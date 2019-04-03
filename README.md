@@ -2,6 +2,7 @@ Hej!
 # Startup
 
 ## Setup NPM dependencies:
+* Stand in Frontend map "/Frontend" 
 * NPM install
 
 ## Setup python script:
