@@ -1,0 +1,7 @@
+{
+    "https://omega-connect-api.hesiod.omega.gcp.op5.com/api/v1.0/health" : {
+        "target": "https://localhost:4200",
+        "secure": false,
+        "changeOrigin": true
+    }
+}
