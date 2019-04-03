@@ -1,0 +1,22 @@
+<div class="container">
+    <br>
+<h4><mark>Sensor:</mark> {{function}}
+</h4>
+<div class="alert alert-success">
+    <ul>
+        <li>EUI: <strong>{{devEUI}}</strong></li>
+        <li>Location: <strong>{{location}}</strong></li>
+        <li>Data: <strong>{{data}}</strong></li>
+    </ul>
+    </div>
+
+
+<h5>Choose a sensor</h5>
+<button class="submit btn-danger" (click)="sensSelect('sound')">Sound</button>
+<button class="submit btn-success"(click)="sensSelect('co2')">CO2</button>
+<button class="submit btn-info"(click)="sensSelect('hum')">Humidity</button>
+
+
+
+
+</div>

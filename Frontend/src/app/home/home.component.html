@@ -1,0 +1,28 @@
+<!-- <h1 [class.gray]="h1Style"> Home </h1>
+
+<button (click)="firstClick()">Click me </button>
+
+<h1>Graph</h1> -->
+
+<!-- <ul *ngIf="result">
+  <li *ngFor="let res of arr">
+      <p> {{res[0] }}</p>
+       <p> {{res[2] }}</p>
+  </li>
+</ul> -->
+<!--
+<p> {{result.metrics | json }}</p>
+{{ result.metrics }} -->
+
+
+<div>
+  <div *ngIf="draw" style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+    </canvas>
+  </div>
+</div>
