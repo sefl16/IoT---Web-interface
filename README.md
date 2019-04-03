@@ -15,5 +15,5 @@ Hej!
 * Python3 main.py
 
 ## Start database from PHP
-* Stand in backend directory
-* php -S 127.0.0.1:8080 -t .\angular-php-app\backend\
+* Stand in project directory
+* php -S 127.0.0.1:8080 -t .\backend
