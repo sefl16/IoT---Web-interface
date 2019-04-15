@@ -67,6 +67,27 @@ CREATE TABLE sensors
     FOREIGN KEY (appNumber) REFERENCES apartments(appNumber)
 );
 
+-- creates a view that is used for the procedure userApartmentsInfo
+DROP VIEW IF EXISTS userApartmentsInfo;
+
+CREATE VIEW userApartmentsInfo AS
+	SELECT 
+        u.id AS userID,
+        c.city,
+        a.address,
+        uc.complexID,
+        s.devEUI,
+        a.appNumber
+	FROM complex AS c
+		JOIN usercomplex AS uc
+			ON uc.complexID = c.id
+		JOIN apartments AS a
+			ON a.address = c.address
+		JOIN `user` AS u
+			ON u.id = c.id
+		JOIN sensors AS s
+			ON s.appNumber = a.appNumber;
+
 
 -- procedure to add a user this can be updated with encryption and hashing?
 DROP PROCEDURE IF EXISTS addUser;
@@ -295,3 +316,20 @@ END
 //
 
 delimiter ;
+
+-- procedure to display info about all apartments connected to them
+DROP PROCEDURE IF EXISTS userApartmentsInfo;
+
+delimiter //
+
+CREATE PROCEDURE userApartmentsInfo
+(
+	aUserID INT
+
+)
+BEGIN
+		SELECT * FROM userApartmentsInfo where userID = aUserID;
+END
+//
+
+DELIMITER ;

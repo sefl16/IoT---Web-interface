@@ -41,6 +41,14 @@ CALL displayUsers();
 CALL displaySpesificUser(1);
 CALL displaySpesificUser(4);
 CALL updateUser(1, 'nyttpass', "Kalle", "svenson", "kalle@fiktiv.se", "070-12344411", "knAvagen3"); 
+CALL addSensor(1111, "WAESRDTFYGUNB234567AWESG");
+
+
+		
+
+SELECT * FROM userApartmentsInfo;
+CALL userApartmentsInfo(4);
+		
 
 
 
