@@ -24,10 +24,10 @@ CREATE TABLE user
 (
     id INT auto_increment PRIMARY KEY,
     username varchar(30) not null UNIQUE,
-    `password` varchar(300) not null,
+    P_hash varchar(300) not null,
     first_name varchar(30) not null,
     last_name varchar(30) not null,
-    email varbinary(300) not null,
+    email varchar(300) not null,
     phoneNumber varchar(30) not null,
     address varchar(30) not null,
     op5_key varchar(30)
@@ -81,10 +81,10 @@ DELIMITER ;;
 CREATE PROCEDURE addUser
 (
 	aUsername varchar(30),
-    aPassword varchar(300),
+    aPassword varchar(255),
     aFirst_name varchar(30),
     aLast_name varchar(30),
-    aEmail varbinary(300),
+    aEmail varchar(30),
     aPhoneNumber varchar(30),
     aAddress varchar(30),
     aOp5_key varchar(30)
@@ -93,7 +93,7 @@ CREATE PROCEDURE addUser
 BEGIN
 
 	INSERT INTO `user`
-		(username, `password`, first_name, last_name, email, phoneNumber, address, op5_key)
+		(username, P_hash, first_name, last_name, email, phoneNumber, address, op5_key)
 			VALUES
 				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhoneNumber, aAddress, aOP5_key);
                 
@@ -210,16 +210,16 @@ DELIMITER ;;
 CREATE PROCEDURE updateUser
 (
 	aID INT,
-    aPassword varchar(300),
+    aPassword varchar(255),
     aFirst_name varchar(30),
     aLast_name varchar(30),
-    aEmail varbinary(300),
+    aEmail varchar(30),
     aPhoneNumber varchar(30),
     aAddress varchar(30)
     
 )
 BEGIN
-	UPDATE user SET `password` = aPassword, first_name = aFirst_name, last_name = aLast_name, email = aEmail, phoneNumber = aPhoneNumber, address = aAddress WHERE aID = id;
+	UPDATE user SET P_hash = aPassword, first_name = aFirst_name, last_name = aLast_name, email = aEmail, phoneNumber = aPhoneNumber, address = aAddress WHERE aID = id;
 END
 ;;
 DELIMITER ;

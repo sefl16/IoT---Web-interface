@@ -1,6 +1,6 @@
 
-INSERT INTO user(username,password,first_name,last_name, email, phoneNumber,address,op5_key)
-VALUES("kalle", sha2(concat('passwurd', 1234), 256), "Kalle","svenson", aes_encrypt("kalle@fiktiv.se",'something123'), "070-12344411", "KnAvagen3","qwertyuiopasdfghjkl"),
+INSERT INTO user(username, P_hash, first_name, last_name, email, phoneNumber, address,op5_key)
+VALUES("kalle", "passwurd", "Kalle","svenson", "kalle@fiktiv.se", "070-12344411", "KnAvagen3","qwertyuiopasdfghjkl"),
       ("lixsom", "wurdpass", "maj", "kullberg", "maj@fiktiv.se", "070-94112331", "KnAvagen4","lkjhgfdsaqwertyuiop"),
       ("sebastion", "testarpass", "sebbeboiii","efternamn", "sebastian@fiktiv.se", "12412211111", "KnAvagen5", "okmijnuhbyhgvtfcrdx");
 
@@ -31,7 +31,7 @@ VALUES("1234", "WDJA12WDA2151CAWDMA"),
       ("2222", "AFIA21AFMAA251AWMA5");
       
 -- testing all the procedures
-CALL addUser("Olle", sha2(concat('thispassword', 1234567890), 256), "Olle", "Olsson", aes_encrypt("Olle@thisisamail.com", 'thisIsAnEncryptionKey123'), "070-15675678", "Ollesgata", "apejroigrgafq3w4etr9j39");
+CALL addUser("Olle", 'thispassword', "Olle", "Olsson", "Olle@thisisamail.com", "070-15675678", "Ollesgata", "apejroigrgafq3w4etr9j39");
 CALL addComplex("Ollesgata", "Karlskrona");
 CALL connectUserToComplex("Olle", "Ollesgata", "Karlskrona");
 CALL connectUserToComplex("Olle", "Nyvägen", "Stockholm");
@@ -40,7 +40,7 @@ CALL addSensor("1526", "WAERXAxwegewewtko1239");
 CALL displayUsers();
 CALL displaySpesificUser(1);
 CALL displaySpesificUser(4);
-CALL updateUser(1, sha2(concat('nyttpass', 1234), 256), "Kalle", "svenson", aes_encrypt("kalle@fiktiv.se",'something123'), "070-12344411", "knAvagen3"); 
+CALL updateUser(1, 'nyttpass', "Kalle", "svenson", "kalle@fiktiv.se", "070-12344411", "knAvagen3"); 
 
 
 
