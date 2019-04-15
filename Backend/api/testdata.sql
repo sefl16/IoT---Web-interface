@@ -53,15 +53,15 @@ CALL updateUser(1, 'nyttpass', "Kalle", "svenson", "kalle@fiktiv.se", "070-12344
 -- SELECT CONVERT(aes_decrypt(email, 'something123')USING utf8) from user where first_name ="Kalle";
 -- SELECT CONVERT(aes_decrypt(email, 'thisIsAnEncryptionKey123')USING utf8) FROM user WHERE first_name="Olle";
 
-CALL removeSensor("WDJA12WDA2151CAWDMA");
-CALL deleteUser (4);
-CALL removeApartment(1526);
-CALL removeApartment(1111);
-CALL removeApartment(1234);
-CALL removeApartment(2222);
-SELECT* from complex;
-SELECT* from userComplex;
-SELECT * from apartments;
-select* from sensors;
-CALL removeComplex(4);
-CALL removeComplex(1);
+-- CALL removeSensor("WDJA12WDA2151CAWDMA");
+-- CALL deleteUser (4);
+-- CALL removeApartment(1526);
+-- CALL removeApartment(1111);
+-- CALL removeApartment(1234);
+-- CALL removeApartment(2222);
+-- SELECT* from complex;
+-- SELECT* from userComplex;
+-- SELECT * from apartments;
+-- select* from sensors;
+-- CALL removeComplex(4);
+-- CALL removeComplex(1);

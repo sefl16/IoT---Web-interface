@@ -2,7 +2,7 @@
 DROP DATABASE IF EXISTS studentverken;
 CREATE database studentverken;
 
-#GRANT ALL ON studentverken.* TO user@localhost IDENTIFIED BY 'pass';
+-- GRANT ALL ON studentverken.* TO user@localhost IDENTIFIED BY 'pass';
 
 
 -- visa vad en användare kan göra mot vilken databas
@@ -10,11 +10,6 @@ SHOW GRANTS FOR root@localhost;
 
 -- Visa för nuvarande användare
 SHOW GRANTS FOR CURRENT_USER;
-
-USE studentverken;
-
-DROP database IF EXISTS studentverken;
-CREATE database studentverken;
 
 USE studentverken;
 
@@ -76,7 +71,7 @@ CREATE TABLE sensors
 -- procedure to add a user this can be updated with encryption and hashing?
 DROP PROCEDURE IF EXISTS addUser;
 
-DELIMITER ;;
+delimiter //
 
 CREATE PROCEDURE addUser
 (
@@ -98,12 +93,12 @@ BEGIN
 				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhoneNumber, aAddress, aOP5_key);
                 
 END
-;;
-DELIMITER ;
+//
+delimiter ;
 -- procedure to add a complex
 DROP PROCEDURE IF EXISTS addComplex;
 
-DELIMITER ;; 
+delimiter // 
 CREATE PROCEDURE addComplex
 (
     aAddress varchar(30),
@@ -116,13 +111,13 @@ BEGIN
 			VALUES
 				(aAddress, aCity);
 END 
-;;
-DELIMITER ;
+//
+delimiter ;
 
 -- connects a user to a complex
 DROP PROCEDURE IF EXISTS connectUserToComplex;
 
-DELIMITER ;;
+delimiter //
 
 CREATE PROCEDURE connectUserToComplex
 (	
@@ -141,13 +136,13 @@ BEGIN
     WHERE u.username = aUsername AND c.address = aAddress AND c.city = aCity;
     
 END
-;;
-DELIMITER ;
+//
+delimiter ;
 
 -- adds a apartment into a complex (this assumes the complex already exists in the system)
 DROP PROCEDURE IF EXISTS addApartment;
 
-DELIMITER ;;
+delimiter //
 
 CREATE PROCEDURE addApartment
 (
@@ -161,12 +156,15 @@ BEGIN
 		(aAddress, aAppNumber);
 
 END 
-;;
-DELIMITER ;
+//
+
+delimiter ;
 
 -- adds a sensor to an apartment (this assumes the apartment already exists in the system)
 DROP PROCEDURE IF EXISTS addSensor;
-DELIMITER ;;
+
+delimiter //
+
 CREATE PROCEDURE addSensor
 (
 	aAppNumber INT,
@@ -178,22 +176,28 @@ BEGIN
 			( aAppNumber, aDevEUI);
 	
 END 
-;;
-DELIMITER ;
+//
+
+delimiter ;
 -- procedure to select all the users
 DROP PROCEDURE IF EXISTS displayUsers;
-DELIMITER ;; 
+
+delimiter // 
+
 CREATE PROCEDURE displayUsers
 (
 )
 BEGIN 
 	SELECT * FROM user;
 END
-;;
-DELIMITER ;
+//
+
+delimiter ;
 -- procedure to select a spesific user based on their id
 DROP PROCEDURE IF EXISTS displaySpesificUser;
-DELIMITER ;;
+
+delimiter //
+
 CREATE PROCEDURE displaySpesificUser
 (
 	aID INT
@@ -201,12 +205,15 @@ CREATE PROCEDURE displaySpesificUser
 BEGIN
 	SELECT * FROM user WHERE id = aID;
 END 
-;; 
-DELIMITER ;
+// 
+
+delimiter ;
 
 -- update existing users password first and lasdt name email phonenumber and address (this can also be updated with new encryption salt ect...)
 DROP PROCEDURE IF EXISTS updateUser;
-DELIMITER ;;
+
+delimiter //
+
 CREATE PROCEDURE updateUser
 (
 	aID INT,
@@ -221,12 +228,15 @@ CREATE PROCEDURE updateUser
 BEGIN
 	UPDATE user SET P_hash = aPassword, first_name = aFirst_name, last_name = aLast_name, email = aEmail, phoneNumber = aPhoneNumber, address = aAddress WHERE aID = id;
 END
-;;
-DELIMITER ;
+//
+
+delimiter ;
 
 -- deletes a user from the database based on the id
-DROP PROCEDURE IF EXISTS deleteUser
-DELIMITER ;;
+DROP PROCEDURE IF EXISTS deleteUser;
+
+delimiter //
+
 CREATE PROCEDURE deleteUser
 (
 	aID INT
@@ -235,11 +245,13 @@ BEGIN
 	DELETE FROM usercomplex WHERE aID = userID;
 	DELETE FROM user WHERE aID = id LIMIT 1;
 END
-;;
-DELIMITER ;
+//
+
+delimiter ;
 -- removes a sensor from based on its devEUI
 DROP PROCEDURE IF EXISTS removeSensor;
-DELIMITER ;;
+delimiter //
+
 CREATE PROCEDURE removeSensor
 (
 	aDevEUI VARCHAR(50)
@@ -247,11 +259,14 @@ CREATE PROCEDURE removeSensor
 BEGIN
 	DELETE FROM sensors WHERE devEUI = aDevEUI LIMIT 1;
 END
-;;
-DELIMITER ; 
+//
+
+delimiter ; 
 -- removes an apartment from the database and any sensor connected to it
 DROP PROCEDURE IF EXISTS removeApartment;
-DELIMITER ;;
+
+delimiter //
+
 CREATE PROCEDURE removeApartment
 (
 	aAppNumber varchar(30)
@@ -260,19 +275,23 @@ BEGIN
 	DELETE FROM sensors WHERE aAppNumber = appNumber;
 	DELETE FROM apartments where aAppNumber = appNumber LIMIT 1;
 END
-;;
-DELIMITER ;
+//
+
+delimiter ;
 
 -- removes a whole complex from the database only works if there are no apartments connected to the complex
-DROP PROCEDURE IF EXISTS removeComplex
-DELIMITER ;;
+DROP PROCEDURE IF EXISTS removeComplex;
+
+delimiter //
+
 CREATE PROCEDURE removeComplex
 (
 	aID INT
 )
 BEGIN
-	DELETE FROM usercomplex WHERE aID = complexID;
-	DELETE FROM complex WHERE aID = id LIMIT 1;
+	DELETE FROM usercomplex WHERE complexID = aID;
+	DELETE FROM complex WHERE id = aID LIMIT 1;
 END
-;;
-DELIMITER ;
+//
+
+delimiter ;
