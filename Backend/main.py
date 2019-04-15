@@ -5,8 +5,8 @@ import _thread
 from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
-from prometheus_client.parser import text_string_to_metric_families
-import requests
+#from prometheus_client.parser import text_string_to_metric_families
+#import requests
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,9 +18,13 @@ auth_token = "?AUTH_TOKEN=VwLYKMLzjW*mvKnOAACSEcyBfHsAWgmoxyWjiKrrVYiQeR*f"
 def do_post(auth_token):
     headers = {"Content-Type": "application/json"}
     data = json.dumps({
+        'partition_offset_map': {'4': 6427, '7': 38613},
         "auto.offset.reset": "earliest",
-        "auto.commit.enable": False
+        # "auto.offset.reset": "earliest",
+        "auto.commit.enable": True
     })
+
+    print(data)
     conn = http.client.HTTPSConnection("omega-connect-api.hesiod.omega.gcp.op5.com")
     conn.request("POST", "/api/v0.1/consumers"+ auth_token, data, headers)
     recv = conn.getresponse()
@@ -28,7 +32,7 @@ def do_post(auth_token):
     if recv.status == 200:
         recv = json.loads(recv.read())
         if 'consumer_instance_id' in recv:
-            consumer_instance_id = recv['consumer_instance_id']
+            consumer_instance_id = rcecv['consumer_instance_id']
             print(consumer_instance_id)
             conn.request("GET", "/api/v0.1/consumers/" + consumer_instance_id + "/metrics" + auth_token, "", headers)
             recv = conn.getresponse()
@@ -51,12 +55,12 @@ class Employees(Resource):
 api.add_resource(Employees, '/employees') # Route_1
 
 hey = do_post(auth_token)
-metrics = hey
-while(True):
-    for family in text_string_to_metric_families(metrics):
-        for sample in family.samples:
-            print("Name: {0} Labels: {1} Value: {2}".format(*sample))
-
+# metrics = hey
+# while(True):
+#     for family in text_string_to_metric_families(metrics):
+#         for sample in family.samples:
+#             print("Name: {0} Labels: {1} Value: {2}".format(*sample))
+#
 
 if __name__ == '__main__':
     app.run(port=5002)
