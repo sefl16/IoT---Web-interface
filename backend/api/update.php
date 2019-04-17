@@ -22,8 +22,10 @@ if(isset($postdata) && !empty($postdata))
   $last_name = mysqli_real_escape_string($con, (string)$request->last_name);
   $op5_key = isset($request->op5_key) ? mysqli_real_escape_string($con, (string)$request->op5_key) : null;
 
+  $hash = password_hash($password, PASSWORD_DEFAULT);
+
   // Update.
-  $sql = "UPDATE `users` SET `username`='$username',`password`='$password', `first_name`='$first_name', `last_name`='$last_name', `op5_key`='$op5_key' WHERE `id` = '{$id}' LIMIT 1";
+  $sql = "UPDATE `user` SET `username`='$username',`P_hash`='$hash', `first_name`='$first_name', `last_name`='$last_name', `op5_key`='$op5_key' WHERE `id` = '{$id}' LIMIT 1";
 
   if(mysqli_query($con, $sql))
   {

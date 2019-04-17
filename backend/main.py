@@ -5,7 +5,7 @@ import _thread
 from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
-from prometheus_client.parser import text_string_to_metric_families
+#from prometheus_client.parser import text_string_to_metric_families
 import requests
 
 app = Flask(__name__)
@@ -52,10 +52,7 @@ api.add_resource(Employees, '/employees') # Route_1
 
 hey = do_post(auth_token)
 metrics = hey
-while(True):
-    for family in text_string_to_metric_families(metrics):
-        for sample in family.samples:
-            print("Name: {0} Labels: {1} Value: {2}".format(*sample))
+
 
 
 if __name__ == '__main__':

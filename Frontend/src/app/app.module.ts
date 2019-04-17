@@ -1,53 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-
-import { HttpClientModule }    from '@angular/common/http';
-
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { ShowapiComponent } from './showapi/showapi.component';
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
-import { NavComponent } from './nav/nav.component';
-import { ChartsModule } from 'ng2-charts';
-import { ApartmentComponent } from './apartment/apartment.component';
-
-//Julia
+import { AppComponent } from './app.component';
 import { SensorComponent } from './components/sensor/sensor.component';
-import { DeviceComponent } from './components/device/device.component';
+import { FormsModule } from '@angular/forms';
 import { CustomerComponent } from './components/customer/customer.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { HomeComponent } from './components/home/home.component';
+import { ApartmentComponent } from './components/apartment/apartment.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-//Christian
-import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ShowapiComponent,
-    AboutComponent,
-    HomeComponent,
-    NavComponent,
-    ApartmentComponent,
-    AdminComponent,
-    LoginComponent,
-    CustomerComponent,
-    DeviceComponent,
     SensorComponent,
+    CustomerComponent,
+    LoginComponent,
+    AdminComponent,
+    HomeComponent,
+    ApartmentComponent,
     DashboardComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpClientModule,
     AppRoutingModule,
-    HttpClientModule,
-    ChartsModule
-  ],
+    FormsModule,
+    HttpClientModule
+
+],
   providers: [],
   bootstrap: [AppComponent]
 })
