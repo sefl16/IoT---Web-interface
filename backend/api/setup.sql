@@ -78,7 +78,7 @@ CREATE VIEW userApartmentsInfo AS
         s.devEUI,
         a.appNumber
 	FROM complex AS c
-		JOIN usercomplex AS uc
+		JOIN userComplex AS uc
 			ON uc.complexID = c.id
 		JOIN apartments AS a
 			ON a.address = c.address
@@ -147,7 +147,7 @@ CREATE PROCEDURE connectUserToComplex
 
 )
 BEGIN
-	INSERT INTO usercomplex (userID, complexID)
+	INSERT INTO userComplex (userID, complexID)
     SELECT
     u.id,
     c.id
@@ -262,7 +262,7 @@ CREATE PROCEDURE deleteUser
 	aID INT
 )
 BEGIN
-	DELETE FROM usercomplex WHERE aID = userID;
+	DELETE FROM userComplex WHERE aID = userID;
 	DELETE FROM user WHERE aID = id LIMIT 1;
 END
 //
@@ -309,7 +309,7 @@ CREATE PROCEDURE removeComplex
 	aID INT
 )
 BEGIN
-	DELETE FROM usercomplex WHERE complexID = aID;
+	DELETE FROM userComplex WHERE complexID = aID;
 	DELETE FROM complex WHERE id = aID LIMIT 1;
 END
 //
@@ -332,3 +332,15 @@ END
 //
 
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS displayComplexForUser;
+delimiter //
+CREATE PROCEDURE displayComplexForUser
+(
+    aID INT
+)
+BEGIN
+    SELECT DISTINCT city, address, complexID FROM userApartmentsInfo where aID = userID;
+END
+//
+delimiter ;

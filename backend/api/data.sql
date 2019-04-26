@@ -8,7 +8,9 @@ INSERT INTO complex(address, city)
 VALUES
 ("Testgatan", "Karlskrona"),
 ("Kungsgatan", "Karlstad"),
-("Nyvagen", "Stockholm");
+("Nyvagen", "Stockholm"),
+("Testgatan2","Karlskrona"),
+("Testgatan3","Karlskrona");
 
 
 
@@ -16,7 +18,10 @@ INSERT INTO userComplex (userId, complexId)
 VALUES (1, 1),
 	   (1, 2),
        (2, 2),
-       (2, 3);
+       (2, 3),
+       (1,4),
+       (1,5),
+       (1,6);
 
 
 INSERT INTO apartments (address, appNumber)
