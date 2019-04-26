@@ -1,0 +1,26 @@
+<div class="container">
+<br>
+
+
+<div class="alert alert-success">
+    <ul>
+        <li><strong>{{option}}</strong></li>
+
+    </ul>
+    </div>
+
+
+
+
+
+<h5>Registration</h5>
+<form (submit) ="addOne(option.value)">
+    <div class="form-group">
+        <label for="reg">Register a new costumer</label>
+        <input type="text" id="option" placeholder="Company name"
+        class="form-control" #option>
+        <br>
+        <button type="button" class="btn-outline-success">Add</button>
+        </div>
+        </form>
+</div>

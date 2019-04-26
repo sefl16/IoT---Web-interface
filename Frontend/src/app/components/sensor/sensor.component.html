@@ -1,0 +1,121 @@
+<div class="container">
+<ul class="nav nav-pills nav-fill">
+        <li class="nav-item" *ngFor="let room of apartment; let i = index">
+            <button id="{{i}}" class="submit btn btn-outline-info" (click)="showSensors(i)">
+                {{ room }}
+            </button>
+        </li>
+    </ul>
+
+<div><br></div>
+
+<!-- <div class="row justify-content-center">
+    <ul class="nav nav-tabs nav-fills " id="tab" role="tablist">
+      <li class="nav-item" *ngFor="let sens of sensor">
+            <a class="nav-link" (click)="showSensors()">
+                {{ sens }}
+            </a>
+      </li>
+
+
+
+</ul> -->
+<!--
+
+<div class="tab-content" id="pills-tabContent">
+<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"></div>
+    </div>
+
+
+    <li class="nav-item" *ngFor="let sens of sensor">
+            {{ sens }}
+
+    </li>
+
+
+
+
+
+
+</div> -->
+
+<!-- <form *ngIf=show> -->
+    <div class="form-group">
+<div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+          <div class="nav-item" *ngFor="let sens of sensor">
+
+              <h4 class="my-0 font-weight-normal"> {{ sens }}</h4>
+ </div>
+     <div class="card-body">
+    <h1 class="card-title pricing-card-title fas fa-thermometer-half"> </h1>
+    <ul class="list-unstyled mt-3 mb-4">
+    <li>10°</li>
+
+    </ul>
+        
+        </div>
+    </div>
+
+    <!-- <div class="card mb-4 box-shadow">
+    <div class="card-header">
+    <h4 class="my-0 font-weight-normal">Humidity</h4>
+</div>
+    <div class="card-body">
+    <h1 class="card-title pricing-card-title">Test </h1>
+    <ul class="list-unstyled mt-3 mb-4">
+    <li>85%</li>
+
+    </ul>
+        <button type="button" class="btn btn-lg btn-block btn-outline-primary">History</button>
+              </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">CO2</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">Test </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>30 %</li>
+                </ul>
+            <button type="button" class="btn btn-lg btn-block btn-outline-primary">History</button>
+              </div>
+            </div> -->
+          </div>
+
+
+
+
+
+
+<div><br></div>
+<form *ngIf=show>
+    <div class="form-group">
+        <div><br></div>
+
+        <!--
+<h5>Choose a sensor</h5>
+<button class="submit btn-danger" (click)="sensSelect('sound')">Sound</button>
+<button class="submit btn-success"(click)="sensSelect('co2')">CO2</button>
+<button class="submit btn-info"(click)="sensSelect('hum')">Humidity</button>
+
+
+
+<div><br></div>
+<h4><mark>Sensor:</mark> {{function}}
+</h4>
+<div class="alert alert-success">
+<ul>
+    <li>Location: <strong>{{location}}</strong></li>
+    <li>Data: <strong>{{data}}</strong></li>
+</ul>
+</div> -->
+
+
+
+<!--
+<button class="submit btn-danger" (click)="locSelect('tvättstuga1')">tvättstuga1</button>
+<button class="submit btn-success"(click)="locSelect('hallen')">hallen</button>
+<button class="submit btn-info"(click)="locSelect('room')">room</button> -->
