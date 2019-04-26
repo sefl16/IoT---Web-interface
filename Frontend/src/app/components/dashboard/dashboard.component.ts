@@ -10,7 +10,7 @@ import {User} from '../../user'
 export class DashboardComponent implements OnInit
 {
   users: User[];
-  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, op5_key:null}
+  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null}
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
