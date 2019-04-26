@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from '../../api.service';
+import {Complex} from '../../complex';
+import {Apartment} from '../../apartment';
+import {User} from '../../user';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { HttpClientModule }    from '@angular/common/http';
@@ -11,7 +15,8 @@ import { HttpClientModule }    from '@angular/common/http';
 })
 export class ApartmentComponent implements OnInit {
   id: any;
-  //apartments: [];
+  complex: Complex[];
+  selectedComplex: Complex = {address: null, city: null};
   sensors:boolean = false;
   street: string;
   house:string;
@@ -20,15 +25,31 @@ export class ApartmentComponent implements OnInit {
   data:any;
   lgh:string;
   streets = ["Gata1", "Gata2", "Gata3"]
+  apartment: Apartment[];
+  selectedApartment: Apartment={appnumber: null, debEUI: null};
+  appid: any;
 
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
 
   ) { }
 
   ngOnInit() {
+    this.id = 1;
+    this.appid = 1;
+    this.apiService.readUserComplex(this.id).subscribe((complex: Complex[])=>
+    {
+      this.complex = complex;
+      console.log(this.complex);
+    })
+    // this.apiService.readUserApartments(this.appid).subscribe((apartment: Apartment[])=>
+    // {
+    //   this.apartment = apartment;
+    //   console.log(this.apartment);
+    // })
     this.id = this.route.snapshot.paramMap.get('id');
     this.street =  "Valhalavägen";
     this.house = '10';

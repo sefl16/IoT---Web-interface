@@ -8,4 +8,5 @@ export class User {
   phone_number: string;
   address: string;
   op5_key: string;
+  city: string;
 }
