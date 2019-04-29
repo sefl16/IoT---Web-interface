@@ -23,7 +23,8 @@ switch ($source)
           $complex[$i]['city'] = $row['city'];
           $complex[$i]['address'] = $row['address'];
           $complex[$i]['apartments'] = [];
-          $sql2 = "CALL getComplexApps('{$id}',"$row['complexID']")";
+          $variable = $row['complexID'];
+          $sql2 = "CALL getComplexApps('{$id}','{$variable}')";
           if($result2 = mysqli_query($con,$sql2))
           {
             while($row2 = mysqli_fetch_assoc($result2))

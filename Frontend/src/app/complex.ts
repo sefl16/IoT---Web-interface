@@ -3,4 +3,5 @@ export class Complex {
   apartment: Apartment[];
   city: string;
   adress: string;
+
 }
