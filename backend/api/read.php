@@ -19,11 +19,18 @@ switch ($source)
 
         while($row = mysqli_fetch_assoc($result))
         {
+          $j = 0;
           $complex[$i]['city'] = $row['city'];
           $complex[$i]['address'] = $row['address'];
-          $complex[$i]['appnumber'] = [];
-          while()
-
+          $complex[$i]['apartments'] = [];
+          $sql2 = "CALL getComplexApps('{$id}',"$row['complexID']")";
+          if($result2 = mysqli_query($con,$sql2))
+          {
+            while($row2 = mysqli_fetch_assoc($result2))
+            {
+              $complex[$i]['apartments'][$j] = $row2['appnumber'];
+            }
+          }
           $i++;
         }
         echo json_encode($complex);

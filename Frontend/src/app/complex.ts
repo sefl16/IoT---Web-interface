@@ -1,6 +1,6 @@
 import {Apartment} from './apartment';
 export class Complex {
-  apartment: Apartment[] = {appnumber: null, devEUI: null};
+  apartment: Apartment[];
   city: string;
   adress: string;
 }
