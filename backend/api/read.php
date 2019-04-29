@@ -12,14 +12,17 @@ if($id = ($_GET['id'] !== null && (int)$_GET['id'] > 0)? mysqli_real_escape_stri
   $complex = [];
 
   //$sql = "CALL displayComplexForUser('{$id}')";
-  $sql = "SELECT * FROM complex";
+  $sql = "CALL displayComplexForUser('{$id}')";
   if($result = mysqli_query($con,$sql))
   {
     $i = 0;
+
     while($row = mysqli_fetch_assoc($result))
     {
+      $j = 0;
       $complex[$i]['city'] = $row['city'];
       $complex[$i]['address'] = $row['address'];
+
       $i++;
     }
     echo json_encode($complex);

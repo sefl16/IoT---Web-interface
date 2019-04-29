@@ -30,20 +30,29 @@ VALUES("1234", "WDJA12WDA2151CAWDMA"),
       ("1111", "AWDIDCMA1251ACC1241"),
       ("2222", "AFIA21AFMAA251AWMA5");
 
--- testing all the procedures
-CALL addUser("Olle", 'thispassword', "Olle", "Olsson", "Olle@thisisamail.com", "070-15675678", "Ollesgata", "apejroigrgafq3w4etr9j39");
-CALL addComplex("Ollesgata", "Karlskrona");
-CALL connectUserToComplex("Olle", "Ollesgata", "Karlskrona");
-CALL connectUserToComplex("Olle", "Nyvägen", "Stockholm");
-CALL addApartment("Ollesgata", 1526);
-CALL addSensor("1526", "WAERXAxwegewewtko1239");
-CALL displayUsers();
-CALL displaySpesificUser(1);
-CALL displaySpesificUser(4);
-CALL updateUser(1, 'nyttpass', "Kalle", "svenson", "kalle@fiktiv.se", "070-12344411", "knAvagen3");
-
-
-
+      -- testing all the procedures
+      CALL addUser("Olle", 'thispassword', "Olle", "Olsson", "Olle@thisisamail.com", "070-15675678", "Ollesgata", "apejroigrgafq3w4etr9j39");
+      CALL addComplex("Ollesgata", "Karlskrona");
+      CALL addComplex("Kallesgata", "Karlskrona");
+      CALL addComplex("entillgata", "Karlskrona");
+      CALL connectUserToComplex("Olle", "Ollesgata", "Karlskrona");
+      CALL connectUserToComplex("Olle", "Nyvägen", "Stockholm");
+      CALL connectUserToComplex("Kalle", "entillgata", "Karlskrona");
+      -- CALL connectUserTOComplex("Kalle", "Ollesgata", "Karlskrona");
+      CALL connectUserToComplex("Kalle", "Kallesgata", "Karlskrona");
+      CALL addApartment("Ollesgata", 1526);
+      CALL addApartment("Kallesgata", 1112);
+      CALL addApartment("Kallesgata", 12345);
+      CALL addApartment("Kallesgata", 98765);
+      CALL addApartment("entillgata", 67854);
+      CALL addSensor(67854, "ejivosrjpaorfhuaoei");
+      CALL addSensor(1526, "WAERXAxwegewewtko1239");
+      CALL addSensor(1112, "WAESRDTHTRSEAESR");
+      CALL addSensor(12345, "WERTYGDETGFD");
+      CALL displayUsers();
+      CALL displaySpesificUser(1);
+      CALL displaySpesificUser(4);
+      CALL updateUser(1, 'nyttpass', "Kalle", "svenson", "kalle@fiktiv.se", "070-12344411", "knAvagen3");
 -- SELECT * from user;
 -- SELECT* from complex;
 -- SELECT* from userComplex;

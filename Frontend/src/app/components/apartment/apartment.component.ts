@@ -26,7 +26,7 @@ export class ApartmentComponent implements OnInit {
   lgh:string;
   streets = ["Gata1", "Gata2", "Gata3"]
   apartment: Apartment[];
-  selectedApartment: Apartment={appnumber: null, debEUI: null};
+  selectedApartment: Apartment = {appnumber: null, devEUI: null};
   appid: any;
 
 
