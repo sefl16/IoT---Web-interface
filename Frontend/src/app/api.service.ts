@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
+import { Complex } from './complex';
 import { Observable } from 'rxjs';
 
 
@@ -24,6 +25,13 @@ export class ApiService {
   deleteUser(id: number){
     return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
   }
+  readUserComplex(id: number){
+    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}`);
+  }
+  //eperimenting with appartment read calls. want one call with complex id and one with appid
+  // readUserApartments(appid: number){
+  //   return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read.php/?appid=${appid}`);
+  // }
 
     constructor(private httpClient: HttpClient) { }
   }
