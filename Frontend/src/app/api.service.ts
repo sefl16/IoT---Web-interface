@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   PHP_API_SERVER = "http://127.0.0.1:8080";
-  readUser(): Observable<User[]>{
-    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read.php`);
+  readUser(source: string): Observable<User[]>{
+    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read.php/?source=${source}`);
   }
 
   createUser(user: User): Observable<User>{
@@ -25,13 +25,10 @@ export class ApiService {
   deleteUser(id: number){
     return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
   }
-  readUserComplex(id: number){
-    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}`);
+  readUserComplex(id: number, source: string){
+    return this.httpClient.post<User[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);
   }
-  //eperimenting with appartment read calls. want one call with complex id and one with appid
-  // readUserApartments(appid: number){
-  //   return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read.php/?appid=${appid}`);
-  // }
+
 
     constructor(private httpClient: HttpClient) { }
   }

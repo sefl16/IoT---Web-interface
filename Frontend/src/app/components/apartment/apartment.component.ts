@@ -22,12 +22,16 @@ export class ApartmentComponent implements OnInit {
   house:string;
   function:string;
   location:string;
+  source:string;
   data:any;
   lgh:string;
   streets = ["Gata1", "Gata2", "Gata3"]
   apartment: Apartment[];
   selectedApartment: Apartment = {appnumber: null, devEUI: null};
   appid: any;
+  users: User[];
+  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null}
+
 
 
   constructor(
@@ -40,7 +44,8 @@ export class ApartmentComponent implements OnInit {
   ngOnInit() {
     this.id = 1;
     //this.appid = 1;
-    this.apiService.readUserComplex(this.id).subscribe((complex: Complex[])=>
+    this.source = "readUserComplex"
+    this.apiService.readUserComplex(this.id, this.source).subscribe((complex: Complex[])=>
     {
       this.complex = complex;
       console.log(this.complex);
