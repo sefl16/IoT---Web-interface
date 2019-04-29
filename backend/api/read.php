@@ -12,29 +12,58 @@ switch ($source)
     if($id = ($_GET['id'] !== null && (int)$_GET['id'] > 0)? mysqli_real_escape_string($con, (int)$_GET['id']) : false)
     {
       $complex = [];
-      $sql = "CALL displayComplexForUser('{$id}')";
+      $complexID = [];
+      //$complexID = array();
+      $sql = "CALL userApartmentsInfo('{$id}')";
+      //$sql = "CALL displayComplexForUser('{$id}')";
       if($result = mysqli_query($con,$sql))
       {
         $i = 0;
-
+        $j = 0;
+        $y = 0;
         while($row = mysqli_fetch_assoc($result))
         {
-          $j = 0;
-          $complex[$i]['city'] = $row['city'];
-          $complex[$i]['address'] = $row['address'];
-          $complex[$i]['apartments'] = [];
-          $variable = $row['complexID'];
-          $sql2 = "CALL getComplexApps('{$id}','{$variable}')";
-          if($result2 = mysqli_query($con,$sql2))
+          if(in_array($row['complexID'],$complexID) == false)
           {
-            while($row2 = mysqli_fetch_assoc($result2))
-            {
-              $complex[$i]['apartments'][$j] = $row2['appnumber'];
-            }
+            $complex[$i]['city'] = $row['city'];
+            $complex[$i]['address'] = $row['address'];
+            $complex[$i]['complexID'] = $row['complexID'];
+            $complexID[$i] = $row['complexID'];
+            //array_push($complexID, $row['complexID']);
+            $complex[$i]['apartments'] = [];
+
+
           }
           $i++;
         }
-        echo json_encode($complex);
+        $sizeofcomplexID = sizeof($complexID);
+        for($i = 0; $i < $sizeofcomplexID; $i++)
+        {
+          while($complexID = mysqli_fetch_assoc($result))
+          {
+            if($row['complexID'] == $complexID[$i])
+            {
+                $complex[$i]['apartments'][$j] = $row['appNumber'];
+                $j++;
+            }
+          }
+          $j = 0;
+        }
+
+
+
+        // $complex[$i]['apartments'][$j] = $row['appNumber'];
+        // $i++;
+        // $j++;
+      // $complex[1]['apartments'][1] =
+      //   while($row = mysqli_fetch_assoc($result))
+      //   {
+      //     $complex[$i]['apartments'][$j] = $row['appNumber'];
+      //     $j++;
+      //     $i++;
+      //   }
+
+      echo json_encode($complex);
       }
       else
       {
@@ -111,6 +140,29 @@ switch ($source)
   //   echo json_encode($users);
   // }
   // else
+  // {
+  //   http_response_code(404);
+  // }
+
+  // $sql2 = "CALL getComplexApps('{$id}', '{$complexID}')";
+  //
+  // if($result2 = mysqli_query($con,$sql2))
+  // {
+  //   http_response_code(133);
+  //   while($row = mysqli_fetch_assoc($result))
+  //   {
+  //     $complex[$i]['apartments'][$j] = $row['appNumber'];
+  //
+  //     $j++;
+  //   }
+  // }
+
+  // $result = mysqli_query($con,$sql);
+  // if($result == true)
+  // {
+  //   http_response_code(200);
+  // }
+  // else if($result == false)
   // {
   //   http_response_code(404);
   // }

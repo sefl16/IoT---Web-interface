@@ -1,7 +1,8 @@
 import {Apartment} from './apartment';
 export class Complex {
-  apartment: Apartment[];
+  apartments: Apartment[];
   city: string;
   adress: string;
+  complexID: string;
 
 }

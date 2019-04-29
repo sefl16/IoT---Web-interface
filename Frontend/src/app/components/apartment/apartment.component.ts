@@ -16,7 +16,7 @@ import { HttpClientModule }    from '@angular/common/http';
 export class ApartmentComponent implements OnInit {
   id: any;
   complex: Complex[];
-  selectedComplex: Complex = {adress: null, city: null};
+  selectedComplex: Complex = {adress: null, city: null, complexID: null, apartments: null};
   sensors:boolean = false;
   street: string;
   house:string;
