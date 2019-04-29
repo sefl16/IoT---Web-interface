@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS apartments;
 CREATE TABLE apartments
 (
     address varchar(30) not null,
-    appNumber INT not null UNIQUE,
+    appNumber INT not null,
 
 	FOREIGN KEY (address) REFERENCES complex(address),
     PRIMARY KEY (address, appNumber),
@@ -327,20 +327,34 @@ CREATE PROCEDURE userApartmentsInfo
 
 )
 BEGIN
-		SELECT * FROM userApartmentsInfo where userID = aUserID;
+		SELECT * FROM userApartmentsInfo where userID = aUserID ORDER BY address;
 END
 //
 
-DELIMITER ;
+delimiter ;
 
 DROP PROCEDURE IF EXISTS displayComplexForUser;
 delimiter //
 CREATE PROCEDURE displayComplexForUser
 (
-    aID INT
+	aID INT
 )
 BEGIN
-    SELECT DISTINCT city, address, complexID FROM userApartmentsInfo where aID = userID;
+	SELECT DISTINCT city, address, complexID  FROM userApartmentsInfo where aID = userID;
+END
+//
+delimiter ;
+
+
+DROP PROCEDURE IF EXISTS getComplexApps;
+delimiter //
+CREATE PROCEDURE getComplexApps
+(
+	aUserID INT,
+    aComplexID INT
+)
+BEGIN 
+	SELECT appnumber FROM userApartmentsInfo WHERE aUserID = userID AND aComplexID = complexID;
 END
 //
 delimiter ;

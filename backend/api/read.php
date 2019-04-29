@@ -21,8 +21,8 @@ switch ($source)
         {
           $complex[$i]['city'] = $row['city'];
           $complex[$i]['address'] = $row['address'];
-          $complex[$i]['appnumber'] = [];
-          while()
+          //$complex[$i]['appnumber'] = [];
+         // while()
 
           $i++;
         }
