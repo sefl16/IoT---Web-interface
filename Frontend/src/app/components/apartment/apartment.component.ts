@@ -42,7 +42,6 @@ export class ApartmentComponent implements OnInit {
 
   ngOnInit() {
     this.id = 1;
-    //this.appid = 1;
     this.source = "readUserComplex"
     this.apiService.readUserComplex(this.id, this.source).subscribe((complex: Complex[])=>
     {

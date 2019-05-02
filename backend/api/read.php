@@ -44,18 +44,14 @@ switch ($source)
         {
           foreach($data_array as $item)
           {
-            //http_response_code(300);
             if($complexID[$y] == $item['complexID'])
             {
-                //http_response_code(300);
                 $complex[$y]['apartments'][$j] = $item['appNumber'];
                 $j++;
             }
-
           }
           $j = 0;
         }
-
       echo json_encode($complex);
       }
       else

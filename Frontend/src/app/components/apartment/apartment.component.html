@@ -4,21 +4,24 @@
 </h4>
 <br>
 <div class="dropdown btn-block">
+
   <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-  *ngFor="let item of complex">{{item.address}}
+  *ngFor="let item of complex">
+  {{item.address}}
+  {{item.apartments}}
+{{room}}
+  </button>
   <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton">
-    <div *ngFor="let subitem of item['apartments']">
-      <a class="dropdown-item" href="/sensor/1" >{{subitem}}</a>
+    <a class="dropdown-item" href="/sensor/1" *ngFor="let item of complex; index as i">{{item.apartments}}</a>
   </div>
 </div>
-
 
 <!-- <div>
   <table border = '1' width = '100%' style='border-collapse: collapse;'>
     <tr>
       <th>City</th>
       <th>Address</th>
-<a class="dropdown-item" href="/sensor/1"></a>
+
     </tr>
 
     <tr *ngFor="let complex of complex">
