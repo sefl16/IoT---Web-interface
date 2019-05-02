@@ -4,18 +4,11 @@
 </h4>
 <br>
 <div class="dropdown btn-block">
-
   <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-  *ngFor="let complex of complex">
-  {{complex.address}}
-{{room}}
-  </button>
+  *ngFor="let item of complex">{{item.address}}
   <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton"
-  *ngFor="let appartment of appartment">
-  {{complex.appartment.address}}
-    <a class="dropdown-item" href="/sensor/1">Vanlig Lägenhet</a>
-    <a class="dropdown-item" href="/sensor/2">Tvättstuga lägenhet</a>
-    <a class="dropdown-item" href="#">5</a>
+    *ngFor="let subitem of item.apartments">{{subitem}}
+    <div *ngFor="let subitem of item['apartments']">{{subitem}}
   </div>
 </div>
 
@@ -24,7 +17,7 @@
     <tr>
       <th>City</th>
       <th>Address</th>
-
+<a class="dropdown-item" href="/sensor/1"></a>
     </tr>
 
     <tr *ngFor="let complex of complex">

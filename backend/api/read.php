@@ -18,12 +18,16 @@ switch ($source)
       //$sql = "CALL displayComplexForUser('{$id}')";
       if($result = mysqli_query($con,$sql))
       {
+        $result2 = $result;
         $i = 0;
         $j = 0;
         $y = 0;
         while($row = mysqli_fetch_assoc($result))
         {
-          if(in_array($row['complexID'],$complexID) == false)
+          $row2 = $row;
+          $y = 0;
+          $j = 0;
+          if(in_array($row['complexID'], $complexID) == false)
           {
             $complex[$i]['city'] = $row['city'];
             $complex[$i]['address'] = $row['address'];
@@ -31,23 +35,38 @@ switch ($source)
             $complexID[$i] = $row['complexID'];
             //array_push($complexID, $row['complexID']);
             $complex[$i]['apartments'] = [];
-
-
+            $i++;
           }
-          $i++;
-        }
-        $sizeofcomplexID = sizeof($complexID);
-        for($i = 0; $i < $sizeofcomplexID; $i++)
-        {
-          while($complexID = mysqli_fetch_assoc($result))
+
+          // while($row2 = $result2->fetch_assoc())
+          // {
+          //   if($complexID[$y] == $row2['complexID'])
+          //   {
+          //     //http_response_code(300);
+          //     $complex[$y]['apartments'][$j] = $row['appNumber'];
+          //     $j++;
+          //     $y++;
+          //     $j++;
+          //   }
+          // }
+          $sizeofcomplexID = sizeof($complexID);
+          for($y = 0; $y < 3; $y++)
           {
-            if($row['complexID'] == $complexID[$i])
+            foreach($row2 as $r2)
             {
-                $complex[$i]['apartments'][$j] = $row['appNumber'];
-                $j++;
+              //http_response_code(300);
+              if($complexID[$y] == $row['complexID'])
+              {
+                if(in_array($row['appNumber'], $complex['apartments']) == false)
+                {
+                  //http_response_code(300);
+                  $complex[$y]['apartments'][$j] = $row2['appNumber'];
+                  $j++;
+                }
+              }
             }
+            $j = 0;
           }
-          $j = 0;
         }
 
 

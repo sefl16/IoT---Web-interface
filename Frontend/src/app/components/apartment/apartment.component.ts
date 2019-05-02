@@ -25,7 +25,6 @@ export class ApartmentComponent implements OnInit {
   source:string;
   data:any;
   lgh:string;
-  streets = ["Gata1", "Gata2", "Gata3"]
   apartment: Apartment[];
   selectedApartment: Apartment = {appnumber: null, devEUI: null};
   appid: any;
@@ -50,52 +49,36 @@ export class ApartmentComponent implements OnInit {
       this.complex = complex;
       console.log(this.complex);
     })
-    // this.apiService.readUserApartments(this.appid).subscribe((apartment: Apartment[])=>
-    // {
-    //   this.apartment = apartment;
-    //   console.log(this.apartment);
-    // })
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.street =  "Valhalavägen";
-    this.house = '10';
-    this.function = "Sound";
-    this.location = "loundry1";
-    this.data = "smthng";
-    //this.apartments= JSON.parse(require('fs').readFileSync('../../apartments1.json', 'utf8'));
 }
-
-// showSensors(){
-//     this.sensors = !this.sensors;
+// sensSelect(option) {
+//     if(option == 'sound') {
+//         this.function = 'sound';
+//         this.location = 'Ronnebygatan 43';
+//         this.data = 'graph';
+//     } else if(option == 'co2') {
+//         this.function = 'CO2';
+//         this.location = 'NOrra Smedjegatan 12';
+//         this.data = 'graph';
+//     } else if(option == 'hum') {
+//         this.function = 'Humidity';
+//         this.location = 'Centralbron';
+//         this.data = 'graph';
+//     }
+//
 // }
-sensSelect(option) {
-    if(option == 'sound') {
-        this.function = 'sound';
-        this.location = 'Ronnebygatan 43';
-        this.data = 'graph';
-    } else if(option == 'co2') {
-        this.function = 'CO2';
-        this.location = 'NOrra Smedjegatan 12';
-        this.data = 'graph';
-    } else if(option == 'hum') {
-        this.function = 'Humidity';
-        this.location = 'Centralbron';
-        this.data = 'graph';
-    }
-
-}
 
 
 
-showSensorsByStreet(str) {
-    if(str == 'Alamedan' ){
-        this.lgh ='24';
-        } else if(str  == 'Valhalavägen'){
-            this.lgh ='23';
-    } else if(str == 'Miner'){
-        this.lgh ='93';
-        }
-
-}
+// showSensorsByStreet(str) {
+//     if(str == 'Alamedan' ){
+//         this.lgh ='24';
+//         } else if(str  == 'Valhalavägen'){
+//             this.lgh ='23';
+//     } else if(str == 'Miner'){
+//         this.lgh ='93';
+//         }
+//
+// }
 
 
 }
