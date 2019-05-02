@@ -6,11 +6,12 @@
 <div class="dropdown btn-block">
   <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
   *ngFor="let item of complex">{{item.address}}
-  <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton"
-    *ngFor="let subitem of item.apartments">{{subitem}}
-    <div *ngFor="let subitem of item['apartments']">{{subitem}}
+  <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton">
+    <div *ngFor="let subitem of item['apartments']">
+      <a class="dropdown-item" href="/sensor/1" >{{subitem}}</a>
   </div>
 </div>
+
 
 <!-- <div>
   <table border = '1' width = '100%' style='border-collapse: collapse;'>

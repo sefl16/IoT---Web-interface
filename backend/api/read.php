@@ -16,15 +16,16 @@ switch ($source)
       //$complexID = array();
       $sql = "CALL userApartmentsInfo('{$id}')";
       //$sql = "CALL displayComplexForUser('{$id}')";
+      $result2 = array();
       if($result = mysqli_query($con,$sql))
       {
-        $result2 = $result;
+
         $i = 0;
         $j = 0;
         $y = 0;
         while($row = mysqli_fetch_assoc($result))
         {
-          $row2 = $row;
+          $data_array[] = $row;
           $y = 0;
           $j = 0;
           if(in_array($row['complexID'], $complexID) == false)
@@ -33,54 +34,27 @@ switch ($source)
             $complex[$i]['address'] = $row['address'];
             $complex[$i]['complexID'] = $row['complexID'];
             $complexID[$i] = $row['complexID'];
-            //array_push($complexID, $row['complexID']);
             $complex[$i]['apartments'] = [];
             $i++;
           }
-
-          // while($row2 = $result2->fetch_assoc())
-          // {
-          //   if($complexID[$y] == $row2['complexID'])
-          //   {
-          //     //http_response_code(300);
-          //     $complex[$y]['apartments'][$j] = $row['appNumber'];
-          //     $j++;
-          //     $y++;
-          //     $j++;
-          //   }
-          // }
-          $sizeofcomplexID = sizeof($complexID);
-          for($y = 0; $y < 3; $y++)
-          {
-            foreach($row2 as $r2)
-            {
-              //http_response_code(300);
-              if($complexID[$y] == $row['complexID'])
-              {
-                if(in_array($row['appNumber'], $complex['apartments']) == false)
-                {
-                  //http_response_code(300);
-                  $complex[$y]['apartments'][$j] = $row2['appNumber'];
-                  $j++;
-                }
-              }
-            }
-            $j = 0;
-          }
         }
 
+        $sizeofcomplexID = sizeof($complexID);
+        for($y = 0; $y < $sizeofcomplexID; $y++)
+        {
+          foreach($data_array as $item)
+          {
+            //http_response_code(300);
+            if($complexID[$y] == $item['complexID'])
+            {
+                //http_response_code(300);
+                $complex[$y]['apartments'][$j] = $item['appNumber'];
+                $j++;
+            }
 
-
-        // $complex[$i]['apartments'][$j] = $row['appNumber'];
-        // $i++;
-        // $j++;
-      // $complex[1]['apartments'][1] =
-      //   while($row = mysqli_fetch_assoc($result))
-      //   {
-      //     $complex[$i]['apartments'][$j] = $row['appNumber'];
-      //     $j++;
-      //     $i++;
-      //   }
+          }
+          $j = 0;
+        }
 
       echo json_encode($complex);
       }
@@ -185,3 +159,29 @@ switch ($source)
   // {
   //   http_response_code(404);
   // }
+
+  // while($row2 = $result2->fetch_assoc())
+  // {
+  //   if($complexID[$y] == $row2['complexID'])
+  //   {
+  //     //http_response_code(300);
+  //     $complex[$y]['apartments'][$j] = $row['appNumber'];
+  //     $j++;
+  //     $y++;
+  //     $j++;
+  //   }
+  // }
+
+
+
+
+          // $complex[$i]['apartments'][$j] = $row['appNumber'];
+          // $i++;
+          // $j++;
+        // $complex[1]['apartments'][1] =
+        //   while($row = mysqli_fetch_assoc($result))
+        //   {
+        //     $complex[$i]['apartments'][$j] = $row['appNumber'];
+        //     $j++;
+        //     $i++;
+        //   }
