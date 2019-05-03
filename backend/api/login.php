@@ -59,7 +59,8 @@ if($res = email_exists($postdata->email, $con))
                     "message" => "Successful login.",
                     "jwt" => $jwt,
                     "exp" => time() + 1500,
-                    "username" => $res["username"]
+                    "username" => $res["username"],
+                    "id" => $res["id"]
                 )
             );
     } else {

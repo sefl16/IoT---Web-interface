@@ -11,7 +11,9 @@
     <a class="p-2 text-dark" href="#">Support</a> -->
     <a class="p-2 text-dark" href="/dashboard">Översikt</a>
   </nav>
-  <a class="btn btn-primary" href="/login">Logga in</a>
+  <a *ngIf="!currentUser" class="btn btn-primary" href="/login">Logga in</a>
+<a *ngIf="currentUser" class="btn btn-primary" (click)="logout()">Logga ut</a>
 
 </div>
+<alert></alert>
 <router-outlet></router-outlet>

@@ -26,7 +26,7 @@ export class ApiService {
     return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
   }
   readUserComplex(id: number, source: string){
-    return this.httpClient.post<User[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);
+    return this.httpClient.get<Complex[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);
   }
 
 

@@ -43,7 +43,7 @@ def do_post(auth_token):
             print(recv)
 
 
-            apiurl = "http://127.0.0.1:8086/write?u=writeuser&p=test&db=op5_test"
+            apiurl = "http://127.0.0.1:8086/write?u=writeuser&p=test&db=test"
             data = recv["metrics"]
             for i in data:
                 #print(type(i))

@@ -41,7 +41,7 @@ export class ApartmentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = 1;
+    this.id = JSON.parse(localStorage.getItem("currentUser")).id;
     this.source = "readUserComplex"
     this.apiService.readUserComplex(this.id, this.source).subscribe((complex: Complex[])=>
     {
