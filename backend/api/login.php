@@ -3,8 +3,6 @@
  * Returns the list of policies.
  */
 require 'database.php';
-// // generate json web token
-use ReallySimpleJWT\Token;
 
 $user = [];
 $postdata = json_decode(file_get_contents("php://input"));
