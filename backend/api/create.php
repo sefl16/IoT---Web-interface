@@ -20,15 +20,15 @@ if(isset($postdata) && !empty($postdata))
   $username = mysqli_real_escape_string($con, (string)($request->username));
   $password = mysqli_real_escape_string($con, (string)$request->password);
   $first_name = mysqli_real_escape_string($con, (string)$request->first_name);
-  $email = mysqli_real_escape_string($con, (string)$request->email);
-  $phoneNumber = mysqli_real_escape_string($con, (string)$request->phoneNumber);
-  $address = mysqli_real_escape_string($con, (string)$request->address);
   $last_name = mysqli_real_escape_string($con, (string)$request->last_name);
+  $email = mysqli_real_escape_string($con, (string)$request->email);
+  $phone_number = mysqli_real_escape_string($con, (string)$request->phone_number);
+  $address = mysqli_real_escape_string($con, (string)$request->address);
   $op5_key = mysqli_real_escape_string($con, (string)$request->op5_key);
 
   $hash = password_hash($password, PASSWORD_DEFAULT);
   // Create.
-  $sql = "INSERT INTO `user`(`username`,`P_hash`, `first_name`, `last_name`, `op5_key`, `email`, `phoneNumber`, `address`) VALUES ('{$username}','{$hash}','{$first_name}','{$last_name}','{$op5_key}', '{$email}', '{$phoneNumber}', '{$address}')";
+  $sql = "CALL addUser('{$username}', '{$hash}', '{$first_name}', '{$last_name}', '{$email}', '{$phone_number}', '{$address}', '{$op5_key}')";
 
   if(mysqli_query($con,$sql))
   {
