@@ -5,49 +5,27 @@
 <br>
 <div class="dropdown btn-block">
 
-    <button class="btn btn-secondary btn-block dropdown-toggle style" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-  *ngFor="let room of streets">
+  <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+  *ngFor="let item of complex">
+  {{item.address}}
+  {{item.apartments}}
 {{room}}
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item item-padding" href="/sensor/1">Vanlig Lägenhet</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="/sensor/2">Tvättstuga lägenhet</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">5</a>
+  <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/sensor/1" *ngFor="let item of complex; index as i">{{item.apartments}}</a>
   </div>
 </div>
 
+<!-- <div>
+  <table border = '1' width = '100%' style='border-collapse: collapse;'>
+    <tr>
+      <th>City</th>
+      <th>Address</th>
 
+    </tr>
 
-
-
-
-
-
-
-<!-- <nav>
-    <div class="vertical-menu">
-      <a href="/sensor">Alalmedan</a>
-      <a href="/sensor">Valhalavägen </a>
-      <a href="/sensor">Minervavägen</a>
-      <a href="/sensor">Ronnebygatan</a>
-      <a href="/sensor">Björkvägen</a>
-      <a href="/sensor">Alalmedan</a>
-      <a href="/sensor">Hallonvägen </a>
-      <a href="/sensor">Dragspelsgatan</a>
-      <a href="/sensor">Forsvägen</a>
-      <a href="/sensor">Dragspelsgatan</a>
-      <a href="/sensor">Giseryd</a>
-      <a href="/sensor">Hallstigen </a>
-      <a href="/sensor">Haglövägen</a>
-      <a href="/sensor">Blixtgatan</a>
-      <a href="/sensor">Brovägen</a>
-      <a href="/sensor">Dockegatan</a>
-      <a href="/sensor">Dimgatan </a>
-      <a href="/sensor">Parkgatan</a>
-      <a href="/sensor">Orrabacken</a>
-      <a href="/sensor">Neongatan</a>
-    </div>
-</nav>
-<br> -->
+    <tr *ngFor="let complex of complex">
+      <td>{{ complex.city }}</td>
+      <td>{{ complex.address }}</td>
+    </tr>
+  </table> -->

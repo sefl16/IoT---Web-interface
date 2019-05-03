@@ -1,0 +1,10 @@
+<p>
+  showapi works!
+</p>
+
+<ul class="heroes">
+  <li *ngFor="let hero of heroes | async">
+      {{hero | json}}
+  </li>
+
+</ul>
