@@ -8,7 +8,11 @@
     <a class="p-2 text-dark" href="#">Support</a> -->
     <a class="p-2 text-dark" href="/dashboard">Dashboard</a>
   </nav>
-  <a class="btn btn-outline-primary" href="/login">Log in</a>
+
+  <a *ngIf="!currentUser" class="btn btn-outline-primary" href="/login">Log in</a>
+  <a *ngIf="currentUser" class="btn btn-outline-primary" (click)="logout()">Log out</a>
+
 
 </div>
+<alert></alert>
 <router-outlet></router-outlet>
