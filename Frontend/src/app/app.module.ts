@@ -1,16 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SensorComponent } from './components/sensor/sensor.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule }    from '@angular/forms';
 import { CustomerComponent } from './components/customer/customer.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { ApartmentComponent } from './components/apartment/apartment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AlertComponent } from './alert/alert.component';
+
+import { JwtModule } from '@auth0/angular-jwt';
+import { JwtInterceptor } from './jwt-interceptor';
+import { ErrorInterceptor } from './error-interceptor';
+
+export function tokenGetter() {
+  return localStorage.getItem('currentUser');
+}
+
 
 @NgModule({
   declarations: [
@@ -21,16 +31,28 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AdminComponent,
     HomeComponent,
     ApartmentComponent,
-    DashboardComponent
+    DashboardComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['127.0.0.1:8080'],
+        blacklistedRoutes: ['example.com/examplebadroute/']
+      }
+    })
 
 ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

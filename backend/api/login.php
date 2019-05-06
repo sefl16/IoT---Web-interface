@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php
 /**
  * Returns the list of policies.
@@ -73,6 +74,8 @@ if($res = email_exists($postdata->email, $con))
   echo json_encode(array("message" => "Email does not exist"));
 }
 =======
+=======
+>>>>>>> ba9291adef624e1f44dada864c20f0852c45efbc
 <?php
 /**
  * Returns the list of policies.
@@ -150,4 +153,7 @@ if($res = email_exists($postdata->email, $con))
   http_response_code(500);
   echo json_encode(array("message" => "Email does not exist"));
 }
+<<<<<<< HEAD
+>>>>>>> ba9291adef624e1f44dada864c20f0852c45efbc
+=======
 >>>>>>> ba9291adef624e1f44dada864c20f0852c45efbc
