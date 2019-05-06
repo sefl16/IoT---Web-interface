@@ -1,5 +1,4 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -38,9 +37,6 @@ export class AlertService {
         return this.subject.asObservable();
     }
 }
-=======
-=======
->>>>>>> ba9291adef624e1f44dada864c20f0852c45efbc
 import { Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -79,7 +75,4 @@ export class AlertService {
         return this.subject.asObservable();
     }
 }
-<<<<<<< HEAD
->>>>>>> ba9291adef624e1f44dada864c20f0852c45efbc
-=======
 >>>>>>> ba9291adef624e1f44dada864c20f0852c45efbc
