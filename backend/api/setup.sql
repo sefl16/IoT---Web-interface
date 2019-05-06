@@ -24,27 +24,22 @@ CREATE TABLE user
     email varchar(300) not null,
     phoneNumber varchar(30) not null,
     address varchar(30) not null,
-    op5_key varchar(30)
+    op5_key varchar(30),
+    admin boolean
 );
 
 DROP TABLE IF EXISTS complex;
 CREATE TABLE complex
 (
     id INT auto_increment PRIMARY KEY,
+    userID INT,
+    FOREIGN KEY (userID) REFERENCES user(id),
     address varchar(30) not null,
     city varchar(30) not null,
     KEY (address)
 );
 
-DROP TABLE IF EXISTS userComplex;
-CREATE TABLE userComplex
-(
-    userID INT not null,
-    complexID INT not null,
-    FOREIGN KEY (userID) REFERENCES user(id),
-    FOREIGN KEY (complexID) REFERENCES complex(id),
-    PRIMARY KEY (complexID, userID)
-);
+
 
 DROP TABLE IF EXISTS apartments;
 CREATE TABLE apartments
@@ -71,22 +66,17 @@ DROP VIEW IF EXISTS userApartmentsInfo;
 
 CREATE VIEW userApartmentsInfo AS
 	SELECT
-        u.id AS userID,
+		c.userID,
+        c.ID AS complexID,
         c.city,
         a.address,
-        uc.complexID,
-        s.devEUI,
-        a.appNumber
+        a.appNumber,
+		s.devEUI
 	FROM complex AS c
-		JOIN userComplex AS uc
-			ON uc.complexID = c.id
 		JOIN apartments AS a
 			ON a.address = c.address
-		JOIN `user` AS u
-			ON u.id = uc.userID
 		JOIN sensors AS s
 			ON s.appNumber = a.appNumber;
-
 
 -- procedure to add a user this can be updated with encryption and hashing?
 DROP PROCEDURE IF EXISTS addUser;
@@ -102,15 +92,16 @@ CREATE PROCEDURE addUser
     aEmail varchar(30),
     aPhoneNumber varchar(30),
     aAddress varchar(30),
-    aOp5_key varchar(30)
+    aOp5_key varchar(30),
+    aAdmin boolean
 
 )
 BEGIN
 
 	INSERT INTO `user`
-		(username, P_hash, first_name, last_name, email, phoneNumber, address, op5_key)
+		(username, P_hash, first_name, last_name, email, phoneNumber, address, op5_key, admin)
 			VALUES
-				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhoneNumber, aAddress, aOP5_key);
+				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhoneNumber, aAddress, aOP5_key, aAdmin);
 
 END
 //
@@ -130,31 +121,6 @@ BEGIN
 		(address, city)
 			VALUES
 				(aAddress, aCity);
-END
-//
-delimiter ;
-
--- connects a user to a complex
-DROP PROCEDURE IF EXISTS connectUserToComplex;
-
-delimiter //
-
-CREATE PROCEDURE connectUserToComplex
-(
-	aUsername varchar(30),
-    aAddress varchar(30),
-    aCity varchar(30)
-
-)
-BEGIN
-	INSERT INTO userComplex (userID, complexID)
-    SELECT
-    u.id,
-    c.id
-	FROM user AS u
-    JOIN complex AS c
-    WHERE u.username = aUsername AND c.address = aAddress AND c.city = aCity;
-
 END
 //
 delimiter ;
@@ -340,7 +306,7 @@ CREATE PROCEDURE displayComplexForUser
 	aID INT
 )
 BEGIN
-	SELECT DISTINCT city, address, complexID  FROM userApartmentsInfo where aID = userID;
+	SELECT DISTINCT city, address, complexID, userID FROM userApartmentsInfo where aID = userID;
 END
 //
 delimiter ;
@@ -355,6 +321,35 @@ CREATE PROCEDURE getComplexApps
 )
 BEGIN
 	SELECT appnumber FROM userApartmentsInfo WHERE aUserID = userID AND aComplexID = complexID;
+END
+//
+delimiter ;
+
+DROP PROCEDURE IF EXISTS editApartment;
+delimiter //
+CREATE PROCEDURE editApartment
+(
+	aAppNumber varchar(30),
+    aAddress varchar(30)
+)
+BEGIN
+	UPDATE apartments SET appNumber = aAppNumber , address = aAddress WHERE aAppNumber = appNumber;
+END
+//
+delimiter ;
+
+
+DROP PROCEDURE IF EXISTS editSensor;
+delimiter //
+CREATE PROCEDURE editSensor
+(
+	aDevEUI varchar(50),
+    aAppNumber varchar(30)
+)
+BEGIN
+
+	UPDATE sensors SET devEUI = aDevEUI, appNumber = aAppNumber WHERE aDevEUI = devEUI;
+
 END
 //
 delimiter ;
