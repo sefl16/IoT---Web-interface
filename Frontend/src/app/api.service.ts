@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
@@ -33,7 +32,7 @@ export class ApiService {
 
     constructor(private httpClient: HttpClient) { }
   }
-=======
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
@@ -63,4 +62,3 @@ export class ApiService {
 
     constructor(private httpClient: HttpClient) { }
   }
->>>>>>> ba9291adef624e1f44dada864c20f0852c45efbc
