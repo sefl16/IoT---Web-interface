@@ -22,16 +22,17 @@ INSERT INTO apartments (address, appNumber)
 VALUES ("Testgatan", "1234"),
 	   ("Testgatan", "1111"),
        ("Testgatan", "2222"),
-			 ("kungsgatan", "12151"),
-			 ("Nyvagen", "159012");
+	   ("kungsgatan", "12151"),
+	   ("Nyvagen", "159012");
 
 
 INSERT INTO sensors(appNumber, devEUI)
 VALUES("1234", "WDJA12WDA2151CAWDMA"),
       ("1111", "AWDIDCMA1251ACC1241"),
       ("2222", "AFIA21AFMAA251AWMA5"),
-			("12151", "AEONF#=A=#MFALS=!!="),
-			("159012", "SGIA#)#NASNDAPW125");
+	  ("12151", "AEONF#=A=#MFALS=!!="),
+	  ("159012", "SGIA#)#NASNDAPW125");
+      
 -- testing all the procedures
 -- CALL addUser("Olle", 'thispassword', "Olle", "Olsson", "Olle@thisisamail.com", "070-15675678", "Ollesgata", "apejroigrgafq3w4etr9j39");
 -- CALL addComplex("Ollesgata", "Karlskrona");
