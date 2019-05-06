@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
-import { Complex } from './complex';
 import { Observable } from 'rxjs';
-
+import { Sensor } from './sensor';
+import { Complex } from './complex';
 
 @Injectable({
   providedIn: 'root'
@@ -25,40 +25,16 @@ export class ApiService {
   deleteUser(id: number){
     return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
   }
+
+  readSensors(id: number, source: string ){ //skriv till ett namn på php filen
+      return this.httpClient.get<Sensor[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}/&source=${source}`);
+  }
+
+  deleteSensor(id: number, source: string){ //skriv till ett namn på php filen
+    return this.httpClient.delete<Sensor>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}/&source=${source}`);
+  }
   readUserComplex(id: number, source: string){
     return this.httpClient.get<Complex[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);
   }
-
-
-    constructor(private httpClient: HttpClient) { }
-  }
-
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from './user';
-import { Observable } from 'rxjs';
-
-
-@Injectable({
-  providedIn: 'root'
-})
-export class ApiService {
-  PHP_API_SERVER = "http://127.0.0.1:8080";
-  readUser(): Observable<User[]>{
-    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read.php`);
-  }
-
-  createUser(user: User): Observable<User>{
-    return this.httpClient.post<User>(`${this.PHP_API_SERVER}/api/create.php`, user);
-  }
-
-  updateUser(user: User){
-    return this.httpClient.put<User>(`${this.PHP_API_SERVER}/api/update.php`, user);
-  }
-
-  deleteUser(id: number){
-    return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
-  }
-
-    constructor(private httpClient: HttpClient) { }
+constructor(private httpClient: HttpClient) { }
   }
