@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-var data = [{"id": 1, "rooms": ["Laundry", "Bedroom", "Kitchen"]},
+var data = [{"id": 1, "rooms": ["Tvättstuga", "Sovrum", "Kök"]},
 {"id": 2, "rooms": ["Tvättstuga"]}]
 
 var sens = [{"idRoom":1, "sensors":["Sound"]},

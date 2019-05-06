@@ -1,4 +1,4 @@
 export class Apartment {
   appnumber: string;
-  devEUI: sting;
+  devEUI: string;
 }
