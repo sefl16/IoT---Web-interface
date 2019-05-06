@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
-import { Complex } from './complex';
 import { Observable } from 'rxjs';
-
+import { Sensor } from './sensor';
+import { Complex } from './complex';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +25,16 @@ export class ApiService {
   deleteUser(id: number){
     return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
   }
+
+  readSensors(id: number, source: string ){ //skriv till ett namn på php filen
+      return this.httpClient.get<Sensor[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}/&source=${source}`);
+  }
+
+  deleteSensor(id: number, source: string){ //skriv till ett namn på php filen
+    return this.httpClient.delete<Sensor>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}/&source=${source}`);
+  }
   readUserComplex(id: number, source: string){
     return this.httpClient.get<Complex[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);
   }
-
-
-    constructor(private httpClient: HttpClient) { }
+constructor(private httpClient: HttpClient) { }
   }
