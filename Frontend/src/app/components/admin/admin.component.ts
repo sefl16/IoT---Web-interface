@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { HttpClientModule }    from '@angular/common/http';
+
 
 @Component({
   selector: 'app-admin',
@@ -7,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private route: ActivatedRoute,
+      private router: Router) { }
 
   ngOnInit() {
   }
