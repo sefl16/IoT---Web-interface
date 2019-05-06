@@ -17,3 +17,8 @@ Hej!
 ## Start database from PHP
 * Stand in project directory
 * php -S 127.0.0.1:8080 -t .\backend
+
+# List of dependencies
+* Angular 7
+* @auth0/angular-jwt 
+  Helper library for handling JWTs in Angular
