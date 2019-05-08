@@ -37,17 +37,11 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
       this.source = 'readSensors'
       this.id = 1;
-      this.apiService.readSensors(this.id,this.source).subscribe((sensors: Sensor[])=>
-      {
-       this.sensors = sensors;
-       console.log(this.sensors);
-       })
-      this.apiService.readUserComplex(this.id,this.source).subscribe((complex: Complex[])=>
-      {
-          this.complex = complex;
-          console.log(this.complex);
-        })
-
+      // this.apiService.readSensors(this.id,this.source).subscribe((sensors: Sensor[])=>
+      // {
+      //  this.sensors = sensors;
+      //  console.log(this.sensors);
+      //  })
 
       //this.id = this.route.snapshot.paramMap.get('id');
       // this.name ='name';
