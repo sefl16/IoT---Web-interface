@@ -49,46 +49,22 @@ export class ApartmentComponent implements OnInit {
       console.log(this.complex);
     })
 }
-// sensSelect(option) {
-//     if(option == 'sound') {
-//         this.function = 'sound';
-//         this.location = 'Ronnebygatan 43';
-//         this.data = 'graph';
-//     } else if(option == 'co2') {
-//         this.function = 'CO2';
-//         this.location = 'NOrra Smedjegatan 12';
-//         this.data = 'graph';
-//     } else if(option == 'hum') {
-//         this.function = 'Humidity';
-//         this.location = 'Centralbron';
-//         this.data = 'graph';
-//     }
-//
-// }
 
+deleteApartment(appnumber)
+{
+    this.apiService.deleteApartment(appnumber).subscribe((apartments: Apartment)=>
 
-
-// showSensorsByStreet(str) {
-//     if(str == 'Alamedan' ){
-//         this.lgh ='24';
-//         } else if(str  == 'Valhalavägen'){
-//             this.lgh ='23';
-//     } else if(str == 'Miner'){
-//         this.lgh ='93';
-//         }
-//
-// }
-
-
+{
+  console.log("Apartment deleted, ", apartments);
+});
 }
-// interface Sensors {
-//     function:string,
-//     devEUI:string,
-//     location:string,
-//     data:any
-// }
+createApartment(form)
+{
+    this.apiService.createApartment(form.value).subscribe((apartments: Apartment)=>
+    {
+         console.log("Apartment created", apartments);
 
-// interface Adress {
-//         street:string,
-//         house:string
-// }
+
+});
+}
+}

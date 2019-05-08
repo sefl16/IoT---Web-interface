@@ -13,6 +13,19 @@
   </div>
 </div>
 
+
+
+<div class="alert alert-info">
+<h5>List of apartments</h5>
+<ul>
+<li *ngFor="let apartment of apartments">
+  <li>{{ apartment.appnumber }}</li>
+  <li>{{ apartment.devEUI }}
+    <button class="btn btn-info btn-sm"
+    (click)="deleteApartment(apartment.appnumber)">x</button>
+  </li>
+  </ul>
+</div>
 <!-- <div>
   <table border = '1' width = '100%' style='border-collapse: collapse;'>
     <tr>

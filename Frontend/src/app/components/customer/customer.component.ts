@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {ApiService} from '../../api.service';
 import {Sensor} from '../../sensor'
-
+import {User} from '../../user';
+import {Complex} from '../../complex';
+import {Apartment} from '../../apartment';
 
 @Component({
   selector: 'app-customer',
@@ -10,10 +12,15 @@ import {Sensor} from '../../sensor'
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
-
+    selectedComplex: Complex = { apartments: null, city: null, adress: null, complexID: null};
+    selectedApartment: Apartment = {appnumber: null, devEUI: null}
+    complex: Complex[];
+    apartments: Apartment[];
+    users: User[];
     source:string;
     sensors:Sensor[];
-    selectedSensor: Sensor = {appNumber: null, devEUI: null}
+    selectedSensor: Sensor = {appNumber: null, devEUI: null};
+    selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null};
     id:any;
     // adress:string;
     // email:string;
@@ -35,6 +42,12 @@ export class CustomerComponent implements OnInit {
        this.sensors = sensors;
        console.log(this.sensors);
        })
+      this.apiService.readUserComplex(this.id,this.source).subscribe((complex: Complex[])=>
+      {
+          this.complex = complex;
+          console.log(this.complex);
+        })
+
 
       //this.id = this.route.snapshot.paramMap.get('id');
       // this.name ='name';
@@ -45,11 +58,33 @@ export class CustomerComponent implements OnInit {
   }
 
 
+  updateComplex(option) //delete and add new rooms
+  {
+      if(this.selectedComplex && this.selectedComplex.complexID)
+      {
+          option.value.complexID = this.selectedComplex.complexID;
+          this.apiService.readUserComplex(this.id, option.value).subscribe((complex: Complex[])=>
+          {
 
-  addOne(option){
-      this.options.unshift(option);
-      return false;
+          });
+      }
   }
+
+
+  // addOne(option){
+  //     this.sensors.unshift(option);
+  //     return false;
+  // }
+
+  addOne(devEUI){
+      this.apiService.createSensor(devEUI.value).subscribe((sensors: Sensor)=>
+      {
+      this.sensors.unshift(devEUI.value);
+      return false;
+  });
+  }
+
+
 
 deleteOpt(opt){
     for(let i=0; i<this.sensors.length; i++) {
@@ -74,13 +109,6 @@ deleteSensor(devEUI)
   console.log("Sensor deleted, ", sensors);
 });
 }
-
-
-
-
-
-
-
 
 
 }

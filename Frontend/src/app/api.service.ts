@@ -4,6 +4,7 @@ import { User } from './user';
 import { Observable } from 'rxjs';
 import { Sensor } from './sensor';
 import { Complex } from './complex';
+import { Apartment } from './apartment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class ApiService {
 
   createUser(user: User): Observable<User>{
     return this.httpClient.post<User>(`${this.PHP_API_SERVER}/api/create.php`, user);
+  }
+  createApartment(apartment: Apartment): Observable<Apartment>{ //new
+    return this.httpClient.post<Apartment>(`${this.PHP_API_SERVER}/api/create.php`, apartment);
   }
 
   updateUser(user: User){
@@ -35,6 +39,12 @@ export class ApiService {
   }
   readUserComplex(id: number, source: string){
     return this.httpClient.get<Complex[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);
+  }
+  createSensor(sensors: Sensor): Observable<Sensor>{
+    return this.httpClient.post<Sensor>(`${this.PHP_API_SERVER}/api/create.php`, sensors);
+  }
+  deleteApartment(appnumber: string){ //new
+     return this.httpClient.delete<Apartment>(`${this.PHP_API_SERVER}/api/delete.php/?id=${appnumber}`);
   }
 constructor(private httpClient: HttpClient) { }
   }
