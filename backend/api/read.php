@@ -27,30 +27,30 @@ switch ($source)
           $data_array[] = $row;
           $y = 0;
           $j = 0;
-          if(in_array($row['complexID'], $complexID) == false)
-          {
+          // if(in_array($row['complexID'], $complexID) == false)
+          // {
             $complex[$i]['city'] = $row['city'];
             $complex[$i]['address'] = $row['address'];
-            $complex[$i]['complexID'] = $row['complexID'];
-            $complexID[$i] = $row['complexID'];
-            $complex[$i]['apartments'] = [];
+            // $complex[$i]['complexID'] = $row['complexID'];
+            // $complexID[$i] = $row['complexID'];
+            $complex[$i]['id'] = $row['id'];
             $i++;
-          }
+          // }
         }
 
-        $sizeofcomplexID = sizeof($complexID);
-        for($y = 0; $y < $sizeofcomplexID; $y++)
-        {
-          foreach($data_array as $item)
-          {
-            if($complexID[$y] == $item['complexID'])
-            {
-                $complex[$y]['apartments'][$j] = $item['appNumber'];
-                $j++;
-            }
-          }
-          $j = 0;
-        }
+        // $sizeofcomplexID = sizeof($complexID);
+        // for($y = 0; $y < $sizeofcomplexID; $y++)
+        // {
+        //   foreach($data_array as $item)
+        //   {
+        //     if($complexID[$y] == $item['complexID'])
+        //     {
+        //         $complex[$y]['apartments'][$j] = $item['appNumber'];
+        //         $j++;
+        //     }
+        //   }
+        //   $j = 0;
+        // }
       echo json_encode($complex);
       }
       else

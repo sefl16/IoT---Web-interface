@@ -16,6 +16,7 @@ import { AlertComponent } from './alert/alert.component'
 import { JwtModule } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './jwt-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
+import { UserViewComponent } from './components/user-view/user-view.component';
 
 export function tokenGetter() {
   return localStorage.getItem('currentUser');
@@ -31,7 +32,8 @@ export function tokenGetter() {
     HomeComponent,
     ApartmentComponent,
     DashboardComponent,
-    AlertComponent
+    AlertComponent,
+    UserViewComponent
   ],
   imports: [
       BrowserModule,

@@ -112,7 +112,8 @@ CREATE PROCEDURE addComplex
 (
 	aUserId INT,
     aAddress varchar(30),
-    aCity varchar(30)
+    aCity varchar(30),
+    uID INT
 )
 BEGIN
 
@@ -202,8 +203,8 @@ CREATE PROCEDURE displayComplexes
 )
 BEGIN
 	SELECT * FROM complex WHERE aID = userID;
-END 
-// 
+END
+//
 delimiter ;
 
 -- procedure for the admin page to display apartments in complexes attached to the user
@@ -213,10 +214,10 @@ CREATE PROCEDURE displayComplexApartments
 (
     aComplexID INT
 )
-BEGIN 
+BEGIN
 	SELECT c.userID, c.id, a.appNumber,c.address
 		FROM complex AS c
-			JOIN apartments AS a 
+			JOIN apartments AS a
             ON c.address = a.address
             WHERE c.address = a.address AND c.id = aComplexID;
 END
