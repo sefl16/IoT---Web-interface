@@ -24,7 +24,8 @@ CREATE TABLE user
     email varchar(300) not null,
     phoneNumber varchar(30) not null,
     address varchar(30) not null,
-    op5_key varchar(30)
+    op5_key varchar(30),
+    admin boolean
 );
 
 DROP TABLE IF EXISTS complex;
@@ -91,15 +92,16 @@ CREATE PROCEDURE addUser
     aEmail varchar(30),
     aPhoneNumber varchar(30),
     aAddress varchar(30),
-    aOp5_key varchar(30)
+    aOp5_key varchar(30),
+    aAdmin boolean
 
 )
 BEGIN
 
 	INSERT INTO `user`
-		(username, P_hash, first_name, last_name, email, phoneNumber, address, op5_key)
+		(username, P_hash, first_name, last_name, email, phoneNumber, address, op5_key, admin)
 			VALUES
-				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhoneNumber, aAddress, aOP5_key);
+				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhoneNumber, aAddress, aOP5_key, aAdmin);
 
 END
 //
@@ -119,7 +121,11 @@ BEGIN
 	INSERT INTO complex
 		(address, city, userID)
 			VALUES
+<<<<<<< HEAD
 				(aAddress, aCity, uID);
+=======
+				(aAddress, aCity);
+>>>>>>> 76c68371bcf9e67a3698cf51cfc169d94abb11d3
 END
 //
 delimiter ;
@@ -320,6 +326,35 @@ CREATE PROCEDURE getComplexApps
 )
 BEGIN
 	SELECT appnumber FROM userApartmentsInfo WHERE aUserID = userID AND aComplexID = complexID;
+END
+//
+delimiter ;
+
+DROP PROCEDURE IF EXISTS editApartment;
+delimiter //
+CREATE PROCEDURE editApartment
+(
+	aAppNumber varchar(30),
+    aAddress varchar(30)
+)
+BEGIN
+	UPDATE apartments SET appNumber = aAppNumber , address = aAddress WHERE aAppNumber = appNumber;
+END
+//
+delimiter ;
+
+
+DROP PROCEDURE IF EXISTS editSensor;
+delimiter //
+CREATE PROCEDURE editSensor
+(
+	aDevEUI varchar(50),
+    aAppNumber varchar(30)
+)
+BEGIN
+
+	UPDATE sensors SET devEUI = aDevEUI, appNumber = aAppNumber WHERE aDevEUI = devEUI;
+
 END
 //
 delimiter ;
