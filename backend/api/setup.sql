@@ -31,20 +31,14 @@ DROP TABLE IF EXISTS complex;
 CREATE TABLE complex
 (
     id INT auto_increment PRIMARY KEY,
+    userID INT,
+    FOREIGN KEY (userID) REFERENCES user(id),
     address varchar(30) not null,
     city varchar(30) not null,
     KEY (address)
 );
 
-DROP TABLE IF EXISTS userComplex;
-CREATE TABLE userComplex
-(
-    userID INT not null,
-    complexID INT not null,
-    FOREIGN KEY (userID) REFERENCES user(id),
-    FOREIGN KEY (complexID) REFERENCES complex(id),
-    PRIMARY KEY (complexID, userID)
-);
+
 
 DROP TABLE IF EXISTS apartments;
 CREATE TABLE apartments
@@ -71,22 +65,17 @@ DROP VIEW IF EXISTS userApartmentsInfo;
 
 CREATE VIEW userApartmentsInfo AS
 	SELECT
-        u.id AS userID,
+		c.userID,
+        c.ID AS complexID,
         c.city,
         a.address,
-        uc.complexID,
-        s.devEUI,
-        a.appNumber
+        a.appNumber,
+		s.devEUI
 	FROM complex AS c
-		JOIN userComplex AS uc
-			ON uc.complexID = c.id
 		JOIN apartments AS a
 			ON a.address = c.address
-		JOIN `user` AS u
-			ON u.id = uc.userID
 		JOIN sensors AS s
 			ON s.appNumber = a.appNumber;
-
 
 -- procedure to add a user this can be updated with encryption and hashing?
 DROP PROCEDURE IF EXISTS addUser;
@@ -122,39 +111,15 @@ delimiter //
 CREATE PROCEDURE addComplex
 (
     aAddress varchar(30),
-    aCity varchar(30)
+    aCity varchar(30),
+    uID INT
 )
 BEGIN
 
 	INSERT INTO complex
-		(address, city)
+		(address, city, userID)
 			VALUES
-				(aAddress, aCity);
-END
-//
-delimiter ;
-
--- connects a user to a complex
-DROP PROCEDURE IF EXISTS connectUserToComplex;
-
-delimiter //
-
-CREATE PROCEDURE connectUserToComplex
-(
-	aUsername varchar(30),
-    aAddress varchar(30),
-    aCity varchar(30)
-
-)
-BEGIN
-	INSERT INTO userComplex (userID, complexID)
-    SELECT
-    u.id,
-    c.id
-	FROM user AS u
-    JOIN complex AS c
-    WHERE u.username = aUsername AND c.address = aAddress AND c.city = aCity;
-
+				(aAddress, aCity, uID);
 END
 //
 delimiter ;
@@ -340,7 +305,7 @@ CREATE PROCEDURE displayComplexForUser
 	aID INT
 )
 BEGIN
-	SELECT DISTINCT city, address, complexID  FROM userApartmentsInfo where aID = userID;
+	SELECT DISTINCT city, address, complexID, userID FROM userApartmentsInfo where aID = userID;
 END
 //
 delimiter ;
