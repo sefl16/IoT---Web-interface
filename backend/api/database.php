@@ -2,9 +2,9 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
 header("Access-Control-Allow-Headers: Origin, X-Requsted-With, Content-Type, Accept, Authorization");
-define('DB_HOST', 'localhost');
+define('DB_HOST', '127.0.0.1:3306');
 define('DB_USER', 'root');
-define('DB_PASS', 'testpass');
+define('DB_PASS', 'pass');
 define('DB_NAME', 'studentverken');
 
 function connect()

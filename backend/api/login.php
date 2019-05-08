@@ -8,7 +8,7 @@ $postdata = json_decode(file_get_contents("php://input"));
 function email_exists($email, $con)
 {
     $email = mysqli_real_escape_string($con, (string)($email));
-    $query = "SELECT id, username, first_name, last_name, P_hash, email, op5_key, address, phoneNumber
+    $query = "SELECT id, username, firstname, lastname, P_hash, email, op5_key, address, phonenumber
             FROM user
             WHERE email = '{$email}'
             LIMIT 0,1";
@@ -17,13 +17,13 @@ function email_exists($email, $con)
         if($row = mysqli_fetch_assoc($result)) {
           $user['id']    = $row['id'];
           $user['username'] = $row['username'];
-          $user['first_name'] = $row['first_name'];
-          $user['last_name'] = $row['last_name'];
+          $user['firstname'] = $row['firstname'];
+          $user['lastname'] = $row['lastname'];
           $user['p_hash'] = $row['P_hash'];
           $user['email'] = $row['email'];
           $user['op5_key'] = $row['op5_key'];
           $user['address'] = $row['address'];
-          $user['phoneNumber'] = $row['phoneNumber'];
+          $user['phonenumber'] = $row['phonenumber'];
         }
         return $user;
     }
@@ -37,8 +37,8 @@ if($res = email_exists($postdata->email, $con))
         // Create token payload as a JSON string
         $payload = json_encode([
             'id' => $res["id"],
-            'first_name' => $res["first_name"],
-            'last_name' => $res["last_name"],
+            'firstname' => $res["firstname"],
+            'lastname' => $res["lastname"],
             'username' => $res["username"],
             'admin' => True
         ]);

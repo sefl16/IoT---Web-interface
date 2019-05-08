@@ -1,5 +1,5 @@
 
-INSERT INTO user(username, P_hash, first_name, last_name, email, phoneNumber, address,op5_key, admin)
+INSERT INTO user(username, P_hash, firstname, lastname, email, phonenumber, address,op5_key, admin)
 VALUES("Kalle", "passwurd", "Kalle","svenson", "kalle@fiktiv.se", "070-12344411", "KnAvagen3","qwertyuiopasdfghjkl", true),
       ("lixsom", "wurdpass", "maj", "kullberg", "maj@fiktiv.se", "070-94112331", "KnAvagen4","lkjhgfdsaqwertyuiop", false),
       ("sebastion", "testarpass", "sebbeboiii","efternamn", "sebastian@fiktiv.se", "12412211111", "KnAvagen5", "okmijnuhbyhgvtfcrdx", false);
@@ -11,13 +11,6 @@ VALUES
 (1, "Nyvagen", "Stockholm");
 
 
-
--- INSERT INTO userComplex (userId, complexId)
--- VALUES (1, 1),
---  	   (1, 2),
---       (1, 3);
-
-
 INSERT INTO apartments (address, appNumber)
 VALUES ("Testgatan", "1234"),
 	   ("Testgatan", "1111"),
@@ -25,7 +18,6 @@ VALUES ("Testgatan", "1234"),
 	   ("kungsgatan", "12151"),
 	   ("Nyvagen", "159012");
 
-CALL editApartment("1234", "Nyvagen");
 INSERT INTO sensors(appNumber, devEUI)
 VALUES("1234", "WDJA12WDA2151CAWDMA"),
       ("1111", "AWDIDCMA1251ACC1241"),

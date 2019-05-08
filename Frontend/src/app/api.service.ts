@@ -22,8 +22,8 @@ export class ApiService {
     return this.httpClient.put<User>(`${this.PHP_API_SERVER}/api/update.php`, user);
   }
 
-  deleteUser(id: number){
-    return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
+  deleteUser(id: number, source: string){
+    return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}/&source=${source}`);
   }
 
   readSensors(id: number, source: string ){ //skriv till ett namn på php filen

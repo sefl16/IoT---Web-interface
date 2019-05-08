@@ -2,11 +2,12 @@ export class User {
   id: null;
   username: string;
   password: string;
-  first_name: string;
-  last_name: string;
+  firstname: string;
+  lastname: string;
   email: string;
-  phone_number: string;
+  phonenumber: string;
   address: string;
   op5_key: string;
   city: string;
+  admin: boolean;
 }

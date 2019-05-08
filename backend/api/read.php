@@ -15,7 +15,6 @@ switch ($source)
       $complexID = [];
       //$complexID = array();
       $sql = "CALL userApartmentsInfo('{$id}')";
-      //$sql = "CALL displayComplexForUser('{$id}')";
       $result2 = array();
       if($result = mysqli_query($con,$sql))
       {
@@ -62,7 +61,7 @@ switch ($source)
     }
   case "readUsers":
     $users = [];
-    $sql = "SELECT id, username, first_name, last_name, op5_key FROM user";
+    $sql = "CALL displayUsers()";
 
     if($result = mysqli_query($con,$sql))
     {
@@ -71,9 +70,13 @@ switch ($source)
       {
         $users[$i]['id']    = $row['id'];
         $users[$i]['username'] = $row['username'];
-        $users[$i]['first_name'] = $row['first_name'];
-        $users[$i]['last_name'] = $row['last_name'];
+        $users[$i]['firstname'] = $row['firstname'];
+        $users[$i]['lastname'] = $row['lastname'];
+        $users[$i]['email'] = $row['email'];
+        $users[$i]['phonenumber'] = $row['phonenumber'];
+        $users[$i]['address'] = $row['address'];
         $users[$i]['op5_key'] = $row['op5_key'];
+        $users[$i]['admin'] = $row['admin'];
         $i++;
       }
 
