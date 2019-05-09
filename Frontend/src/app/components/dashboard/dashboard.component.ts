@@ -11,7 +11,11 @@ export class DashboardComponent implements OnInit
 {
   users: User[];
   source: string;
+<<<<<<< HEAD
   selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null, admin:null}
+=======
+  selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin: null}
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
   constructor(private apiService: ApiService) { }
 
 
@@ -49,7 +53,8 @@ export class DashboardComponent implements OnInit
 
   deleteUser(id)
   {
-    this.apiService.deleteUser(id).subscribe((users: User)=>
+    this.source = "deleteUser"
+    this.apiService.deleteUser(id, this.source).subscribe((users: User)=>
   {
     console.log("user deleted, ", users);
   });

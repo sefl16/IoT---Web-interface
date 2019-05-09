@@ -12,7 +12,11 @@
       <th>Phone Number</th>
       <th>Address</th>
       <th>Op5 Key </th>
+<<<<<<< HEAD
       <th>Admin </th>
+=======
+      <th>Admin</th>
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
       <th>Operations</th>
 
     </tr>
@@ -21,10 +25,10 @@
       <td>{{ user.id }}</td>
       <td>{{ user.username }}</td>
       <td>{{ user.password }}</td>
-      <td>{{ user.first_name }}</td>
-      <td>{{ user.last_name }}</td>
+      <td>{{ user.firstname }}</td>
+      <td>{{ user.lastname }}</td>
       <td>{{ user.email }}</td>
-      <td>{{ user.phone_number }}</td>
+      <td>{{ user.phonenumber }}</td>
       <td>{{ user.address }}</td>
       <td>{{ user.op5_key }}</td>
       <td>{{ user.admin }}</td>
@@ -44,16 +48,16 @@
         <input type="text" name="password" [(ngModel)] = "selectedUser.password">
         <br>
         <label>Firstname</label>
-        <input type="text" name="first_name" [(ngModel)] = "selectedUser.first_name">
+        <input type="text" name="firstname" [(ngModel)] = "selectedUser.firstname">
         <br>
         <label>Lastname</label>
-        <input type="text" name="last_name" [(ngModel)] = "selectedUser.last_name">
+        <input type="text" name="lastname" [(ngModel)] = "selectedUser.lastname">
         <br>
         <label>Email</label>
         <input type="text" name="email" [(ngModel)] = "selectedUser.email">
         <br>
         <label>Phone Number</label>
-        <input type="text" name="phone_number" [(ngModel)] = "selectedUser.phone_number">
+        <input type="text" name="phonenumber" [(ngModel)] = "selectedUser.phonenumber">
         <br>
         <label>Address</label>
         <input type="text" name="address" [(ngModel)] = "selectedUser.address">
@@ -61,8 +65,14 @@
         <label>op5 key</label>
         <input type="text" name="op5_key" [(ngModel)] = "selectedUser.op5_key">
         <br>
+<<<<<<< HEAD
         <label>admin</label>
         <input type="boolean" name="admin" [(ngModel)] = "selectedUser.admin">
+=======
+        <label>Admin</label>
+        <input type="boolean" name="admin" [(ngModel)] = "selectedUser.admin">
+
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
         <br>
         <input type="button" (click)="createOrUpdateUser(f)" value="create or update user">
 </form>

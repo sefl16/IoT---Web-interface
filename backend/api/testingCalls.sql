@@ -1,5 +1,5 @@
 
-
+select * from user;
 select * from complex;
 -- testing all the procedures
 -- CALL addUser("Olle", 'thispassword', "Olle", "Olsson", "Olle@thisisamail.com", "070-15675678", "Ollesgata", "apejroigrgafq3w4etr9j39");
@@ -26,7 +26,6 @@ select * from complex;
 -- CALL updateUser(1, 'nyttpass', "Kalle", "svenson", "kalle@fiktiv.se", "070-12344411", "knAvagen3");
 
 
-
 -- SELECT * from user;
 -- SELECT* from complex;
 -- SELECT* from userComplex;
@@ -42,11 +41,20 @@ select * from complex;
 -- select* from sensors;
 -- -- CALL removeComplex(4);
 -- -- CALL removeComplex(1);
+-- CALL adduser('asd', '123', 'test', 'test', 'test', 'test', 'test', 'test', false);
+-- call updateUser(1, '123', 'test', 'test', 'test', 'test', 'test', 'test', 'test', true);
 -- select * from userapartmentsinfo;
-CALL userApartmentsInfo(1);
+-- CALL userApartmentsInfo(1);
+-- CALL editApartment("1234", "Nyvagen");
 
-CALL displayComplexForUser(1);
+-- CALL displayComplexForUser(1);
 select * from sensors;
-CALL editSensor("WDJA12WDA2151CAWDMA", "2222");
+-- CALL editSensor("WDJA12WDA2151CAWDMA", "2222");
 -- CALL getComplexApps(1,5);
 select * from sensors;
+
+CALL displayComplexes(1);
+CALL displayComplexes(2);
+CALL displayComplexApartments(1);
+
+CALL login('kalle@fiktiv.se');

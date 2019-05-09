@@ -7,22 +7,24 @@ CREATE database studentverken;
 -- visa vad en användare kan göra mot vilken databas
 SHOW GRANTS FOR root@localhost;
 
--- Visa för nuvarande användare
 SHOW GRANTS FOR CURRENT_USER;
 
 USE studentverken;
 
 DROP TABLE IF EXISTS user;
-USE studentverken;
 CREATE TABLE user
 (
     id INT auto_increment PRIMARY KEY,
     username varchar(30) not null UNIQUE,
     P_hash varchar(300) not null,
-    first_name varchar(30) not null,
-    last_name varchar(30) not null,
+    firstname varchar(30) not null,
+    lastname varchar(30) not null,
     email varchar(300) not null,
+<<<<<<< HEAD
     phone_number varchar(30) not null,
+=======
+    phonenumber varchar(30) not null,
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
     address varchar(30) not null,
     op5_key varchar(30),
     admin boolean
@@ -87,10 +89,14 @@ CREATE PROCEDURE addUser
 (
 	aUsername varchar(30),
     aPassword varchar(255),
-    aFirst_name varchar(30),
-    aLast_name varchar(30),
+    aFirstname varchar(30),
+    aLastname varchar(30),
     aEmail varchar(30),
+<<<<<<< HEAD
     aPhone_number varchar(30),
+=======
+    aPhonenumber varchar(30),
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
     aAddress varchar(30),
     aOp5_key varchar(30),
     aAdmin boolean
@@ -99,9 +105,15 @@ CREATE PROCEDURE addUser
 BEGIN
 
 	INSERT INTO `user`
+<<<<<<< HEAD
 		(username, P_hash, first_name, last_name, email, phone_number, address, op5_key, admin)
 			VALUES
 				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhone_number, aAddress, aOP5_key, aAdmin);
+=======
+		(username, P_hash, firstname, lastname, email, phonenumber, address, op5_key, admin)
+			VALUES
+				(aUsername, aPassword, aFirstname, aLastname, aEmail, aPhonenumber, aAddress, aOP5_key, aAdmin);
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 
 END
 //
@@ -204,8 +216,13 @@ CREATE PROCEDURE displayComplexes
 )
 BEGIN
 	SELECT * FROM complex WHERE aID = userID;
+<<<<<<< HEAD
 END 
 // 
+=======
+END
+//
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 delimiter ;
 
 -- procedure for the admin page to display apartments in complexes attached to the user
@@ -215,12 +232,21 @@ CREATE PROCEDURE displayComplexApartments
 (
     aComplexID INT
 )
+<<<<<<< HEAD
 BEGIN 
 	SELECT c.userID, c.id, a.appNumber,c.address
 		FROM complex AS c
 			JOIN apartments AS a 
             ON c.address = a.address
             WHERE c.address = a.address AND c.ID = aComplexID;
+=======
+BEGIN
+	SELECT c.userID, c.id, a.appNumber,c.address
+		FROM complex AS c
+			JOIN apartments AS a
+            ON c.address = a.address
+            WHERE c.address = a.address AND c.id = aComplexID;
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 END
 //
 delimiter ;
@@ -233,10 +259,12 @@ delimiter //
 CREATE PROCEDURE updateUser
 (
 	aID INT,
+    aUsername varchar(30),
     aPassword varchar(255),
-    aFirst_name varchar(30),
-    aLast_name varchar(30),
+    aFirstname varchar(30),
+    aLastname varchar(30),
     aEmail varchar(30),
+<<<<<<< HEAD
     aPhone_number varchar(30),
     aAddress varchar(30),
 	aOp5_key varchar(30),
@@ -246,6 +274,16 @@ CREATE PROCEDURE updateUser
 )
 BEGIN
 	UPDATE user SET P_hash = aPassword, first_name = aFirst_name, username = aUsername, last_name = aLast_name, email = aEmail, phone_number = aPhone_number, address = aAddress, op5_key = aOp5_key, admin = aAdmin WHERE aID = id;
+=======
+    aPhonenumber varchar(30),
+    aAddress varchar(30),
+    aOp5_key varchar(30),
+    aAdmin boolean
+
+)
+BEGIN
+	UPDATE user SET username = aUsername, P_hash = aPassword, firstname = aFirstname, lastname = aLastname, email = aEmail, phonenumber = aPhonenumber, address = aAddress, op5_key = aOp5_key, admin = aAdmin WHERE aID = id;
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 END
 //
 
@@ -362,3 +400,21 @@ BEGIN
 END
 //
 delimiter ;
+<<<<<<< HEAD
+=======
+
+
+DROP PROCEDURE IF EXISTS login;
+delimiter //
+CREATE PROCEDURE login
+(
+	aEmail varchar(30)
+)
+BEGIN
+
+	SELECT id, username, firstname, lastname, P_hash, email, op5_key, address, phonenumber, admin FROM user WHERE email = aEmail LIMIT 0,1;
+
+END
+//
+delimiter ;
+>>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
