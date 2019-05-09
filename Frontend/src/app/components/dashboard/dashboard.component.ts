@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit
 {
   users: User[];
   source: string;
-  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null}
+  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null, admin:null}
   constructor(private apiService: ApiService) { }
 
 

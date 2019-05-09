@@ -20,12 +20,16 @@ if(isset($postdata) && !empty($postdata))
   $password = mysqli_real_escape_string($con, (string)$request->password);
   $first_name = mysqli_real_escape_string($con, (string)$request->first_name);
   $last_name = mysqli_real_escape_string($con, (string)$request->last_name);
+  $phone_number = mysqli_real_escape_string($con, (string)$request->phone_number);
+  $email = mysqli_real_escape_string($con, (string)$request->email);
+  $address = isset($request->op5_key) ? mysqli_real_escape_string($con, (string)$request->address) : null;
   $op5_key = isset($request->op5_key) ? mysqli_real_escape_string($con, (string)$request->op5_key) : null;
+  $admin = mysqli_real_escape_string($con, (int)$request->admin);
 
   $hash = password_hash($password, PASSWORD_DEFAULT);
 
   // Update.
-  $sql = "UPDATE `user` SET `username`='$username',`P_hash`='$hash', `first_name`='$first_name', `last_name`='$last_name', `op5_key`='$op5_key' WHERE `id` = '{$id}' LIMIT 1";
+  $sql = "CALL updateUser('{$id}','{$hash}', '{$first_name}', '{$last_name}', '{$email}', '{$phone_number}', '{$address}', '{$op5_key}', '{$admin}', '{$username}')";
 
   if(mysqli_query($con, $sql))
   {

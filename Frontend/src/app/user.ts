@@ -9,4 +9,5 @@ export class User {
   address: string;
   op5_key: string;
   city: string;
+  admin: boolean;
 }

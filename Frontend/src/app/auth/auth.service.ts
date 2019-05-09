@@ -18,6 +18,9 @@ export class AuthenticationService {
     public get currentUserValue(): any {
         return this.currentUserSubject.value;
     }
+    public get isAdmin() {
+      return this.jwtHelper.decodeToken(this.currentUserValue.jwt).admin
+    }
 
     login(email: string, password: string) {
         return this.http.post<any>(`${this.PHP_API_SERVER}/api/login.php`, JSON.stringify({"email": email, "password": password}))

@@ -63,7 +63,7 @@ switch ($source)
     }
   case "readUsers":
     $users = [];
-    $sql = "SELECT id, username, first_name, last_name, phoneNumber, address, email, op5_key FROM user";
+    $sql = "SELECT id, username, first_name, last_name, phone_number, address, email, op5_key, admin FROM user";
 
     if($result = mysqli_query($con,$sql))
     {
@@ -77,7 +77,8 @@ switch ($source)
         $users[$i]['op5_key'] = $row['op5_key'];
         $users[$i]['email'] = $row['email'];
         $users[$i]['address'] = $row['address'];
-        $users[$i]['phoneNumber'] = $row['phoneNumber'];
+        $users[$i]['phone_number'] = $row['phone_number'];
+        $users[$i]['admin'] = $row['admin'];
         $i++;
       }
 
@@ -88,6 +89,58 @@ switch ($source)
       http_response_code(404);
     }
     break;
+  case "readAdminComplex":
+  if($id = ($_GET['id'] !== null && (int)$_GET['id'] > 0)? mysqli_real_escape_string($con, (int)$_GET['id']) : false)
+  {
+    $complex = [];
+    $complexID = [];
+    //$complexID = array();
+    // $sql = "CALL userApartmentsInfo('{$id}')";
+    $sql = "CALL displayComplexApartments('{$id}')";
+    //$sql = "CALL displayComplexForUser('{$id}')";
+    $result2 = array();
+    if($result = mysqli_query($con,$sql))
+    {
+
+      $i = 0;
+      $j = 0;
+      $y = 0;
+      while($row = mysqli_fetch_assoc($result))
+      {
+        $data_array[] = $row;
+        $y = 0;
+        $j = 0;
+        // if(in_array($row['complexID'], $complexID) == false)
+        // {
+          $complex[$i]['userID'] = $row['userID'];
+          $complex[$i]['ID'] = $row['ID'];
+          $complex[$i]['appNumber'] = $row['appNumber'];
+          $complex[$i]['address'] = $row['address'];
+          $i++;
+        // }
+      }
+
+      // $sizeofcomplexID = sizeof($complexID);
+      // for($y = 0; $y < $sizeofcomplexID; $y++)
+      // {
+      //   foreach($data_array as $item)
+      //   {
+      //     if($complexID[$y] == $item['complexID'])
+      //     {
+      //         $complex[$y]['apartments'][$j] = $item['appNumber'];
+      //         $j++;
+      //     }
+      //   }
+      //   $j = 0;
+      // }
+    echo json_encode($complex);
+    }
+    else
+    {
+      http_response_code(404);
+    }
+    break;
+  }
   default:
     http_response_code(404);
     break;

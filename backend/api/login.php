@@ -8,7 +8,7 @@ $postdata = json_decode(file_get_contents("php://input"));
 function email_exists($email, $con)
 {
     $email = mysqli_real_escape_string($con, (string)($email));
-    $query = "SELECT id, username, first_name, last_name, P_hash, email, op5_key, address, phoneNumber
+    $query = "SELECT id, username, first_name, last_name, P_hash, email, op5_key, address, phone_number, admin
             FROM user
             WHERE email = '{$email}'
             LIMIT 0,1";
@@ -23,7 +23,8 @@ function email_exists($email, $con)
           $user['email'] = $row['email'];
           $user['op5_key'] = $row['op5_key'];
           $user['address'] = $row['address'];
-          $user['phoneNumber'] = $row['phoneNumber'];
+          $user['phone_number'] = $row['phone_number'];
+          $user['admin'] = $row['admin'];
         }
         return $user;
     }
@@ -40,7 +41,7 @@ if($res = email_exists($postdata->email, $con))
             'first_name' => $res["first_name"],
             'last_name' => $res["last_name"],
             'username' => $res["username"],
-            'admin' => True
+            'admin' => $res["admin"]
         ]);
         // Encode Header to Base64Url String
         $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));

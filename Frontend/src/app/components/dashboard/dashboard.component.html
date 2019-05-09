@@ -12,6 +12,7 @@
       <th>Phone Number</th>
       <th>Address</th>
       <th>Op5 Key </th>
+      <th>Admin </th>
       <th>Operations</th>
 
     </tr>
@@ -26,6 +27,7 @@
       <td>{{ user.phone_number }}</td>
       <td>{{ user.address }}</td>
       <td>{{ user.op5_key }}</td>
+      <td>{{ user.admin }}</td>
       <td>
         <button (click)="deleteUser(user.id)">Delete</button>
         <button (click)="selectUser(user)">Update</button>
@@ -58,6 +60,9 @@
         <br>
         <label>op5 key</label>
         <input type="text" name="op5_key" [(ngModel)] = "selectedUser.op5_key">
+        <br>
+        <label>admin</label>
+        <input type="boolean" name="admin" [(ngModel)] = "selectedUser.admin">
         <br>
         <input type="button" (click)="createOrUpdateUser(f)" value="create or update user">
 </form>

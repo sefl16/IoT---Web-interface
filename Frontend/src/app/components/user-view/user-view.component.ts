@@ -12,8 +12,9 @@ import { Apartment } from '../../apartment';
 export class UserViewComponent implements OnInit {
   id: any;
   complexes: Complex[];
-  selectedComplex: Complex = {apartments: null, city: null, adress: null, complexID: null};
+  selectedComplex: Complex = {apartments: null, city: null, address: null, complexID: null};
   expanded: boolean = false;
+  apartments: Apartment[];
 
 
   constructor(private route: ActivatedRoute,
@@ -28,8 +29,45 @@ export class UserViewComponent implements OnInit {
       this.complexes = complexes;
     })
   }
-  expand() {
-    return true;
+
+  selectComplex(id) {
+    this.apiService.readAdminComplex(id, "readAdminComplex").subscribe((apartments: Apartment[])=>
+    {
+      this.expanded = !this.expanded;
+      this.apartments = apartments
+    })
   }
+
+  deleteComplex(complex)
+  {
+    this.apiService.deleteComplex(complex).subscribe((complex: any)=>
+    {
+      console.log("user deleted, ", complex);
+      this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>
+      {
+        console.log(complexes);
+        this.complexes = complexes;
+      })
+    });
+  }
+
+  // createOrUpdateComplex(form)
+  // {
+  //   if(this.selectedComplex && this.selectedComplex.id)
+  //     {
+  //       form.value.id = this.selectedComplex.id;
+  //       this.apiService.updateComplex(form.value).subscribe((complex: Complex)=>
+  //     {
+  //       console.log("Updated complex", complex);
+  //     });
+  //   }
+  //   else
+  //   {
+  //     this.apiService.createComplex(form.value).subscribe((complex: Complex)=>
+  //   {
+  //     console.log("Complex created, ", complex);
+  //   });
+  //   }
+  // }
 
 }

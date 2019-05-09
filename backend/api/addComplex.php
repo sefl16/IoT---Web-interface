@@ -6,21 +6,10 @@ if(isset($postdata) && !empty($postdata))
 {
   // Extract the data.
   $request = json_decode($postdata);
-  // Validate.
-  if(trim($request->username) === '')
-  {
-    return http_response_code(400);
-  }
   // Sanitize.
-  $username = mysqli_real_escape_string($con, (string)($request->username));
-  $password = mysqli_real_escape_string($con, (string)$request->password);
-  $first_name = mysqli_real_escape_string($con, (string)$request->first_name);
-  $last_name = mysqli_real_escape_string($con, (string)$request->last_name);
-  $email = mysqli_real_escape_string($con, (string)$request->email);
-  $phone_number = mysqli_real_escape_string($con, (string)$request->phone_number);
+  $userId = mysqli_real_escape_string($con, (string)($request->userId));
   $address = mysqli_real_escape_string($con, (string)$request->address);
-  $op5_key = mysqli_real_escape_string($con, (string)$request->op5_key);
-  $admin = mysqli_real_escape_string($con, (int)$request->admin);
+  $city = mysqli_real_escape_string($con, (string)$request->city);
 
   $hash = password_hash($password, PASSWORD_DEFAULT);
   // Create.

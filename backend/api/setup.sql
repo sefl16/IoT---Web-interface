@@ -22,7 +22,7 @@ CREATE TABLE user
     first_name varchar(30) not null,
     last_name varchar(30) not null,
     email varchar(300) not null,
-    phoneNumber varchar(30) not null,
+    phone_number varchar(30) not null,
     address varchar(30) not null,
     op5_key varchar(30),
     admin boolean
@@ -90,7 +90,7 @@ CREATE PROCEDURE addUser
     aFirst_name varchar(30),
     aLast_name varchar(30),
     aEmail varchar(30),
-    aPhoneNumber varchar(30),
+    aPhone_number varchar(30),
     aAddress varchar(30),
     aOp5_key varchar(30),
     aAdmin boolean
@@ -99,9 +99,9 @@ CREATE PROCEDURE addUser
 BEGIN
 
 	INSERT INTO `user`
-		(username, P_hash, first_name, last_name, email, phoneNumber, address, op5_key, admin)
+		(username, P_hash, first_name, last_name, email, phone_number, address, op5_key, admin)
 			VALUES
-				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhoneNumber, aAddress, aOP5_key, aAdmin);
+				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhone_number, aAddress, aOP5_key, aAdmin);
 
 END
 //
@@ -112,20 +112,16 @@ DROP PROCEDURE IF EXISTS addComplex;
 delimiter //
 CREATE PROCEDURE addComplex
 (
+	aUserId INT,
     aAddress varchar(30),
-    aCity varchar(30),
-    uID INT
+    aCity varchar(30)
 )
 BEGIN
 
 	INSERT INTO complex
-		(address, city, userID)
+		(userID, address, city)
 			VALUES
-<<<<<<< HEAD
-				(aAddress, aCity, uID);
-=======
-				(aAddress, aCity);
->>>>>>> 76c68371bcf9e67a3698cf51cfc169d94abb11d3
+				(aUserID, aAddress, aCity);
 END
 //
 delimiter ;
@@ -199,6 +195,35 @@ END
 //
 
 delimiter ;
+-- procedure for the admin page to display complexes attached to the user
+DROP PROCEDURE IF EXISTS displayComplexes;
+delimiter //
+CREATE PROCEDURE displayComplexes
+(
+	aID INT
+)
+BEGIN
+	SELECT * FROM complex WHERE aID = userID;
+END 
+// 
+delimiter ;
+
+-- procedure for the admin page to display apartments in complexes attached to the user
+DROP PROCEDURE IF EXISTS displayComplexApartments;
+delimiter //
+CREATE PROCEDURE displayComplexApartments
+(
+    aComplexID INT
+)
+BEGIN 
+	SELECT c.userID, c.id, a.appNumber,c.address
+		FROM complex AS c
+			JOIN apartments AS a 
+            ON c.address = a.address
+            WHERE c.address = a.address AND c.ID = aComplexID;
+END
+//
+delimiter ;
 
 -- update existing users password first and lasdt name email phonenumber and address (this can also be updated with new encryption salt ect...)
 DROP PROCEDURE IF EXISTS updateUser;
@@ -212,12 +237,15 @@ CREATE PROCEDURE updateUser
     aFirst_name varchar(30),
     aLast_name varchar(30),
     aEmail varchar(30),
-    aPhoneNumber varchar(30),
-    aAddress varchar(30)
+    aPhone_number varchar(30),
+    aAddress varchar(30),
+	aOp5_key varchar(30),
+    aAdmin boolean,
+    aUsername varchar(30)
 
 )
 BEGIN
-	UPDATE user SET P_hash = aPassword, first_name = aFirst_name, last_name = aLast_name, email = aEmail, phoneNumber = aPhoneNumber, address = aAddress WHERE aID = id;
+	UPDATE user SET P_hash = aPassword, first_name = aFirst_name, username = aUsername, last_name = aLast_name, email = aEmail, phone_number = aPhone_number, address = aAddress, op5_key = aOp5_key, admin = aAdmin WHERE aID = id;
 END
 //
 
@@ -233,7 +261,6 @@ CREATE PROCEDURE deleteUser
 	aID INT
 )
 BEGIN
-	DELETE FROM userComplex WHERE aID = userID;
 	DELETE FROM user WHERE aID = id LIMIT 1;
 END
 //
@@ -259,6 +286,7 @@ DROP PROCEDURE IF EXISTS removeApartment;
 delimiter //
 
 CREATE PROCEDURE removeApartment
+
 (
 	aAppNumber varchar(30)
 )
@@ -277,11 +305,12 @@ delimiter //
 
 CREATE PROCEDURE removeComplex
 (
-	aID INT
+	aID INT,
+    aAddress varchar(30)
 )
 BEGIN
-	DELETE FROM userComplex WHERE complexID = aID;
 	DELETE FROM complex WHERE id = aID LIMIT 1;
+    DELETE FROM apartments WHERE address = aAddress; 
 END
 //
 
@@ -304,31 +333,6 @@ END
 
 delimiter ;
 
-DROP PROCEDURE IF EXISTS displayComplexForUser;
-delimiter //
-CREATE PROCEDURE displayComplexForUser
-(
-	aID INT
-)
-BEGIN
-	SELECT DISTINCT city, address, complexID, userID FROM userApartmentsInfo where aID = userID;
-END
-//
-delimiter ;
-
-
-DROP PROCEDURE IF EXISTS getComplexApps;
-delimiter //
-CREATE PROCEDURE getComplexApps
-(
-	aUserID INT,
-    aComplexID INT
-)
-BEGIN
-	SELECT appnumber FROM userApartmentsInfo WHERE aUserID = userID AND aComplexID = complexID;
-END
-//
-delimiter ;
 
 DROP PROCEDURE IF EXISTS editApartment;
 delimiter //

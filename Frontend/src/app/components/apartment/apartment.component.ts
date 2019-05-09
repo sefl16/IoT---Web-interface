@@ -16,7 +16,7 @@ import { HttpClientModule }    from '@angular/common/http';
 export class ApartmentComponent implements OnInit {
   id: any;
   complex: Complex[];
-  selectedComplex: Complex = {adress: null, city: null, complexID: null, apartments: null};
+  selectedComplex: Complex = {address: null, city: null, complexID: null, apartments: null};
   sensors:boolean = false;
   street: string;
   house:string;
@@ -29,7 +29,7 @@ export class ApartmentComponent implements OnInit {
   selectedApartment: Apartment = {appnumber: null, devEUI: null};
   appid: any;
   users: User[];
-  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null}
+  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null, admin: null}
 
 
 
