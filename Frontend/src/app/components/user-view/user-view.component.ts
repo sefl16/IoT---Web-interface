@@ -42,7 +42,7 @@ export class UserViewComponent implements OnInit {
   {
     this.apiService.deleteComplex(complex).subscribe((complex: any)=>
     {
-      console.log("user deleted, ", complex);
+      console.log("complex deleted, ", complex);
       this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>
       {
         console.log(complexes);
@@ -50,7 +50,6 @@ export class UserViewComponent implements OnInit {
       })
     });
   }
-
   // createOrUpdateComplex(form)
   // {
   //   if(this.selectedComplex && this.selectedComplex.id)

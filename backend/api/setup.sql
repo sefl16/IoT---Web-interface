@@ -20,11 +20,7 @@ CREATE TABLE user
     firstname varchar(30) not null,
     lastname varchar(30) not null,
     email varchar(300) not null,
-<<<<<<< HEAD
-    phone_number varchar(30) not null,
-=======
     phonenumber varchar(30) not null,
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
     address varchar(30) not null,
     op5_key varchar(30),
     admin boolean
@@ -101,10 +97,6 @@ CREATE PROCEDURE addUser
 BEGIN
 
 	INSERT INTO `user`
-		(username, P_hash, first_name, last_name, email, phone_number, address, op5_key, admin)
-			VALUES
-				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhone_number, aAddress, aOP5_key, aAdmin);
-
 		(username, P_hash, firstname, lastname, email, phonenumber, address, op5_key, admin)
 			VALUES
 				(aUsername, aPassword, aFirstname, aLastname, aEmail, aPhonenumber, aAddress, aOP5_key, aAdmin);
@@ -119,7 +111,7 @@ DROP PROCEDURE IF EXISTS addComplex;
 delimiter //
 CREATE PROCEDURE addComplex
 (
-	aUserId INT,
+	aUserID INT,
     aAddress varchar(30),
     aCity varchar(30)
 )
@@ -228,13 +220,6 @@ BEGIN
 			JOIN apartments AS a
             ON c.address = a.address
             WHERE c.address = a.address AND c.ID = aComplexID;
-
-BEGIN
-	SELECT c.userID, c.id, a.appNumber,c.address
-		FROM complex AS c
-			JOIN apartments AS a
-            ON c.address = a.address
-            WHERE c.address = a.address AND c.id = aComplexID;
 END
 //
 delimiter ;
@@ -255,16 +240,6 @@ CREATE PROCEDURE updateUser
     aPhonenumber varchar(30),
     aAddress varchar(30),
 	aOp5_key varchar(30),
-    aAdmin boolean,
-    aUsername varchar(30)
-
-)
-BEGIN
-	UPDATE user SET P_hash = aPassword, first_name = aFirst_name, username = aUsername, last_name = aLast_name, email = aEmail, phone_number = aPhone_number, address = aAddress, op5_key = aOp5_key, admin = aAdmin WHERE aID = id;
-=======
-    aPhonenumber varchar(30),
-    aAddress varchar(30),
-    aOp5_key varchar(30),
     aAdmin boolean
 
 )
@@ -333,8 +308,8 @@ CREATE PROCEDURE removeComplex
     aAddress varchar(30)
 )
 BEGIN
-	DELETE FROM complex WHERE id = aID LIMIT 1;
     DELETE FROM apartments WHERE address = aAddress;
+	DELETE FROM complex WHERE id = aID LIMIT 1;
 END
 //
 

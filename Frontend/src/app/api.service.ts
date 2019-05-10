@@ -35,7 +35,8 @@ export class ApiService {
     return this.httpClient.delete<Sensor>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}/&source=${source}`);
   }
   deleteComplex(complex: Complex){ //skriv till ett namn på php filen
-    return this.httpClient.post<any>(`${this.PHP_API_SERVER}/api/deleteComplex.php`, complex);
+    //return this.httpClient.post<any>(`${this.PHP_API_SERVER}/api/deleteComplex.php`, complex);
+    return this.httpClient.delete<Complex>(`${this.PHP_API_SERVER}/api/deleteComplex.php/?complex=${complex}`);
   }
   readUserComplex(id: number, source: string){
     return this.httpClient.get<Complex[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);

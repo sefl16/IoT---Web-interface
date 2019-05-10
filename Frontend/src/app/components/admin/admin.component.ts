@@ -12,7 +12,7 @@ import {User} from '../../user';
 })
 export class AdminComponent implements OnInit {
   users: User[];
-  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null, admin: null};
+  selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin: null};
 
   constructor(
       private route: ActivatedRoute,
@@ -35,7 +35,7 @@ export class AdminComponent implements OnInit {
 
   deleteUser(id)
   {
-    this.apiService.deleteUser(id).subscribe((users: User)=>
+    this.apiService.deleteUser(id, "deleteUser").subscribe((users: User)=>
     {
       console.log("user deleted, ", users);
       this.apiService.readUser("readUsers").subscribe((users: User[])=>

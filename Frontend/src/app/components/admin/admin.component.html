@@ -39,11 +39,11 @@
     </div>
     <div class="form-group">
     <label>Firstname</label>
-    <input type="text" name="first_name" [(ngModel)] = "selectedUser.first_name" class="form-control">
+    <input type="text" name="firstname" [(ngModel)] = "selectedUser.firstname" class="form-control">
     </div>
     <div class="form-group">
     <label>Lastname</label>
-    <input type="text" name="last_name" [(ngModel)] = "selectedUser.last_name" class="form-control">
+    <input type="text" name="lastname" [(ngModel)] = "selectedUser.lastname" class="form-control">
     </div>
     <div class="form-group">
     <label>Email</label>
@@ -51,7 +51,7 @@
     </div>
     <div class="form-group">
     <label>Phone Number</label>
-    <input type="text" name="phone_number" [(ngModel)] = "selectedUser.phoneNumber" class="form-control">
+    <input type="text" name="phonenumber" [(ngModel)] = "selectedUser.phonenumber" class="form-control">
     </div>
     <div class="form-group">
     <label>Address</label>
@@ -67,5 +67,4 @@
     </div>
     <input type="submit" (click)="createOrUpdateUser(f)" value="create or update user" class="btn btn-primary">
     </form>
-
 </div>

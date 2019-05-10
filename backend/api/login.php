@@ -8,7 +8,7 @@ $postdata = json_decode(file_get_contents("php://input"));
 function email_exists($email, $con)
 {
     $email = mysqli_real_escape_string($con, (string)($email));
-    $query = "SELECT id, username, firstname, lastname, P_hash, email, op5_key, address, phonenumber
+    $query = "SELECT id, username, firstname, lastname, P_hash, email, op5_key, address, phonenumber, admin
             FROM user
             WHERE email = '{$email}'
             LIMIT 0,1";
