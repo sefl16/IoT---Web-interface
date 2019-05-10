@@ -92,11 +92,7 @@ CREATE PROCEDURE addUser
     aFirstname varchar(30),
     aLastname varchar(30),
     aEmail varchar(30),
-<<<<<<< HEAD
-    aPhone_number varchar(30),
-=======
     aPhonenumber varchar(30),
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
     aAddress varchar(30),
     aOp5_key varchar(30),
     aAdmin boolean
@@ -105,15 +101,14 @@ CREATE PROCEDURE addUser
 BEGIN
 
 	INSERT INTO `user`
-<<<<<<< HEAD
 		(username, P_hash, first_name, last_name, email, phone_number, address, op5_key, admin)
 			VALUES
 				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhone_number, aAddress, aOP5_key, aAdmin);
-=======
+
 		(username, P_hash, firstname, lastname, email, phonenumber, address, op5_key, admin)
 			VALUES
 				(aUsername, aPassword, aFirstname, aLastname, aEmail, aPhonenumber, aAddress, aOP5_key, aAdmin);
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
+
 
 END
 //
@@ -216,13 +211,8 @@ CREATE PROCEDURE displayComplexes
 )
 BEGIN
 	SELECT * FROM complex WHERE aID = userID;
-<<<<<<< HEAD
-END 
-// 
-=======
 END
 //
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 delimiter ;
 
 -- procedure for the admin page to display apartments in complexes attached to the user
@@ -232,21 +222,19 @@ CREATE PROCEDURE displayComplexApartments
 (
     aComplexID INT
 )
-<<<<<<< HEAD
-BEGIN 
+BEGIN
 	SELECT c.userID, c.id, a.appNumber,c.address
 		FROM complex AS c
-			JOIN apartments AS a 
+			JOIN apartments AS a
             ON c.address = a.address
             WHERE c.address = a.address AND c.ID = aComplexID;
-=======
+
 BEGIN
 	SELECT c.userID, c.id, a.appNumber,c.address
 		FROM complex AS c
 			JOIN apartments AS a
             ON c.address = a.address
             WHERE c.address = a.address AND c.id = aComplexID;
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 END
 //
 delimiter ;
@@ -264,8 +252,7 @@ CREATE PROCEDURE updateUser
     aFirstname varchar(30),
     aLastname varchar(30),
     aEmail varchar(30),
-<<<<<<< HEAD
-    aPhone_number varchar(30),
+    aPhonenumber varchar(30),
     aAddress varchar(30),
 	aOp5_key varchar(30),
     aAdmin boolean,
@@ -283,7 +270,6 @@ BEGIN
 )
 BEGIN
 	UPDATE user SET username = aUsername, P_hash = aPassword, firstname = aFirstname, lastname = aLastname, email = aEmail, phonenumber = aPhonenumber, address = aAddress, op5_key = aOp5_key, admin = aAdmin WHERE aID = id;
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 END
 //
 
@@ -348,7 +334,7 @@ CREATE PROCEDURE removeComplex
 )
 BEGIN
 	DELETE FROM complex WHERE id = aID LIMIT 1;
-    DELETE FROM apartments WHERE address = aAddress; 
+    DELETE FROM apartments WHERE address = aAddress;
 END
 //
 
@@ -400,8 +386,6 @@ BEGIN
 END
 //
 delimiter ;
-<<<<<<< HEAD
-=======
 
 
 DROP PROCEDURE IF EXISTS login;
@@ -417,4 +401,3 @@ BEGIN
 END
 //
 delimiter ;
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
