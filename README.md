@@ -17,11 +17,16 @@
 
 
 ## Start python script:
+* Stand in backend
 * Python3 main.py
 
 ## Start database from PHP
 * Stand in project directory
 * php -S 127.0.0.1:8080 -t .\backend
+
+# Start the web application
+* Stand in Frontend
+* ng serve
 
 # List of dependencies
 * Angular 7
