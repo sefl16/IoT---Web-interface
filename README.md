@@ -1,8 +1,10 @@
 # Startup
 
-# Requirments
+## Requirments
 * Python3
 * PHP
+* PIP3
+* node.js(NPM)
 
 ## Setup NPM dependencies:
 * Stand in Frontend map "/Frontend" 
