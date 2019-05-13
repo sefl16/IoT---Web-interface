@@ -1,5 +1,8 @@
-Hej!
 # Startup
+
+# Requirments
+* Python3
+* PHP
 
 ## Setup NPM dependencies:
 * Stand in Frontend map "/Frontend" 
