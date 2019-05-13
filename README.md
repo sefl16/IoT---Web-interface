@@ -5,6 +5,7 @@
 * PHP
 * PIP3
 * node.js(NPM)
+* mysql
 
 ## Setup NPM dependencies:
 * Stand in Frontend map "/Frontend" 
