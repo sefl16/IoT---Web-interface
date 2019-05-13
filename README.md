@@ -27,6 +27,7 @@
 # Start the web application
 * Stand in Frontend
 * ng serve
+* Go to browser and visit localhost:4200
 
 # List of dependencies
 * Angular 7
