@@ -2,9 +2,8 @@
 
 require 'database.php';
 
-$id = $_GET['id'];
-$address = $_GET['address'];
-if(!$id)
+$postdata = file_get_contents("php://input");
+if(isset($postdata) && !empty($postdata))
 {
 // Extract the data.
 $request = json_decode($postdata);
@@ -17,8 +16,10 @@ $sql = "call removeComplex('{$id}')";
 if(mysqli_query($con, $sql))
 {
   http_response_code(204);
+  echo "Removed successfully";
 }
 else
 {
   return http_response_code(422);
+}
 }

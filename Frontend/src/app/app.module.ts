@@ -11,7 +11,6 @@ import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { ApartmentComponent } from './components/apartment/apartment.component';
 import { AlertComponent } from './alert/alert.component'
-
 import { JwtModule } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './jwt-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
@@ -34,23 +33,23 @@ export function tokenGetter() {
     UserViewComponent
   ],
   imports: [
-      BrowserModule,
-      AppRoutingModule,
-      ReactiveFormsModule,
-      FormsModule,
-      HttpClientModule,
-      JwtModule.forRoot({
-        config: {
-          tokenGetter: tokenGetter,
-          whitelistedDomains: ['127.0.0.1:8080'],
-          blacklistedRoutes: ['example.com/examplebadroute/']
-        }
-      })
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['127.0.0.1:8080'],
+        blacklistedRoutes: ['example.com/examplebadroute/']
+      }
+    })
 
   ],
     providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

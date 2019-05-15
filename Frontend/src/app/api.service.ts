@@ -46,8 +46,8 @@ export class ApiService {
   deleteSensor(id: number, source: string){ //skriv till ett namn på php filen
     return this.httpClient.delete<Sensor>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}/&source=${source}`);
   }
-  deleteComplex(id: string, address: string){ //skriv till ett namn på php filen
-    return this.httpClient.delete<Complex>(`${this.PHP_API_SERVER}/api/deleteComplex.php/?id=${id}&address=${address}`);
+  deleteComplex(complex: any){ //skriv till ett namn på php filen
+    return this.httpClient.post<Complex>(`${this.PHP_API_SERVER}/api/deleteComplex.php`, complex);
   }
   deleteApartment(apartment: Apartment){ //skriv till ett namn på php filen
     return this.httpClient.post<any>(`${this.PHP_API_SERVER}/api/deleteApartment.php`, apartment);

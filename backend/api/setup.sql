@@ -36,7 +36,7 @@ CREATE TABLE apartments
 (
 	id INT auto_increment PRIMARY KEY,
 	complexID INT,
-    appNumber INT not null,
+  appNumber INT not null,
 
 	FOREIGN KEY (complexID) REFERENCES complex(id) ON DELETE CASCADE
 );
@@ -44,10 +44,10 @@ CREATE TABLE apartments
 DROP TABLE IF EXISTS sensors;
 CREATE TABLE sensors
 (
-    appID INT not null,
-    devEUI varchar(50) not null PRIMARY KEY,
+  appID INT not null,
+  devEUI varchar(50) not null PRIMARY KEY,
 
-    FOREIGN KEY (appID) REFERENCES apartments(id) ON DELETE CASCADE
+  FOREIGN KEY (appID) REFERENCES apartments(id) ON DELETE CASCADE
 );
 
 -- creates a view that is used for the procedure userApartmentsInfo
@@ -206,7 +206,7 @@ CREATE PROCEDURE displayComplexApartments
     aComplexID INT
 )
 BEGIN
-	SELECT a.appNumber, a.id , c.address
+	SELECT a.appNumber, a.id , c.address, c.id as complexID
 		FROM complex AS c
 			JOIN apartments AS a
             ON c.id = a.complexID

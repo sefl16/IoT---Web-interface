@@ -45,7 +45,8 @@ export class UserViewComponent implements OnInit {
 
   deleteComplex(complex)
   {
-    this.apiService.deleteComplex(complex.complexID, complex.address).subscribe((complex: any)=>
+    console.log(complex);
+    this.apiService.deleteComplex(complex).subscribe((complex: any)=>
     {
       console.log("Complex deleted, ", complex);
       this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>
@@ -81,10 +82,10 @@ export class UserViewComponent implements OnInit {
 
   createApartment(form)
   {
+    console.log(form)
     this.apiService.createApartment(form.value).subscribe((apartment: Apartment)=>
     {
       this.readApartments(form.value.complexID);
     });
   }
-
 }
