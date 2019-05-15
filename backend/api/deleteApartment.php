@@ -11,7 +11,7 @@ $request = json_decode($postdata);
 $id = mysqli_real_escape_string($con, (string)($request->id));
 
 // Delete.
-$sql = "call removeComplex('{$id}')";
+$sql = "call removeApartment('{$id}')";
 
 if(mysqli_query($con, $sql))
 {

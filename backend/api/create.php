@@ -20,18 +20,10 @@ if(isset($postdata) && !empty($postdata))
   $phonenumber = mysqli_real_escape_string($con, (string)$request->phonenumber);
   $address = mysqli_real_escape_string($con, (string)$request->address);
   $op5_key = mysqli_real_escape_string($con, (string)$request->op5_key);
-<<<<<<< HEAD
-  $admin = mysqli_real_escape_string($con, (int)$request->admin);
-
-  $hash = password_hash($password, PASSWORD_DEFAULT);
-  // Create.
-  $sql = "CALL addUser('{$username}', '{$hash}', '{$first_name}', '{$last_name}', '{$email}', '{$phone_number}', '{$address}', '{$op5_key}', '{$admin}')";
-=======
   $admin = mysqli_real_escape_string($con, (string)$request->admin);
   $hash = password_hash($password, PASSWORD_DEFAULT);
   // Create.
   $sql = "CALL addUser('{$username}', '{$hash}', '{$firstname}', '{$lastname}', '{$email}', '{$phonenumber}', '{$address}', '{$op5_key}', {$admin})";
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
   if(mysqli_query($con,$sql))
   {
     http_response_code(201);

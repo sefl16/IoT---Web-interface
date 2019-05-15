@@ -19,8 +19,20 @@ export class ApiService {
     return this.httpClient.post<User>(`${this.PHP_API_SERVER}/api/create.php`, user);
   }
 
+  createComplex(complex: Complex): Observable<Complex>{
+    return this.httpClient.post<Complex>(`${this.PHP_API_SERVER}/api/createComplex.php`, complex);
+  }
+
+  createApartment(apartment: Apartment): Observable<Apartment>{
+    return this.httpClient.post<Apartment>(`${this.PHP_API_SERVER}/api/createApartment.php`, apartment);
+  }
+
   updateUser(user: User){
     return this.httpClient.put<User>(`${this.PHP_API_SERVER}/api/update.php`, user);
+  }
+
+  updateComplex(complex: Complex){
+    return this.httpClient.put<Complex>(`${this.PHP_API_SERVER}/api/update.php`, complex);
   }
 
   deleteUser(id: number, source: string){
@@ -36,6 +48,9 @@ export class ApiService {
   }
   deleteComplex(complex: Complex){ //skriv till ett namn på php filen
     return this.httpClient.post<any>(`${this.PHP_API_SERVER}/api/deleteComplex.php`, complex);
+  }
+  deleteApartment(apartment: Apartment){ //skriv till ett namn på php filen
+    return this.httpClient.post<any>(`${this.PHP_API_SERVER}/api/deleteApartment.php`, apartment);
   }
   readUserComplex(id: number, source: string){
     return this.httpClient.get<Complex[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);

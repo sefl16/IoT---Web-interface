@@ -14,7 +14,7 @@ switch ($source)
       $complex = [];
       $complexID = [];
       //$complexID = array();
-      $sql = "CALL userApartmentsInfo('{$id}')";
+      $sql = "CALL displayComplexes('{$id}')";
       $result2 = array();
       if($result = mysqli_query($con,$sql))
       {
@@ -61,11 +61,7 @@ switch ($source)
     }
   case "readUsers":
     $users = [];
-<<<<<<< HEAD
-    $sql = "SELECT id, username, first_name, last_name, phone_number, address, email, op5_key, admin FROM user";
-=======
     $sql = "CALL displayUsers()";
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 
     if($result = mysqli_query($con,$sql))
     {
@@ -79,11 +75,7 @@ switch ($source)
         $users[$i]['email'] = $row['email'];
         $users[$i]['phonenumber'] = $row['phonenumber'];
         $users[$i]['address'] = $row['address'];
-<<<<<<< HEAD
-        $users[$i]['phone_number'] = $row['phone_number'];
-=======
         $users[$i]['op5_key'] = $row['op5_key'];
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
         $users[$i]['admin'] = $row['admin'];
         $i++;
       }
@@ -118,8 +110,8 @@ switch ($source)
         $j = 0;
         // if(in_array($row['complexID'], $complexID) == false)
         // {
-          $complex[$i]['userID'] = $row['userID'];
-          $complex[$i]['ID'] = $row['ID'];
+          $complex[$i]['id'] = $row['id'];
+          $complex[$i]['complexID'] = $row['complexID'];
           $complex[$i]['appNumber'] = $row['appNumber'];
           $complex[$i]['address'] = $row['address'];
           $i++;
@@ -140,6 +132,7 @@ switch ($source)
       //   $j = 0;
       // }
     echo json_encode($complex);
+    http_response_code(222);
     }
     else
     {
