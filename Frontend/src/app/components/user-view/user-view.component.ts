@@ -88,26 +88,4 @@ export class UserViewComponent implements OnInit {
       this.readApartments(form.value.complexID);
     });
   }
-
-  createComplex(form)
-  {
-    this.apiService.createComplex(form.value).subscribe((complex: Complex)=>
-    {
-      console.log("Complex created, ", complex);
-      this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>
-      {
-        console.log(complexes);
-        this.complexes = complexes;
-      })
-    });
-  }
-
-  createApartment(form)
-  {
-    console.log(form)
-    this.apiService.createApartment(form.value).subscribe((apartment: Apartment)=>
-    {
-      this.readApartments(form.value.complexID);
-    });
-  }
 }

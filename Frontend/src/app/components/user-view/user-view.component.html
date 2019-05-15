@@ -13,11 +13,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let complex of complexes">
-            <th scope="row">{{complex.complexID}}</th>
+            <th scope="row">{{complex.id}}</th>
             <td>{{complex.address}}</td>
             <td>{{complex.city}}</td>
             <td>
-                <button (click)="selectComplex(complex.complexID)" class="fas fa-plus btn"></button>
+                <button (click)="selectComplex(complex.id)" class="fas fa-plus btn"></button>
                 <button (click)="deleteComplex(complex)" class="fas fa-trash-alt btn"></button>
             </td>
         </tr>
