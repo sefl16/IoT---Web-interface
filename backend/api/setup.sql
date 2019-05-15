@@ -1,14 +1,6 @@
 DROP DATABASE IF EXISTS studentverken;
 CREATE database studentverken;
 
--- GRANT ALL ON studentverken.* TO user@localhost IDENTIFIED BY 'pass';
-
-
--- visa vad en användare kan göra mot vilken databas
-SHOW GRANTS FOR root@localhost;
-
-SHOW GRANTS FOR CURRENT_USER;
-
 USE studentverken;
 
 DROP TABLE IF EXISTS user;
@@ -110,7 +102,7 @@ DROP PROCEDURE IF EXISTS addComplex;
 delimiter //
 CREATE PROCEDURE addComplex
 (
-	aUserId INT,
+	aUserID INT,
     aAddress varchar(30),
     aCity varchar(30)
 )
@@ -238,7 +230,7 @@ CREATE PROCEDURE updateUser
     aEmail varchar(30),
     aPhonenumber varchar(30),
     aAddress varchar(30),
-    aOp5_key varchar(30),
+	aOp5_key varchar(30),
     aAdmin boolean
 
 )
@@ -305,6 +297,7 @@ CREATE PROCEDURE removeComplex
 	aID INT
 )
 BEGIN
+
 	DELETE FROM complex WHERE id = aID LIMIT 1;
 END
 //

@@ -10,7 +10,6 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { ApartmentComponent } from './components/apartment/apartment.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AlertComponent } from './alert/alert.component'
 
 import { JwtModule } from '@auth0/angular-jwt';
@@ -31,7 +30,6 @@ export function tokenGetter() {
     AdminComponent,
     HomeComponent,
     ApartmentComponent,
-    DashboardComponent,
     AlertComponent,
     UserViewComponent
   ],

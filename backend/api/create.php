@@ -20,8 +20,9 @@ if(isset($postdata) && !empty($postdata))
   $phonenumber = mysqli_real_escape_string($con, (string)$request->phonenumber);
   $address = mysqli_real_escape_string($con, (string)$request->address);
   $op5_key = mysqli_real_escape_string($con, (string)$request->op5_key);
-  $admin = mysqli_real_escape_string($con, (string)$request->admin);
+  $admin = mysqli_real_escape_string($con, (int)$request->admin);
   $hash = password_hash($password, PASSWORD_DEFAULT);
+
   // Create.
   $sql = "CALL addUser('{$username}', '{$hash}', '{$firstname}', '{$lastname}', '{$email}', '{$phonenumber}', '{$address}', '{$op5_key}', {$admin})";
   if(mysqli_query($con,$sql))

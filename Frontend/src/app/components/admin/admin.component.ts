@@ -15,10 +15,10 @@ export class AdminComponent implements OnInit {
   selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin: null};
 
   constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private apiService: ApiService
-    ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+  ) { }
 
   ngOnInit() {
     this.readUsers()
@@ -65,5 +65,4 @@ export class AdminComponent implements OnInit {
     });
     }
   }
-
 }

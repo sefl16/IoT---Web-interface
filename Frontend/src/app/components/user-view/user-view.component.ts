@@ -45,7 +45,7 @@ export class UserViewComponent implements OnInit {
 
   deleteComplex(complex)
   {
-    this.apiService.deleteComplex(complex).subscribe((complex: any)=>
+    this.apiService.deleteComplex(complex.complexID, complex.address).subscribe((complex: any)=>
     {
       console.log("Complex deleted, ", complex);
       this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>

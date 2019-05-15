@@ -7,7 +7,7 @@ if(isset($postdata) && !empty($postdata))
   // Extract the data.
   $request = json_decode($postdata);
   // Sanitize.
-  $userId = mysqli_real_escape_string($con, (string)($request->userId));
+  $userID = mysqli_real_escape_string($con, (string)($request->userID));
   $address = mysqli_real_escape_string($con, (string)$request->address);
   $city = mysqli_real_escape_string($con, (string)$request->city);
   // Create.

@@ -58,3 +58,10 @@ CALL displayComplexes(2);
 CALL displayComplexApartments(1);
 
 CALL login('kalle@fiktiv.se');
+CALL removeComplex(2, "kungsgatan");
+CALL removeSensor("AEONF#=A=#MFALS=!!=");
+CALL displayComplexes(1);
+
+CALL removeCompleteComplex(2, "kungsgatan");
+
+select * from userapartmentsinfo;
