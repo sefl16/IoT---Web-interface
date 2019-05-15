@@ -29,11 +29,7 @@ export class ApartmentComponent implements OnInit {
   selectedApartment: Apartment = {appnumber: null, devEUI: null};
   appid: any;
   users: User[];
-<<<<<<< HEAD
-  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null, admin: null}
-=======
   selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin:null}
->>>>>>> f68dff848b5a8d1e5de52ee0a4079b3745944824
 
 
 
@@ -52,47 +48,5 @@ export class ApartmentComponent implements OnInit {
       this.complex = complex;
       console.log(this.complex);
     })
+  }
 }
-// sensSelect(option) {
-//     if(option == 'sound') {
-//         this.function = 'sound';
-//         this.location = 'Ronnebygatan 43';
-//         this.data = 'graph';
-//     } else if(option == 'co2') {
-//         this.function = 'CO2';
-//         this.location = 'NOrra Smedjegatan 12';
-//         this.data = 'graph';
-//     } else if(option == 'hum') {
-//         this.function = 'Humidity';
-//         this.location = 'Centralbron';
-//         this.data = 'graph';
-//     }
-//
-// }
-
-
-
-// showSensorsByStreet(str) {
-//     if(str == 'Alamedan' ){
-//         this.lgh ='24';
-//         } else if(str  == 'Valhalavägen'){
-//             this.lgh ='23';
-//     } else if(str == 'Miner'){
-//         this.lgh ='93';
-//         }
-//
-// }
-
-
-}
-// interface Sensors {
-//     function:string,
-//     devEUI:string,
-//     location:string,
-//     data:any
-// }
-
-// interface Adress {
-//         street:string,
-//         house:string
-// }

@@ -21,7 +21,7 @@ export class AppComponent {
     }
 
     isAdmin() {
-      console.log(this.authenticationService.isAdmin)
+      //console.log(this.authenticationService.isAdmin)
       return this.authenticationService.isAdmin;
     }
 

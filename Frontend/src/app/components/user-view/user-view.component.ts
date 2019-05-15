@@ -12,13 +12,13 @@ import { Apartment } from '../../apartment';
 export class UserViewComponent implements OnInit {
   id: any;
   complexes: Complex[];
-  selectedComplex: Complex = {apartments: null, city: null, address: null, complexID: null};
+  selectedComplexID: any;
   expanded: boolean = false;
   apartments: Apartment[];
 
 
   constructor(private route: ActivatedRoute,
-              private apiService: ApiService) { }
+              private apiService: ApiService,) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id')
@@ -30,19 +30,25 @@ export class UserViewComponent implements OnInit {
     })
   }
 
-  selectComplex(id) {
-    this.apiService.readAdminComplex(id, "readAdminComplex").subscribe((apartments: Apartment[])=>
+  readApartments(complexID) {
+    this.apiService.readAdminComplex(complexID, "readAdminComplex").subscribe((apartments: Apartment[])=>
     {
-      this.expanded = !this.expanded;
+      console.log(apartments);
+      this.selectedComplexID = complexID;
       this.apartments = apartments
     })
+  }
+  selectComplex(id) {
+    this.readApartments(id);
+    this.expanded = !this.expanded;
   }
 
   deleteComplex(complex)
   {
+    console.log(complex);
     this.apiService.deleteComplex(complex).subscribe((complex: any)=>
     {
-      console.log("user deleted, ", complex);
+      console.log("Complex deleted, ", complex);
       this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>
       {
         console.log(complexes);
@@ -51,23 +57,36 @@ export class UserViewComponent implements OnInit {
     });
   }
 
-  // createOrUpdateComplex(form)
-  // {
-  //   if(this.selectedComplex && this.selectedComplex.id)
-  //     {
-  //       form.value.id = this.selectedComplex.id;
-  //       this.apiService.updateComplex(form.value).subscribe((complex: Complex)=>
-  //     {
-  //       console.log("Updated complex", complex);
-  //     });
-  //   }
-  //   else
-  //   {
-  //     this.apiService.createComplex(form.value).subscribe((complex: Complex)=>
-  //   {
-  //     console.log("Complex created, ", complex);
-  //   });
-  //   }
-  // }
+  deleteApartment(apartment)
+  {
+    console.log(apartment);
+    this.apiService.deleteApartment(apartment).subscribe((msg: any)=>
+    {
+      console.log("Apartment removed", apartment.appNumber);
+      this.readApartments(apartment.complexID)
+    });
+  }
+
+  createComplex(form)
+  {
+    this.apiService.createComplex(form.value).subscribe((complex: Complex)=>
+    {
+      console.log("Complex created, ", complex);
+      this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>
+      {
+        console.log(complexes);
+        this.complexes = complexes;
+      })
+    });
+  }
+
+  createApartment(form)
+  {
+    console.log(form)
+    this.apiService.createApartment(form.value).subscribe((apartment: Apartment)=>
+    {
+      this.readApartments(form.value.complexID);
+    });
+  }
 
 }

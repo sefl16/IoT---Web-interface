@@ -11,44 +11,44 @@ import {Sensor} from '../../sensor'
 })
 export class CustomerComponent implements OnInit {
 
-    source:string;
-    sensors:Sensor[];
-    selectedSensor: Sensor = {appNumber: null, devEUI: null}
-    id:any;
-    // adress:string;
-    // email:string;
-    // apartment:any;
-    options:string[];
-    företag = ["SEB", "KarslkronaHem", "Sigma"];
+  source:string;
+  sensors:Sensor[];
+  selectedSensor: Sensor = {appNumber: null, devEUI: null}
+  id:any;
+  // adress:string;
+  // email:string;
+  // apartment:any;
+  options:string[];
+  företag = ["SEB", "KarslkronaHem", "Sigma"];
 
   constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private apiService: ApiService
-) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+  ){ }
 
   ngOnInit() {
-      this.source = 'readSensors'
-      this.id = 1;
-      // this.apiService.readSensors(this.id,this.source).subscribe((sensors: Sensor[])=>
-      // {
-      //  this.sensors = sensors;
-      //  console.log(this.sensors);
-      //  })
+    this.source = 'readSensors'
+    this.id = 1;
+    // this.apiService.readSensors(this.id,this.source).subscribe((sensors: Sensor[])=>
+    // {
+    //  this.sensors = sensors;
+    //  console.log(this.sensors);
+    //  })
 
-      //this.id = this.route.snapshot.paramMap.get('id');
-      // this.name ='name';
-      // this.adress='adress';
-      // this.email ='email';
-      this.options =['sensor1', 'sensor2', 'sensor3'];
-      //företag = ["SEB", "KarslkronaHem", "Sigma"];
+    //this.id = this.route.snapshot.paramMap.get('id');
+    // this.name ='name';
+    // this.adress='adress';
+    // this.email ='email';
+    this.options =['sensor1', 'sensor2', 'sensor3'];
+    //företag = ["SEB", "KarslkronaHem", "Sigma"];
   }
 
 
 
   addOne(option){
-      this.options.unshift(option);
-      return false;
+    this.options.unshift(option);
+    return false;
   }
 
 deleteOpt(opt){
@@ -60,27 +60,17 @@ deleteOpt(opt){
     }
 }
 
-selectSensor(sensors: Sensor)
-{
-  this.selectedSensor = sensors;
-}
+  selectSensor(sensors: Sensor)
+  {
+    this.selectedSensor = sensors;
+  }
 
-deleteSensor(devEUI)
-{
+  deleteSensor(devEUI)
+  {
     this.source = 'deleteSensor';
     this.apiService.deleteSensor(devEUI, this.source).subscribe((sensors: Sensor)=>
-
-{
-  console.log("Sensor deleted, ", sensors);
-});
-}
-
-
-
-
-
-
-
-
-
+    {
+      console.log("Sensor deleted, ", sensors);
+    });
+  }
 }

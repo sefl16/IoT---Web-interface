@@ -7,22 +7,19 @@ if(isset($postdata) && !empty($postdata))
   // Extract the data.
   $request = json_decode($postdata);
   // Sanitize.
-  $userId = mysqli_real_escape_string($con, (string)($request->userId));
+  $userID = mysqli_real_escape_string($con, (string)($request->userID));
   $address = mysqli_real_escape_string($con, (string)$request->address);
   $city = mysqli_real_escape_string($con, (string)$request->city);
-
-  $hash = password_hash($password, PASSWORD_DEFAULT);
   // Create.
-  $sql = "CALL addUser('{$username}', '{$hash}', '{$first_name}', '{$last_name}', '{$email}', '{$phone_number}', '{$address}', '{$op5_key}', '{$admin}')";
+  $sql = "CALL addComplex('{$userID}', '{$address}', '{$city}')";
   if(mysqli_query($con,$sql))
   {
     http_response_code(201);
-    $user = [
-      'username' => $username,
-      'password' => $password,
-      'id'    => mysqli_insert_id($con)
+    $complex = [
+      'id'    => mysqli_insert_id($con),
+      'address' => $address
     ];
-    echo json_encode($user);
+    echo json_encode($complex);
   }
   else
   {
