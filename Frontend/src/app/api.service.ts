@@ -45,7 +45,7 @@ export class ApiService {
   readAdminComplex(id: number, source: string){
     return this.httpClient.get<Apartment[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);
   }
-  displayComplexes(id:int, source:string){
+  displayComplexes(id: number, source:string){
       return this.httpClient.get<Complex[]>(`${this.PHP_API_SERVER}/api/read.php?=${id}&source=${source}`);
   }
 constructor(private httpClient: HttpClient) { }
