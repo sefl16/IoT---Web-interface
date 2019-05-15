@@ -1,14 +1,6 @@
 DROP DATABASE IF EXISTS studentverken;
 CREATE database studentverken;
 
--- GRANT ALL ON studentverken.* TO user@localhost IDENTIFIED BY 'pass';
-
-
--- visa vad en användare kan göra mot vilken databas
-SHOW GRANTS FOR root@localhost;
-
-SHOW GRANTS FOR CURRENT_USER;
-
 USE studentverken;
 
 DROP TABLE IF EXISTS user;

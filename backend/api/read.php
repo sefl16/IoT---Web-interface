@@ -18,7 +18,6 @@ switch ($source)
       $result2 = array();
       if($result = mysqli_query($con,$sql))
       {
-
         $i = 0;
         $j = 0;
         $y = 0;
@@ -36,21 +35,20 @@ switch ($source)
             $i++;
           }
         }
-
-         $sizeofcomplexID = sizeof($complexID);
-         for($y = 0; $y < $sizeofcomplexID; $y++)
-         {
-           foreach($data_array as $item)
-           {
-             if($complexID[$y] == $item['complexID'])
-             {
-                 $complex[$y]['apartments'][$j] = $item['appNumber'];
-                 $j++;
-             }
-           }
-           $j = 0;
-         }
-      echo json_encode($complex);
+        $sizeofcomplexID = sizeof($complexID);
+        for($y = 0; $y < $sizeofcomplexID; $y++)
+        {
+          foreach($data_array as $item)
+          {
+            if($complexID[$y] == $item['complexID'])
+            {
+              $complex[$y]['apartments'][$j] = $item['appNumber'];
+              $j++;
+            }
+          }
+          $j = 0;
+        }
+        echo json_encode($complex);
       }
       else
       {
@@ -92,10 +90,7 @@ switch ($source)
   {
     $complex = [];
     $complexID = [];
-    //$complexID = array();
-    // $sql = "CALL userApartmentsInfo('{$id}')";
     $sql = "CALL displayComplexApartments('{$id}')";
-    //$sql = "CALL displayComplexForUser('{$id}')";
     $result2 = array();
     if($result = mysqli_query($con,$sql))
     {
@@ -108,16 +103,12 @@ switch ($source)
         $data_array[] = $row;
         $y = 0;
         $j = 0;
-        // if(in_array($row['complexID'], $complexID) == false)
-        // {
           $complex[$i]['userID'] = $row['userID'];
           $complex[$i]['id'] = $row['id'];
           $complex[$i]['appNumber'] = $row['appNumber'];
           $complex[$i]['address'] = $row['address'];
           $i++;
-        // }
       }
-
 
     echo json_encode($complex);
     }

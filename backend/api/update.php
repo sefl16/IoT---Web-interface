@@ -30,7 +30,6 @@ if(isset($postdata) && !empty($postdata))
 
   // Update
   $sql = "CALL updateUser('{$id}', '{$username}','{$hash}', '{$firstname}', '{$lastname}', '{$email}', '{$phonenumber}', '{$address}', '{$op5_key}', '{$admin}')";
-  //$sql = "UPDATE `user` SET `username`='$username',`P_hash`='$hash', `first_name`='$first_name', `last_name`='$last_name', `op5_key`='$op5_key', `admin`='$admin' WHERE `id` = '{$id}' LIMIT 1";
   if(mysqli_query($con, $sql))
   {
     http_response_code(204);

@@ -50,23 +50,4 @@ export class UserViewComponent implements OnInit {
       })
     });
   }
-  // createOrUpdateComplex(form)
-  // {
-  //   if(this.selectedComplex && this.selectedComplex.id)
-  //     {
-  //       form.value.id = this.selectedComplex.id;
-  //       this.apiService.updateComplex(form.value).subscribe((complex: Complex)=>
-  //     {
-  //       console.log("Updated complex", complex);
-  //     });
-  //   }
-  //   else
-  //   {
-  //     this.apiService.createComplex(form.value).subscribe((complex: Complex)=>
-  //   {
-  //     console.log("Complex created, ", complex);
-  //   });
-  //   }
-  // }
-
 }
