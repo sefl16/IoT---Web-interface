@@ -46,11 +46,12 @@
             </tr>
        </tbody>
     </table>
+
     <form #f2 ="ngForm">
       <input type="hidden" name="complexID" [(ngModel)] = "selectedComplexID" class="form-control">
       <div class="form-group">
       <label for="appnumber">Appartment number</label>
-      <input type="text" name="appnumber" [(ngModel)] = "appnumber" class="form-control">
+      <input type="number" name="appnumber" [(ngModel)] = "appnumber" class="form-control">
       </div>
       <input type="submit" (click)="createApartment(f2)" value="create appartment" class="btn btn-primary">
     </form>
