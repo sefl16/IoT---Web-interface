@@ -56,8 +56,9 @@ switch ($source)
       {
         http_response_code(404);
       }
-      break;
+
     }
+  break;
   case "readUsers":
     $users = [];
     $sql = "CALL displayUsers()";

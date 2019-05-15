@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit
 
   deleteUser(id)
   {
-    this.source = "deleteUser"
+    this.source = "deleteUser";
     this.apiService.deleteUser(id, this.source).subscribe((users: User)=>
   {
     console.log("user deleted, ", users);

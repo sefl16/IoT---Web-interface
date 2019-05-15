@@ -31,7 +31,7 @@ CREATE TABLE complex
 (
     id INT auto_increment PRIMARY KEY,
     userID INT,
-    FOREIGN KEY (userID) REFERENCES user(id),
+    FOREIGN KEY (userID) REFERENCES user(id) ON DELETE CASCADE,
     address varchar(30) not null,
     city varchar(30) not null,
     KEY (address)
@@ -42,10 +42,11 @@ CREATE TABLE complex
 DROP TABLE IF EXISTS apartments;
 CREATE TABLE apartments
 (
+	
     address varchar(30) not null,
     appNumber INT not null,
 
-	FOREIGN KEY (address) REFERENCES complex(address),
+	FOREIGN KEY (address) REFERENCES complex(address) ON DELETE CASCADE,
     PRIMARY KEY (address, appNumber),
     KEY (appNumber)
 );
@@ -56,7 +57,7 @@ CREATE TABLE sensors
     appNumber INT not null,
     devEUI varchar(50) not null PRIMARY KEY,
 
-    FOREIGN KEY (appNumber) REFERENCES apartments(appNumber)
+    FOREIGN KEY (appNumber) REFERENCES apartments(appNumber) ON DELETE CASCADE
 );
 
 -- creates a view that is used for the procedure userApartmentsInfo
@@ -290,7 +291,7 @@ CREATE PROCEDURE removeApartment
 	aAppNumber varchar(30)
 )
 BEGIN
-	DELETE FROM sensors WHERE aAppNumber = appNumber;
+
 	DELETE FROM apartments where aAppNumber = appNumber LIMIT 1;
 END
 //
@@ -308,7 +309,7 @@ CREATE PROCEDURE removeComplex
     aAddress varchar(30)
 )
 BEGIN
-    DELETE FROM apartments WHERE address = aAddress;
+
 	DELETE FROM complex WHERE id = aID LIMIT 1;
 END
 //
