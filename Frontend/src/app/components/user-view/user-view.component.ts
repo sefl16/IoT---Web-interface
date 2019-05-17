@@ -35,7 +35,7 @@ export class UserViewComponent implements OnInit {
     {
       console.log(apartments);
       this.selectedComplexID = complexID;
-      this.apartments = apartments
+      this.apartments = apartments;
     })
   }
   selectComplex(id) {

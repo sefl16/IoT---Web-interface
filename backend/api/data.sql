@@ -1,5 +1,5 @@
 
-INSERT INTO user(username, P_hash, firstname, lastname, email, phonenumber, address,op5_key, admin)
+INSERT INTO user(username, pHash, firstname, lastname, email, phonenumber, address, op5Key, admin)
 VALUES("Kalle", "passwurd", "Kalle","svenson", "kalle@fiktiv.se", "070-12344411", "KnAvagen3","qwertyuiopasdfghjkl", true),
       ("lixsom", "wurdpass", "maj", "kullberg", "maj@fiktiv.se", "070-94112331", "KnAvagen4","lkjhgfdsaqwertyuiop", false),
       ("sebastion", "testarpass", "sebbeboiii","efternamn", "sebastian@fiktiv.se", "12412211111", "KnAvagen5", "okmijnuhbyhgvtfcrdx", false);
@@ -20,7 +20,6 @@ VALUES (1, "1234"),
 
 INSERT INTO sensors(appID, devEUI)
 VALUES(1, "WDJA12WDA2151CAWDMA"),
-      (2, "AWDIDCMA1251ACC1241"),
-      (3, "AFIA21AFMAA251AWMA5"),
-	  (4, "AEONF#=A=#MFALS=!!="),
-	  (5, "SGIA#)#NASNDAPW125");
+      (2, "AFIA21AFMAA251AWMA5"),
+	  (3, "AEONF#=A=#MFALS=!!="),
+	  (4, "SGIA#)#NASNDAPW125");

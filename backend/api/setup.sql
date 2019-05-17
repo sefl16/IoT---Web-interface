@@ -8,13 +8,13 @@ CREATE TABLE user
 (
     id INT auto_increment PRIMARY KEY,
     username varchar(30) not null UNIQUE,
-    P_hash varchar(300) not null,
+    pHash varchar(300) not null,
     firstname varchar(30) not null,
     lastname varchar(30) not null,
     email varchar(300) not null,
     phonenumber varchar(30) not null,
     address varchar(30) not null,
-    op5_key varchar(30),
+    op5Key varchar(30),
     admin boolean
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE apartments
 (
 	id INT auto_increment PRIMARY KEY,
 	complexID INT,
-  appNumber INT not null,
+	appNumber INT not null,
 
 	FOREIGN KEY (complexID) REFERENCES complex(id) ON DELETE CASCADE
 );
@@ -82,16 +82,16 @@ CREATE PROCEDURE addUser
     aEmail varchar(30),
     aPhonenumber varchar(30),
     aAddress varchar(30),
-    aOp5_key varchar(30),
+    aop5Key varchar(30),
     aAdmin boolean
 
 )
 BEGIN
 
 	INSERT INTO `user`
-		(username, P_hash, firstname, lastname, email, phonenumber, address, op5_key, admin)
+		(username, pHash, firstname, lastname, email, phonenumber, address, op5Key, admin)
 			VALUES
-				(aUsername, aPassword, aFirstname, aLastname, aEmail, aPhonenumber, aAddress, aOP5_key, aAdmin);
+				(aUsername, aPassword, aFirstname, aLastname, aEmail, aPhonenumber, aAddress, aOp5Key, aAdmin);
 
 END
 //
@@ -198,6 +198,19 @@ END
 //
 delimiter ;
 
+-- procedure for the admin page to display complexes attached to the user
+DROP PROCEDURE IF EXISTS displaySensors;
+delimiter //
+CREATE PROCEDURE displaySensors
+(
+	aID INT
+)
+BEGIN
+	SELECT * FROM sensors WHERE aID = appID;
+END
+//
+delimiter ;
+
 -- procedure for the admin page to display apartments in complexes attached to the user
 DROP PROCEDURE IF EXISTS displayComplexApartments;
 delimiter //
@@ -230,12 +243,12 @@ CREATE PROCEDURE updateUser
     aEmail varchar(30),
     aPhonenumber varchar(30),
     aAddress varchar(30),
-	aOp5_key varchar(30),
+	aOp5Key varchar(30),
     aAdmin boolean
 
 )
 BEGIN
-	UPDATE user SET username = aUsername, P_hash = aPassword, firstname = aFirstname, lastname = aLastname, email = aEmail, phonenumber = aPhonenumber, address = aAddress, op5_key = aOp5_key, admin = aAdmin WHERE aID = id;
+	UPDATE user SET username = aUsername, pHash = aPassword, firstname = aFirstname, lastname = aLastname, email = aEmail, phonenumber = aPhonenumber, address = aAddress, op5Key = aOp5Key, admin = aAdmin WHERE aID = id;
 END
 //
 
@@ -358,7 +371,7 @@ CREATE PROCEDURE login
 )
 BEGIN
 
-	SELECT id, username, firstname, lastname, P_hash, email, op5_key, address, phonenumber, admin FROM user WHERE email = aEmail LIMIT 0,1;
+	SELECT id, username, firstname, lastname, pHash, email, op5Key, address, phonenumber, admin FROM user WHERE email = aEmail LIMIT 0,1;
 
 END
 //

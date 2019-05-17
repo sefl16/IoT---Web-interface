@@ -55,7 +55,7 @@ switch ($source)
         $users[$i]['email'] = $row['email'];
         $users[$i]['phonenumber'] = $row['phonenumber'];
         $users[$i]['address'] = $row['address'];
-        $users[$i]['op5_key'] = $row['op5_key'];
+        $users[$i]['op5Key'] = $row['op5Key'];
         $users[$i]['admin'] = $row['admin'];
         $i++;
       }
@@ -101,6 +101,40 @@ switch ($source)
     }
     break;
   }
+
+  case "readSensors":
+  if($id = ($_GET['id'] !== null && (int)$_GET['id'] > 0)? mysqli_real_escape_string($con, (int)$_GET['id']) : false)
+  {
+    $sensor = [];
+    $complexID = [];
+    $sql = "CALL displaySensors('{$id}')";
+    $result = array();
+    if($result = mysqli_query($con,$sql))
+    {
+
+      $i = 0;
+      $j = 0;
+      $y = 0;
+      while($row = mysqli_fetch_assoc($result))
+      {
+        $data_array[] = $row;
+        $y = 0;
+        $j = 0;
+          $sensor[$i]['appID'] = $row['appID'];
+          $sensor[$i]['devEUI'] = $row['devEUI'];
+          $i++;
+      }
+
+    echo json_encode($sensor);
+    http_response_code(222);
+    }
+    else
+    {
+      http_response_code(404);
+    }
+    break;
+  }
+
   default:
     http_response_code(404);
     break;

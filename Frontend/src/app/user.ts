@@ -7,7 +7,7 @@ export class User {
   email: string;
   phonenumber: string;
   address: string;
-  op5_key: string;
+  op5Key: string;
   city: string;
   admin: boolean;
 }
