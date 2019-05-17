@@ -7,7 +7,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { HttpClientModule }    from '@angular/common/http';
 
-
 @Component({
   selector: 'app-apartment',
   templateUrl: './apartment.component.html',
@@ -19,7 +18,7 @@ export class ApartmentComponent implements OnInit {
   tempsens: string[];
   id: any;
   complex: Complex[];
-  selectedComplex: Complex = {adress: null, city: null, complexID: null, apartments: null};
+  selectedComplex: Complex = {address: null, city: null, complexID: null, apartments: null};
   sensors:boolean = false;
   street: string;
   house:string;
@@ -32,7 +31,7 @@ export class ApartmentComponent implements OnInit {
   //selectedApartment: Apartment = {appnumber: null, devEUI: null};
   appid: any;
   users: User[];
-  //selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null}
+  selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin:null}
 
 
 
@@ -53,50 +52,5 @@ export class ApartmentComponent implements OnInit {
       this.complex = complex;
       console.log(this.complex);
     })
-
-}
-
-  // addOne(devEUI){
-  //     this.apiService.createSensor(devEUI.value).subscribe((apartment: Apartment)=>
-  //     {
-  //     this.apartment.unshift(devEUI.value);
-  //     return false;
-  // });
-  // }
-
-  addOne(option) {
-      this.options.unshift(option);
-      return false;
   }
-
-deleteSensor(opt) {
-    for(let i=0; i<this.options.length; i++) {
-        if(this.options[i]==opt){
-            this.options.splice(i, 1);
-            break;
-        }
-    }
-}
-
-
-
-
-
-// deleteApartment(appnumber)
-// {
-//     this.apiService.deleteApartment(appnumber).subscribe((apartments: Apartment)=>
-//
-// {
-//   console.log("Apartment deleted, ", apartments);
-// });
-// }
-// createApartment(form)
-// {
-//     this.apiService.createApartment(form.value).subscribe((apartments: Apartment)=>
-//     {
-//          console.log("Apartment created", apartments);
-//
-//
-// });
-// }
 }

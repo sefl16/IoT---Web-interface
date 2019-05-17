@@ -14,15 +14,17 @@ if(isset($postdata) && !empty($postdata))
   // Sanitize.
   $username = mysqli_real_escape_string($con, (string)($request->username));
   $password = mysqli_real_escape_string($con, (string)$request->password);
-  $first_name = mysqli_real_escape_string($con, (string)$request->first_name);
-  $last_name = mysqli_real_escape_string($con, (string)$request->last_name);
+  $firstname = mysqli_real_escape_string($con, (string)$request->firstname);
+  $lastname = mysqli_real_escape_string($con, (string)$request->lastname);
   $email = mysqli_real_escape_string($con, (string)$request->email);
-  $phone_number = mysqli_real_escape_string($con, (string)$request->phone_number);
+  $phonenumber = mysqli_real_escape_string($con, (string)$request->phonenumber);
   $address = mysqli_real_escape_string($con, (string)$request->address);
   $op5_key = mysqli_real_escape_string($con, (string)$request->op5_key);
+  $admin = mysqli_real_escape_string($con, (int)$request->admin);
   $hash = password_hash($password, PASSWORD_DEFAULT);
+
   // Create.
-  $sql = "CALL addUser('{$username}', '{$hash}', '{$first_name}', '{$last_name}', '{$email}', '{$phone_number}', '{$address}', '{$op5_key}')";
+  $sql = "CALL addUser('{$username}', '{$hash}', '{$firstname}', '{$lastname}', '{$email}', '{$phonenumber}', '{$address}', '{$op5_key}', {$admin})";
   if(mysqli_query($con,$sql))
   {
     http_response_code(201);

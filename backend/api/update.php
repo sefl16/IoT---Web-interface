@@ -15,18 +15,21 @@ if(isset($postdata) && !empty($postdata))
   }
 
   // Sanitize.
-  $id    = mysqli_real_escape_string($con, (int)$request->id);
+  // Update.
+  $id = mysqli_real_escape_string($con, (string)($request->id));
   $username = mysqli_real_escape_string($con, (string)($request->username));
   $password = mysqli_real_escape_string($con, (string)$request->password);
-  $first_name = mysqli_real_escape_string($con, (string)$request->first_name);
-  $last_name = mysqli_real_escape_string($con, (string)$request->last_name);
-  $op5_key = isset($request->op5_key) ? mysqli_real_escape_string($con, (string)$request->op5_key) : null;
-
+  $firstname = mysqli_real_escape_string($con, (string)$request->firstname);
+  $lastname = mysqli_real_escape_string($con, (string)$request->lastname);
+  $email = mysqli_real_escape_string($con, (string)$request->email);
+  $phonenumber = mysqli_real_escape_string($con, (string)$request->phonenumber);
+  $address = mysqli_real_escape_string($con, (string)$request->address);
+  $op5_key = mysqli_real_escape_string($con, (string)$request->op5_key);
+  $admin = mysqli_real_escape_string($con, (string)$request->admin);
   $hash = password_hash($password, PASSWORD_DEFAULT);
 
-  // Update.
-  $sql = "UPDATE `user` SET `username`='$username',`P_hash`='$hash', `first_name`='$first_name', `last_name`='$last_name', `op5_key`='$op5_key' WHERE `id` = '{$id}' LIMIT 1";
-
+  // Update
+  $sql = "CALL updateUser('{$id}', '{$username}','{$hash}', '{$firstname}', '{$lastname}', '{$email}', '{$phonenumber}', '{$address}', '{$op5_key}', '{$admin}')";
   if(mysqli_query($con, $sql))
   {
     http_response_code(204);

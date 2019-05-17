@@ -1,28 +1,18 @@
 DROP DATABASE IF EXISTS studentverken;
 CREATE database studentverken;
 
--- GRANT ALL ON studentverken.* TO user@localhost IDENTIFIED BY 'pass';
-
-
--- visa vad en användare kan göra mot vilken databas
-SHOW GRANTS FOR root@localhost;
-
--- Visa för nuvarande användare
-SHOW GRANTS FOR CURRENT_USER;
-
 USE studentverken;
 
 DROP TABLE IF EXISTS user;
-USE studentverken;
 CREATE TABLE user
 (
     id INT auto_increment PRIMARY KEY,
     username varchar(30) not null UNIQUE,
     P_hash varchar(300) not null,
-    first_name varchar(30) not null,
-    last_name varchar(30) not null,
+    firstname varchar(30) not null,
+    lastname varchar(30) not null,
     email varchar(300) not null,
-    phoneNumber varchar(30) not null,
+    phonenumber varchar(30) not null,
     address varchar(30) not null,
     op5_key varchar(30),
     admin boolean
@@ -33,7 +23,7 @@ CREATE TABLE complex
 (
     id INT auto_increment PRIMARY KEY,
     userID INT,
-    FOREIGN KEY (userID) REFERENCES user(id),
+    FOREIGN KEY (userID) REFERENCES user(id) ON DELETE CASCADE,
     address varchar(30) not null,
     city varchar(30) not null,
     KEY (address)
@@ -44,21 +34,20 @@ CREATE TABLE complex
 DROP TABLE IF EXISTS apartments;
 CREATE TABLE apartments
 (
-    address varchar(30) not null,
-    appNumber INT not null,
+	id INT auto_increment PRIMARY KEY,
+	complexID INT,
+  appNumber INT not null,
 
-	FOREIGN KEY (address) REFERENCES complex(address),
-    PRIMARY KEY (address, appNumber),
-    KEY (appNumber)
+	FOREIGN KEY (complexID) REFERENCES complex(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS sensors;
 CREATE TABLE sensors
 (
-    appNumber INT not null,
-    devEUI varchar(50) not null PRIMARY KEY,
+  appID INT not null,
+  devEUI varchar(50) not null PRIMARY KEY,
 
-    FOREIGN KEY (appNumber) REFERENCES apartments(appNumber)
+  FOREIGN KEY (appID) REFERENCES apartments(id) ON DELETE CASCADE
 );
 
 -- creates a view that is used for the procedure userApartmentsInfo
@@ -67,16 +56,17 @@ DROP VIEW IF EXISTS userApartmentsInfo;
 CREATE VIEW userApartmentsInfo AS
 	SELECT
 		c.userID,
-        c.ID AS complexID,
+        c.id,
+        c.address,
         c.city,
-        a.address,
         a.appNumber,
-		s.devEUI
+		s.devEUI,
+        a.complexID
 	FROM complex AS c
 		JOIN apartments AS a
-			ON a.address = c.address
+			ON a.complexID = c.id
 		JOIN sensors AS s
-			ON s.appNumber = a.appNumber;
+			ON s.appID = a.id;
 
 -- procedure to add a user this can be updated with encryption and hashing?
 DROP PROCEDURE IF EXISTS addUser;
@@ -87,10 +77,10 @@ CREATE PROCEDURE addUser
 (
 	aUsername varchar(30),
     aPassword varchar(255),
-    aFirst_name varchar(30),
-    aLast_name varchar(30),
+    aFirstname varchar(30),
+    aLastname varchar(30),
     aEmail varchar(30),
-    aPhoneNumber varchar(30),
+    aPhonenumber varchar(30),
     aAddress varchar(30),
     aOp5_key varchar(30),
     aAdmin boolean
@@ -99,9 +89,9 @@ CREATE PROCEDURE addUser
 BEGIN
 
 	INSERT INTO `user`
-		(username, P_hash, first_name, last_name, email, phoneNumber, address, op5_key, admin)
+		(username, P_hash, firstname, lastname, email, phonenumber, address, op5_key, admin)
 			VALUES
-				(aUsername, aPassword, aFirst_name, aLast_name, aEmail, aPhoneNumber, aAddress, aOP5_key, aAdmin);
+				(aUsername, aPassword, aFirstname, aLastname, aEmail, aPhonenumber, aAddress, aOP5_key, aAdmin);
 
 END
 //
@@ -112,20 +102,16 @@ DROP PROCEDURE IF EXISTS addComplex;
 delimiter //
 CREATE PROCEDURE addComplex
 (
+	aUserID INT,
     aAddress varchar(30),
-    aCity varchar(30),
-    uID INT
+    aCity varchar(30)
 )
 BEGIN
 
 	INSERT INTO complex
-		(address, city, userID)
+		(userID, address, city)
 			VALUES
-<<<<<<< HEAD
-				(aAddress, aCity, uID);
-=======
-				(aAddress, aCity);
->>>>>>> 76c68371bcf9e67a3698cf51cfc169d94abb11d3
+				(aUserID, aAddress, aCity);
 END
 //
 delimiter ;
@@ -137,14 +123,14 @@ delimiter //
 
 CREATE PROCEDURE addApartment
 (
-	aAddress varchar(30),
+	aComplexID INT,
     aAppNumber INT
 )
 
 BEGIN
-	INSERT INTO apartments (address, appNumber)
+	INSERT INTO apartments (complexID, appNumber)
     VALUES
-		(aAddress, aAppNumber);
+		(aComplexID, aAppNumber);
 
 END
 //
@@ -158,13 +144,13 @@ delimiter //
 
 CREATE PROCEDURE addSensor
 (
-	aAppNumber INT,
+	aAppID INT,
     aDevEUI VARCHAR(50)
 )
 BEGIN
-	INSERT INTO sensors (appNumber, devEUI)
+	INSERT INTO sensors (appID, devEUI)
 		VALUES
-			( aAppNumber, aDevEUI);
+			( aAppID, aDevEUI);
 
 END
 //
@@ -199,6 +185,35 @@ END
 //
 
 delimiter ;
+-- procedure for the admin page to display complexes attached to the user
+DROP PROCEDURE IF EXISTS displayComplexes;
+delimiter //
+CREATE PROCEDURE displayComplexes
+(
+	aID INT
+)
+BEGIN
+	SELECT * FROM complex WHERE aID = userID;
+END
+//
+delimiter ;
+
+-- procedure for the admin page to display apartments in complexes attached to the user
+DROP PROCEDURE IF EXISTS displayComplexApartments;
+delimiter //
+CREATE PROCEDURE displayComplexApartments
+(
+    aComplexID INT
+)
+BEGIN
+	SELECT a.appNumber, a.id , c.address, c.id as complexID
+		FROM complex AS c
+			JOIN apartments AS a
+            ON c.id = a.complexID
+            WHERE c.id = a.complexID AND c.id = aComplexID;
+END
+//
+delimiter ;
 
 -- update existing users password first and lasdt name email phonenumber and address (this can also be updated with new encryption salt ect...)
 DROP PROCEDURE IF EXISTS updateUser;
@@ -208,16 +223,19 @@ delimiter //
 CREATE PROCEDURE updateUser
 (
 	aID INT,
+    aUsername varchar(30),
     aPassword varchar(255),
-    aFirst_name varchar(30),
-    aLast_name varchar(30),
+    aFirstname varchar(30),
+    aLastname varchar(30),
     aEmail varchar(30),
-    aPhoneNumber varchar(30),
-    aAddress varchar(30)
+    aPhonenumber varchar(30),
+    aAddress varchar(30),
+	aOp5_key varchar(30),
+    aAdmin boolean
 
 )
 BEGIN
-	UPDATE user SET P_hash = aPassword, first_name = aFirst_name, last_name = aLast_name, email = aEmail, phoneNumber = aPhoneNumber, address = aAddress WHERE aID = id;
+	UPDATE user SET username = aUsername, P_hash = aPassword, firstname = aFirstname, lastname = aLastname, email = aEmail, phonenumber = aPhonenumber, address = aAddress, op5_key = aOp5_key, admin = aAdmin WHERE aID = id;
 END
 //
 
@@ -233,7 +251,6 @@ CREATE PROCEDURE deleteUser
 	aID INT
 )
 BEGIN
-	DELETE FROM userComplex WHERE aID = userID;
 	DELETE FROM user WHERE aID = id LIMIT 1;
 END
 //
@@ -259,12 +276,12 @@ DROP PROCEDURE IF EXISTS removeApartment;
 delimiter //
 
 CREATE PROCEDURE removeApartment
+
 (
-	aAppNumber varchar(30)
+	aAppID INT
 )
 BEGIN
-	DELETE FROM sensors WHERE aAppNumber = appNumber;
-	DELETE FROM apartments where aAppNumber = appNumber LIMIT 1;
+	DELETE FROM apartments where aAppID = id LIMIT 1;
 END
 //
 
@@ -280,7 +297,7 @@ CREATE PROCEDURE removeComplex
 	aID INT
 )
 BEGIN
-	DELETE FROM userComplex WHERE complexID = aID;
+
 	DELETE FROM complex WHERE id = aID LIMIT 1;
 END
 //
@@ -304,41 +321,15 @@ END
 
 delimiter ;
 
-DROP PROCEDURE IF EXISTS displayComplexForUser;
-delimiter //
-CREATE PROCEDURE displayComplexForUser
-(
-	aID INT
-)
-BEGIN
-	SELECT DISTINCT city, address, complexID, userID FROM userApartmentsInfo where aID = userID;
-END
-//
-delimiter ;
-
-
-DROP PROCEDURE IF EXISTS getComplexApps;
-delimiter //
-CREATE PROCEDURE getComplexApps
-(
-	aUserID INT,
-    aComplexID INT
-)
-BEGIN
-	SELECT appnumber FROM userApartmentsInfo WHERE aUserID = userID AND aComplexID = complexID;
-END
-//
-delimiter ;
 
 DROP PROCEDURE IF EXISTS editApartment;
 delimiter //
 CREATE PROCEDURE editApartment
 (
-	aAppNumber varchar(30),
-    aAddress varchar(30)
+	aAppNumber varchar(30)
 )
 BEGIN
-	UPDATE apartments SET appNumber = aAppNumber , address = aAddress WHERE aAppNumber = appNumber;
+	UPDATE apartments SET appNumber = aAppNumber WHERE aAppNumber = appNumber;
 END
 //
 delimiter ;
@@ -348,12 +339,26 @@ DROP PROCEDURE IF EXISTS editSensor;
 delimiter //
 CREATE PROCEDURE editSensor
 (
-	aDevEUI varchar(50),
-    aAppNumber varchar(30)
+	aDevEUI varchar(50)
 )
 BEGIN
 
-	UPDATE sensors SET devEUI = aDevEUI, appNumber = aAppNumber WHERE aDevEUI = devEUI;
+	UPDATE sensors SET devEUI = aDevEUI WHERE aDevEUI = devEUI;
+
+END
+//
+delimiter ;
+
+
+DROP PROCEDURE IF EXISTS login;
+delimiter //
+CREATE PROCEDURE login
+(
+	aEmail varchar(30)
+)
+BEGIN
+
+	SELECT id, username, firstname, lastname, P_hash, email, op5_key, address, phonenumber, admin FROM user WHERE email = aEmail LIMIT 0,1;
 
 END
 //

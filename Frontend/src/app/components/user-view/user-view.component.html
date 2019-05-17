@@ -1,10 +1,11 @@
 <div class="container">
 
-<h1> Complexes of user {{id}}</h1>
-<table class="table">
+<!-- Complex list  -->
+<h1> Complex för användare {{id}}</h1>
+<table class="table table-bordered">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">Id</th>
             <th scope="col">Address</th>
             <th scope="col">City</th>
             <th scope="col">Åtgärd</th>
@@ -16,26 +17,71 @@
             <td>{{complex.address}}</td>
             <td>{{complex.city}}</td>
             <td>
-                <button (click)="expanded = !expanded" class="fas fa-plus btn"></button>
-                <button (click)="deleteUser()" class="fas fa-trash-alt btn"></button>
+                <button (click)="selectComplex(complex.id)" class="fas fa-plus btn"></button>
+                <button (click)="deleteComplex(complex)" class="fas fa-trash-alt btn"></button>
             </td>
-        </tr>
-        <tr ng-show="expanded">
-            <td colspan="3"> hey  {{expanded}}</td>
         </tr>
    </tbody>
 </table>
 
+<!-- Show appartments for selected complex -->
+<div *ngIf="expanded == true">
+    <div *ngIf="this.apartments[0]; else noAppartments">
+    <h1> Lägenheter för {{this.apartments[0].address}} </h1>
+    <table class="table table-bordered" *ngIf="expanded == true">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="row">Lgh.nummer</th>
+                <th scope="col">Lägenhetsadress</th>
+                <th scope="col">Åtgärd</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let app of apartments">
+                <th scope="row"> {{app.appNumber}} </th>
+                <td> {{app.address}} </td>
+                <td>
+                    <button (click)="deleteApartment(app)" class="fas fa-trash-alt btn"></button>
+                </td>
+            </tr>
+       </tbody>
+    </table>
+
+    <form #f2 ="ngForm">
+      <input type="hidden" name="complexID" [(ngModel)] = "selectedComplexID" class="form-control">
+      <div class="form-group">
+      <label for="appnumber">Appartment number</label>
+      <input type="number" name="appnumber" [(ngModel)] = "appnumber" class="form-control">
+      </div>
+      <input type="submit" (click)="createApartment(f2)" value="create appartment" class="btn btn-primary">
+    </form>
+    </div>
+    <ng-template #noAppartments>
+        There are no appartments.
+        <form #f2 ="ngForm">
+          <input type="hidden" name="complexID" [(ngModel)] = "selectedComplexID" class="form-control">
+          <div class="form-group">
+          <label for="appnumber">Appartment number</label>
+          <input type="text" name="appnumber" [(ngModel)] = "appnumber" class="form-control">
+          </div>
+          <input type="submit" (click)="createApartment(f2)" value="create appartment" class="btn btn-primary">
+        </form>
+    </ng-template>
+</div>
+
+<!-- Create new complex -->
+<h1> Skapa Complex </h1>
 <form #f ="ngForm">
   <div class="form-group">
+  <input type="hidden" name="userID" [(ngModel)] = "id" class="form-control">
   <label for="address">Address</label>
-  <input type="text" name="address" [(ngModel)] = "selectedComplex.address" class="form-control">
+  <input type="text" name="address" [(ngModel)] = "address" class="form-control">
   </div>
   <div class="form-group">
   <label for="city">City</label>
-  <input type="text" name="first_name" [(ngModel)] = "selectedComplex.city" class="form-control">
+  <input type="text" name="city" [(ngModel)] = "city" class="form-control">
   </div>
-  <input type="submit" (click)="createOrUpdateUser(f)" value="create or update complex" class="btn btn-primary">
+  <input type="submit" (click)="createComplex(f)" value="create complex" class="btn btn-primary">
   </form>
 
 </div>

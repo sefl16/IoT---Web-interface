@@ -12,15 +12,18 @@ import {User} from '../../user';
 })
 export class AdminComponent implements OnInit {
   users: User[];
-  selectedUser: User = {id: null, username: null, password: null, first_name:null, last_name:null, email:null, phone_number:null, address:null, op5_key:null, city:null};
+  selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin: null};
 
   constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private apiService: ApiService
-    ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+  ) { }
 
   ngOnInit() {
+    this.readUsers()
+  }
+  readUsers() {
     this.apiService.readUser("readUsers").subscribe((users: User[])=>
     {
       console.log(users);
@@ -35,14 +38,31 @@ export class AdminComponent implements OnInit {
 
   deleteUser(id)
   {
-    this.apiService.deleteUser(id).subscribe((users: User)=>
-  {
-    console.log("user deleted, ", users);
-    this.apiService.readUser("readUsers").subscribe((users: User[])=>
+    this.apiService.deleteUser(id, 'deleteUser').subscribe((users: User)=>
     {
-      this.users = users;
-    })
-  });
+      console.log("user deleted, ", users);
+      this.readUsers();
+    });
   }
 
+  createOrUpdateUser(form)
+  {
+    if(this.selectedUser && this.selectedUser.id)
+      {
+        form.value.id = this.selectedUser.id;
+        this.apiService.updateUser(form.value).subscribe((users: User)=>
+      {
+        console.log("user updated", users);
+        this.readUsers();
+      });
+    }
+    else
+    {
+      this.apiService.createUser(form.value).subscribe((users: User)=>
+    {
+      console.log("user created, ", users);
+      this.readUsers();
+    });
+    }
+  }
 }

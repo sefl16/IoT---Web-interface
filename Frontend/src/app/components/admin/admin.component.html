@@ -4,7 +4,7 @@
     <a class="p-2 text-dark" href="/customer">Kontrollera kunder</a>
     <a class="p-2 text-dark" href="/dashboard">Registrera ett företag</a>
   </nav>
-
+  <h1> Lista över användare </h1>
   <table class="table">
       <thead class="thead-dark">
           <tr>
@@ -33,12 +33,16 @@
     <input type="text" name="username" [(ngModel)] = "selectedUser.username" class="form-control">
     </div>
     <div class="form-group">
+    <label for="password">Password</label>
+    <input type="text" name="password" [(ngModel)] = "selectedUser.password" class="form-control">
+    </div>
+    <div class="form-group">
     <label>Firstname</label>
-    <input type="text" name="first_name" [(ngModel)] = "selectedUser.first_name" class="form-control">
+    <input type="text" name="firstname" [(ngModel)] = "selectedUser.firstname" class="form-control">
     </div>
     <div class="form-group">
     <label>Lastname</label>
-    <input type="text" name="last_name" [(ngModel)] = "selectedUser.last_name" class="form-control">
+    <input type="text" name="lastname" [(ngModel)] = "selectedUser.lastname" class="form-control">
     </div>
     <div class="form-group">
     <label>Email</label>
@@ -46,7 +50,7 @@
     </div>
     <div class="form-group">
     <label>Phone Number</label>
-    <input type="text" name="phone_number" [(ngModel)] = "selectedUser.phoneNumber" class="form-control">
+    <input type="text" name="phonenumber" [(ngModel)] = "selectedUser.phonenumber" class="form-control">
     </div>
     <div class="form-group">
     <label>Address</label>
@@ -56,7 +60,10 @@
     <label>OP5 Key</label>
     <input type="text" name="op5_key" [(ngModel)] = "selectedUser.op5_key" class="form-control">
     </div>
+    <div class="form-group">
+    <label>Admin</label>
+    <input type="number" name="admin" [(ngModel)] = "selectedUser.admin" class="form-control">
+    </div>
     <input type="submit" (click)="createOrUpdateUser(f)" value="create or update user" class="btn btn-primary">
     </form>
-
 </div>
