@@ -86,7 +86,7 @@ CREATE PROCEDURE addUser
     aEmail varchar(30),
     aPhonenumber varchar(30),
     aAddress varchar(30),
-    aop5Key varchar(30),
+    ap5Key varchar(30),
     aAdmin boolean
 
 )
