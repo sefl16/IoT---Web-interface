@@ -6,7 +6,6 @@ import {User} from '../../user';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { HttpClientModule }    from '@angular/common/http';
-//import json from '../../apartments1.json';
 
 @Component({
   selector: 'app-apartment',
