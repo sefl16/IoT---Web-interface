@@ -2,6 +2,9 @@ DROP DATABASE IF EXISTS studentverken;
 CREATE database studentverken;
 
 USE studentverken;
+CREATE USER IF NOT EXISTS affv@localhost IDENTIFIED BY 'Solpark19';
+GRANT ALL ON studentverken TO affv@localhost;
+show grants for affv@localhost;
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user

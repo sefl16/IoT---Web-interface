@@ -5,7 +5,8 @@ import {SensorComponent} from './components/sensor/sensor.component';
 import {DeviceComponent} from './components/device/device.component';
 import {ApartmentComponent} from './components/apartment/apartment.component';
 import {AdminComponent} from './components/admin/admin.component';
-import { UserViewComponent } from './components/user-view/user-view.component';
+import {UserViewComponent} from './components/user-view/user-view.component';
+
 const routes: Routes = [
      {path: 'apartment/:id', component: DeviceComponent},
      {path: 'login', component: LoginComponent},
