@@ -3,8 +3,9 @@ CREATE database studentverken;
 
 USE studentverken;
 DROP USER affv@localhost;
+flush privileges;
 CREATE USER IF NOT EXISTS affv@localhost IDENTIFIED BY 'Solpark19';
-GRANT ALL ON studentverken TO affv@localhost;
+GRANT ALL ON studentverken.* TO affv@localhost;
 show grants for affv@localhost;
 
 DROP TABLE IF EXISTS user;
@@ -86,7 +87,7 @@ CREATE PROCEDURE addUser
     aEmail varchar(30),
     aPhonenumber varchar(30),
     aAddress varchar(30),
-    aop5Key varchar(30),
+    aOp5Key varchar(30),
     aAdmin boolean
 
 )
