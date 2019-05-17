@@ -20,3 +20,12 @@
     background-size:contain;
   }
 }
+
+.welcome
+{
+  color: #4699dd;
+  padding-top: 75px;
+  font-weight: bold;
+  font-size: 50px;
+  font-family: sans-serif;
+}

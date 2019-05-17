@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-from influx import influxDBclient
+#from influxdb import influxDBclient
+from influxdb import InfluxDBClient
 import http.client, urllib.parse
 import json
 import _thread
@@ -19,12 +20,23 @@ CORS(app)
 
 
 def DBcon():
-    client = influxDBclient(host = 'localhost', port=8086)
+    client = InfluxDBClient(host = 'localhost', port=8086)
     client.switch_database('op5_test')
-    callBefore = "SELECT value FROM temperature, humidity, light, motion, soundAvg, soundPeak, vdd, LrrLAT, LrrLON, "
+    DevEUI = []
+    DevEUI.append("A81758FFFE03CC78")
+    DevEUI.append("A81758FFFE0377EB")
+    callBefore = "SELECT value FROM temperature, humidity, light, motion, soundAvg, soundPeak, vdd, LrrLAT, LrrLON WHERE "
     callDynamic = ""
-    client.query("SELECT value FROM temperature, humidity, light, motion, soundAvg, soundPeak, vdd, LrrLAT, LrrLON, WHERE DevEUI = "afna" ")
+    for item in DevEUI:
+        callDynamic += "DevEUI = '" + item + "' OR "
+    callDynamic = callDynamic[:-3]
+    callAfter = "ORDER BY ASC LIMIT 1"
+    callFinal = callBefore + callDynamic + callAfter
+    print(callFinal)
+    result = client.query(callFinal)
+    print(result)
 
-
+DBcon()
 if __name__ == 'main':
+    DBcon()
     app.run()
