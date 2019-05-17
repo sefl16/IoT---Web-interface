@@ -18,6 +18,9 @@ export class ApiService {
   createUser(user: User): Observable<User>{
     return this.httpClient.post<User>(`${this.PHP_API_SERVER}/api/create.php`, user);
   }
+  createApartment(apartment: Apartment): Observable<Apartment>{ //new
+    return this.httpClient.post<Apartment>(`${this.PHP_API_SERVER}/api/create.php`, apartment);
+  }
 
   createComplex(complex: Complex): Observable<Complex>{
     return this.httpClient.post<Complex>(`${this.PHP_API_SERVER}/api/createComplex.php`, complex);

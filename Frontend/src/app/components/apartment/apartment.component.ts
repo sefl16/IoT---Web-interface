@@ -13,6 +13,9 @@ import { HttpClientModule }    from '@angular/common/http';
   styleUrls: ['./apartment.component.css']
 })
 export class ApartmentComponent implements OnInit {
+
+  options: string[];
+  tempsens: string[];
   id: any;
   complex: Complex[];
   selectedComplex: Complex = {address: null, city: null, complexID: null, apartments: null};
@@ -25,7 +28,7 @@ export class ApartmentComponent implements OnInit {
   data:any;
   lgh:string;
   apartment: Apartment[];
-  selectedApartment: Apartment = {appnumber: null, devEUI: null};
+  //selectedApartment: Apartment = {appnumber: null, devEUI: null};
   appid: any;
   users: User[];
   selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin:null}
@@ -38,7 +41,9 @@ export class ApartmentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = JSON.parse(localStorage.getItem("currentUser")).id;
+      this.options = ['Test1', 'Test2', 'Test3'];
+      this.tempsens =['DEVeui1', 'DEVeui2', 'DEVeui3'];
+    //this.id = JSON.parse(localStorage.getItem("currentUser")).id;
     this.source = "readUserComplex"
     this.apiService.readUserComplex(this.id, this.source).subscribe((complex: Complex[])=>
     {

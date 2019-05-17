@@ -7,7 +7,6 @@ import {ApartmentComponent} from './components/apartment/apartment.component';
 import {AdminComponent} from './components/admin/admin.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
 const routes: Routes = [
-    {path: 'customer', component: CustomerComponent},
      {path: 'sensor/:id', component: SensorComponent},
      {path: 'login', component: LoginComponent},
      {path: 'apartment', component: ApartmentComponent},
