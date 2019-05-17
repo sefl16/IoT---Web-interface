@@ -43,8 +43,8 @@ export class ApartmentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.options = ['Test1', 'Test2', 'Test3'];
-      this.tempsens =['DEVeui1', 'DEVeui2', 'DEVeui3'];
+    this.options = ['Test1', 'Test2', 'Test3'];
+    this.tempsens =['DEVeui1', 'DEVeui2', 'DEVeui3'];
     //this.id = JSON.parse(localStorage.getItem("currentUser")).id;
     this.source = "readUserComplex"
     this.apiService.readUserComplex(this.id, this.source).subscribe((complex: Complex[])=>
@@ -52,51 +52,20 @@ export class ApartmentComponent implements OnInit {
       this.complex = complex;
       console.log(this.complex);
     })
-}
-
-  // addOne(devEUI){
-  //     this.apiService.createSensor(devEUI.value).subscribe((apartment: Apartment)=>
-  //     {
-  //     this.apartment.unshift(devEUI.value);
-  //     return false;
-  // });
-  // }
-
-  addOne(option) {
-      this.options.unshift(option);
-      return false;
   }
 
-deleteSensor(opt) {
+
+  addOne(option) {
+    this.options.unshift(option);
+    return false;
+  }
+
+  deleteSensor(opt) {
     for(let i=0; i<this.options.length; i++) {
         if(this.options[i]==opt){
-            this.options.splice(i, 1);
-            break;
+          this.options.splice(i, 1);
+          break;
         }
     }
-}
-
-
-
-
-
-// deleteApartment(appnumber)
-// {
-//     this.apiService.deleteApartment(appnumber).subscribe((apartments: Apartment)=>
-//
-// {
-//   console.log("Apartment deleted, ", apartments);
-// });
-// }
-// createApartment(form)
-// {
-//     this.apiService.createApartment(form.value).subscribe((apartments: Apartment)=>
-//     {
-//          console.log("Apartment created", apartments);
-//
-//
-// });
-// }
-}
   }
 }

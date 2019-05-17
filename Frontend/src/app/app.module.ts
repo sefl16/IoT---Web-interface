@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SensorComponent } from './components/sensor/sensor.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { CustomerComponent } from './components/customer/customer.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
@@ -24,7 +23,6 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     SensorComponent,
-    CustomerComponent,
     LoginComponent,
     AdminComponent,
     HomeComponent,
