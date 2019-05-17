@@ -30,6 +30,7 @@ export class DeviceComponent implements OnInit {
 
     this.sensorList =[{appID: this.id, devEUI: "Sensor1"}, {appID: this.id, devEUI: "Sensor2"}];
     //this.id = JSON.parse(localStorage.getItem("currentUser")).id;
+    this.readSensors();
   }
 
   readSensors() {

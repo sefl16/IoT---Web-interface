@@ -6,6 +6,7 @@ import {DeviceComponent} from './components/device/device.component';
 import {ApartmentComponent} from './components/apartment/apartment.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {UserViewComponent} from './components/user-view/user-view.component';
+import {HomeComponent} from './components/home/home.component';
 
 const routes: Routes = [
      {path: 'apartment/:id', component: DeviceComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
      {path: 'admin', component: AdminComponent},
      {path: 'user/:id', component: UserViewComponent},
      {path: 'sensor-view/:id', component: SensorComponent},
+     {path: '', component: HomeComponent}
 ];
 
 @NgModule({
