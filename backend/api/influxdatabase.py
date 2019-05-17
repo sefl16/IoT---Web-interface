@@ -21,7 +21,9 @@ CORS(app)
 def DBcon():
     client = influxDBclient(host = 'localhost', port=8086)
     client.switch_database('op5_test')
-    client.query("SELECT * FROM temperature WHERE = ")
+    callBefore = "SELECT value FROM temperature, humidity, light, motion, soundAvg, soundPeak, vdd, LrrLAT, LrrLON, "
+    callDynamic = ""
+    client.query("SELECT value FROM temperature, humidity, light, motion, soundAvg, soundPeak, vdd, LrrLAT, LrrLON, WHERE DevEUI = "afna" ")
 
 
 if __name__ == 'main':
