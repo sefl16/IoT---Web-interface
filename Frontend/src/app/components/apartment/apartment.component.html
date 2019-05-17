@@ -1,6 +1,6 @@
 <div class="container">
     <br>
-<h4><mark>Gata: </mark>
+<!-- <h4><mark>Gata: </mark>
 </h4>
 <br>
 <div class="dropdown btn-block" *ngFor="let item of complex">
@@ -13,18 +13,40 @@
   </div>
 </div>
 
+ -->
+
+
+<h5>List of sensors</h5>
+<form (submit) ="addOne(option.value)">
+    <div class="form-group">
+        <label for="option">Lägg till devEUI av en senosor</label>
+        <br>
+        <li *ngFor="let opt of tempsens">
+            {{opt}} <button
+            class="btn btn-info btn-sm"
+            (click)="addOne(opt)">add</button>
+        </li>
+
+    </div>
+    </form>
+
+<!-- <div class="alert alert-warning">
+    <ul>
+        <li *ngFor="let opt of options">{{opt}}</li>
+    </ul>
+</div> -->
 
 
 <div class="alert alert-info">
-<h5>List of apartments</h5>
-<ul>
-<li *ngFor="let apartment of apartments">
-  <li>{{ apartment.appnumber }}</li>
-  <li>{{ apartment.devEUI }}
-    <button class="btn btn-info btn-sm"
-    (click)="deleteApartment(apartment.appnumber)">x</button>
-  </li>
-  </ul>
+    <ul>
+        <li *ngFor="let opt of options">
+            {{opt}} <button class="btn btn-info btn-sm"
+            (click)="deleteSensor(opt)">x</button>
+        </li>
+    </ul>
+</div>
+
+
 </div>
 <!-- <div>
   <table border = '1' width = '100%' style='border-collapse: collapse;'>

@@ -25,7 +25,7 @@ export class CustomerComponent implements OnInit {
     // adress:string;
     // email:string;
     // apartment:any;
-    options:string[];
+    //options:string[];
     företag = ["SEB", "KarslkronaHem", "Sigma"];
 
   constructor(
@@ -47,7 +47,7 @@ export class CustomerComponent implements OnInit {
       // this.name ='name';
       // this.adress='adress';
       // this.email ='email';
-      this.options =['sensor1', 'sensor2', 'sensor3'];
+      //this.options =['sensor1', 'sensor2', 'sensor3'];
       //företag = ["SEB", "KarslkronaHem", "Sigma"];
   }
 
@@ -70,39 +70,21 @@ export class CustomerComponent implements OnInit {
   //     return false;
   // }
 
-  addOne(devEUI){
-      this.apiService.createSensor(devEUI.value).subscribe((sensors: Sensor)=>
-      {
-      this.sensors.unshift(devEUI.value);
-      return false;
-  });
-  }
-
-
-
-deleteOpt(opt){
-    for(let i=0; i<this.sensors.length; i++) {
-        if(this.sensors[i]==opt){
-            this.sensors.splice(i, 1);
-            break;
-        }
-    }
-}
 
 selectSensor(sensors: Sensor)
 {
   this.selectedSensor = sensors;
 }
 
-deleteSensor(devEUI)
-{
-    this.source = 'deleteSensor';
-    this.apiService.deleteSensor(devEUI, this.source).subscribe((sensors: Sensor)=>
-
-{
-  console.log("Sensor deleted, ", sensors);
-});
-}
+// deleteSensor(devEUI)
+// {
+//     this.source = 'deleteSensor';
+//     this.apiService.deleteSensor(devEUI, this.source).subscribe((sensors: Sensor)=>
+//
+// {
+//   console.log("Sensor deleted, ", sensors);
+// });
+// }
 
 
 }

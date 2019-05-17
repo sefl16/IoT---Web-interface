@@ -4,31 +4,6 @@
 <br>
 
 
-<h5>List of sensors</h5>
-<form (submit) ="addOne(option.value)">
-    <div class="form-group">
-        <label for="option">Lägg till ett rum/eller senosor</label>
-        <br>
-        <input type="text" id="option" placeholder="Address"
-        class="form-control" #option>
-        <input type="text" id="option" placeholder="Appnumber"
-        class="form-control" #option>
-        <br>
-        <button type="submit" class="btn btn-outline-info">Lägg till</button>
-    </div>
-    </form>
-
-
-
-
-<div class="alert alert-info">
-    <ul>
-        <li *ngFor="let devEUI of sensors">
-            {{devEUI.devEUI}} <button class="btn btn-info btn-sm"
-            (click)="deleteSensor(devEUI)">x</button>
-        </li>
-    </ul>
-</div>
 
 
 
