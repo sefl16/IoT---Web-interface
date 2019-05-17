@@ -198,6 +198,19 @@ END
 //
 delimiter ;
 
+-- procedure for the admin page to display complexes attached to the user
+DROP PROCEDURE IF EXISTS displaySensors;
+delimiter //
+CREATE PROCEDURE displaySensors
+(
+	aID INT
+)
+BEGIN
+	SELECT * FROM sensors WHERE aID = appID;
+END
+//
+delimiter ;
+
 -- procedure for the admin page to display apartments in complexes attached to the user
 DROP PROCEDURE IF EXISTS displayComplexApartments;
 delimiter //

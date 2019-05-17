@@ -27,6 +27,10 @@ export class ApiService {
     return this.httpClient.post<Apartment>(`${this.PHP_API_SERVER}/api/createApartment.php`, apartment);
   }
 
+  createSensor(sensor: Sensor): Observable<Sensor>{
+    return this.httpClient.post<Sensor>(`${this.PHP_API_SERVER}/api/createSensor.php`, sensor);
+  }
+
   updateUser(user: User){
     return this.httpClient.put<User>(`${this.PHP_API_SERVER}/api/update.php`, user);
   }
@@ -39,21 +43,24 @@ export class ApiService {
     return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}/&source=${source}`);
   }
 
-  readSensors(id: number, source: string ){ //skriv till ett namn på php filen
-      return this.httpClient.get<Sensor[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}/&source=${source}`);
-  }
-
-  deleteSensor(id: number, source: string){ //skriv till ett namn på php filen
-    return this.httpClient.delete<Sensor>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}/&source=${source}`);
-  }
   deleteComplex(complex: any){ //skriv till ett namn på php filen
     return this.httpClient.post<Complex>(`${this.PHP_API_SERVER}/api/deleteComplex.php`, complex);
   }
+
   deleteApartment(apartment: Apartment){ //skriv till ett namn på php filen
     return this.httpClient.post<any>(`${this.PHP_API_SERVER}/api/deleteApartment.php`, apartment);
   }
+
+  deleteSensor(sensor: Sensor){ //skriv till ett namn på php filen
+    return this.httpClient.post<any>(`${this.PHP_API_SERVER}/api/deleteSensor.php`, sensor);
+  }
+
   readUserComplex(id: number, source: string){
     return this.httpClient.get<Complex[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}&source=${source}`);
+  }
+
+  readSensors(id: number, source: string){ //skriv till ett namn på php filen
+      return this.httpClient.get<Sensor[]>(`${this.PHP_API_SERVER}/api/read.php/?id=${id}/&source=${source}`);
   }
 
   readAdminComplex(id: number, source: string){

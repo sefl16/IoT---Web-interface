@@ -1,4 +1,4 @@
 export class Sensor {
-  appNumber: any;
+  appID: any;
   devEUI: string;
 }

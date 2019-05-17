@@ -1,3 +1,44 @@
-<p>
-  device works!
-</p>
+<div class="container">
+    <br>
+<!-- <h4><mark>Gata: </mark>
+</h4>
+<br>
+<div class="dropdown btn-block" *ngFor="let item of complex">
+
+  <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
+  {{item.address}}
+  </button>
+  <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/sensor/1" *ngFor="let app of item.apartments">{{app}}</a>
+  </div>
+</div>
+<<<<<<< HEAD
+
+ -->
+
+
+<h5>List of sensors</h5>
+<form>
+    <div class="form-group">
+        <label for="option">Lägg till devEUI av en sensor</label>
+        <br>
+        <li *ngFor="let sensor of sensorList">
+            {{sensor.devEUI}} <button
+            class="btn btn-info btn-sm"
+            (click)="addOne(sensor)">add</button>
+        </li>
+
+    </div>
+    </form>
+
+<div class="alert alert-info">
+    <ul>
+        <li *ngFor="let sensor of sensors">
+            {{sensor.devEUI}} <button class="btn btn-info btn-sm"
+            (click)="deleteSensor(sensor)">x</button>
+        </li>
+    </ul>
+</div>
+
+
+</div>
