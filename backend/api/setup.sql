@@ -36,7 +36,7 @@ CREATE TABLE apartments
 (
 	id INT auto_increment PRIMARY KEY,
 	complexID INT,
-  appNumber INT not null,
+    appNumber INT not null,
 
 	FOREIGN KEY (complexID) REFERENCES complex(id) ON DELETE CASCADE
 );
@@ -194,6 +194,19 @@ CREATE PROCEDURE displayComplexes
 )
 BEGIN
 	SELECT * FROM complex WHERE aID = userID;
+END
+//
+delimiter ;
+
+-- procedure for the admin page to display complexes attached to the user
+DROP PROCEDURE IF EXISTS displaySensors;
+delimiter //
+CREATE PROCEDURE displaySensors
+(
+	aID INT
+)
+BEGIN
+	SELECT * FROM sensors WHERE aID = appID;
 END
 //
 delimiter ;

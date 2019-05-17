@@ -38,7 +38,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let app of apartments">
-                <th scope="row"> {{app.appNumber}} </th>
+                <th scope="row"><a href="apartment/{{app.id}}">{{app.appNumber}}</a></th>
                 <td> {{app.address}} </td>
                 <td>
                     <button (click)="deleteApartment(app)" class="fas fa-trash-alt btn"></button>

@@ -3,37 +3,20 @@ import {ApiService} from '../../api.service';
 import {Complex} from '../../complex';
 import {Apartment} from '../../apartment';
 import {User} from '../../user';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { HttpClientModule }    from '@angular/common/http';
+import {Sensor} from '../../sensor';
+import {Router, ActivatedRoute, ParamMap} from '@angular/router';
+import {switchMap} from 'rxjs/operators';
+import {HttpClientModule}    from '@angular/common/http';
 
 @Component({
-  selector: 'app-apartment',
-  templateUrl: './apartment.component.html',
-  styleUrls: ['./apartment.component.css']
+  selector: 'app-device',
+  templateUrl: './device.component.html',
+  styleUrls: ['./device.component.css']
 })
-export class ApartmentComponent implements OnInit {
-
-  options: string[];
-  tempsens: string[];
+export class DeviceComponent implements OnInit {
+  sensorList: Sensor[];
   id: any;
-  complex: Complex[];
-  selectedComplex: Complex = {address: null, city: null, complexID: null, apartments: null};
-  sensors:boolean = false;
-  street: string;
-  house:string;
-  function:string;
-  location:string;
-  source:string;
-  data:any;
-  lgh:string;
-  apartment: Apartment[];
-  //selectedApartment: Apartment = {appnumber: null, devEUI: null};
-  appid: any;
-  users: User[];
-  selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin:null}
-
-
+  sensors: Sensor[];
 
   constructor(
     private route: ActivatedRoute,
@@ -43,29 +26,29 @@ export class ApartmentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.options = ['Test1', 'Test2', 'Test3'];
-    this.tempsens =['DEVeui1', 'DEVeui2', 'DEVeui3'];
+    this.id = this.route.snapshot.paramMap.get('id')
+
+    this.sensorList =[{appID: this.id, devEUI: "Sensor1"}, {appID: this.id, devEUI: "Sensor2"}];
     //this.id = JSON.parse(localStorage.getItem("currentUser")).id;
-    this.source = "readUserComplex"
-    this.apiService.readUserComplex(this.id, this.source).subscribe((complex: Complex[])=>
+    this.apiService.readSensors(this.id, 'readSensors').subscribe((sensors: Sensor[])=>
     {
-      this.complex = complex;
-      console.log(this.complex);
+      console.log(sensors);
+      this.sensors = sensors;
     })
   }
 
 
-  addOne(option) {
-    this.options.unshift(option);
-    return false;
+  addOne(sensor) {
+    this.apiService.createSensor(sensor).subscribe((sensor: Sensor)=>
+    {
+      console.log(sensor);
+    })
   }
 
-  deleteSensor(opt) {
-    for(let i=0; i<this.options.length; i++) {
-        if(this.options[i]==opt){
-          this.options.splice(i, 1);
-          break;
-        }
-    }
+  deleteSensor(sensor) {
+    this.apiService.deleteSensor(sensor).subscribe((msg: any)=>
+    {
+      console.log(msg);
+    })
   }
 }

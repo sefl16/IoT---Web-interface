@@ -18,47 +18,27 @@
 
 
 <h5>List of sensors</h5>
-<form (submit) ="addOne(option.value)">
+<form>
     <div class="form-group">
-        <label for="option">Lägg till devEUI av en senosor</label>
+        <label for="option">Lägg till devEUI av en sensor</label>
         <br>
-        <li *ngFor="let opt of tempsens">
-            {{opt}} <button
+        <li *ngFor="let sensor of sensorList">
+            {{sensor.devEUI}} <button
             class="btn btn-info btn-sm"
-            (click)="addOne(opt)">add</button>
+            (click)="addOne(sensor)">add</button>
         </li>
 
     </div>
     </form>
 
-<!-- <div class="alert alert-warning">
-    <ul>
-        <li *ngFor="let opt of options">{{opt}}</li>
-    </ul>
-</div> -->
-
-
 <div class="alert alert-info">
     <ul>
-        <li *ngFor="let opt of options">
-            {{opt}} <button class="btn btn-info btn-sm"
-            (click)="deleteSensor(opt)">x</button>
+        <li *ngFor="let sensor of sensors">
+            {{sensor.devEUI}} <button class="btn btn-info btn-sm"
+            (click)="deleteSensor(sensor)">x</button>
         </li>
     </ul>
 </div>
 
 
 </div>
-<!-- <div>
-  <table border = '1' width = '100%' style='border-collapse: collapse;'>
-    <tr>
-      <th>City</th>
-      <th>Address</th>
-
-    </tr>
-
-    <tr *ngFor="let complex of complex">
-      <td>{{ complex.city }}</td>
-      <td>{{ complex.address }}</td>
-    </tr>
-  </table> -->

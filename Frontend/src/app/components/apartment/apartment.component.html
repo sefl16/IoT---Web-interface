@@ -5,10 +5,9 @@
 <br>
 <div class="dropdown btn-block" *ngFor="let item of complex">
 
-  <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-  {{item.address}}
-  </button>
+  <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" (click)="selectComplex(item.id)">
+  {{item.address}}</button>
   <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="/sensor/1" *ngFor="let app of item.apartments">{{app}}</a>
+    <a *ngFor="let app of this.currentApartments" class="dropdown-item" href="sensor-view/{{app.appNumber}}">{{app.appNumber}}</a>
   </div>
 </div>
