@@ -1,5 +1,5 @@
 
-INSERT INTO user(username, P_hash, firstname, lastname, email, phonenumber, address,op5_key, admin)
+INSERT INTO user(username, pHash, firstname, lastname, email, phonenumber, address, op5Key, admin)
 VALUES("Kalle", "passwurd", "Kalle","svenson", "kalle@fiktiv.se", "070-12344411", "KnAvagen3","qwertyuiopasdfghjkl", true),
       ("lixsom", "wurdpass", "maj", "kullberg", "maj@fiktiv.se", "070-94112331", "KnAvagen4","lkjhgfdsaqwertyuiop", false),
       ("sebastion", "testarpass", "sebbeboiii","efternamn", "sebastian@fiktiv.se", "12412211111", "KnAvagen5", "okmijnuhbyhgvtfcrdx", false);
@@ -11,16 +11,16 @@ VALUES
 (1, "Nyvagen", "Stockholm");
 
 
-INSERT INTO apartments (address, appNumber)
-VALUES ("Testgatan", "1234"),
-	   ("Testgatan", "1111"),
-       ("Testgatan", "2222"),
-	   ("kungsgatan", "12151"),
-	   ("Nyvagen", "159012");
+INSERT INTO apartments (complexID, appNumber)
+VALUES (1, "1234"),
+	   (1, "1111"),
+       (1, "2222"),
+	   (2, "12151"),
+	   (3, "159012");
 
-INSERT INTO sensors(appNumber, devEUI)
-VALUES("1234", "WDJA12WDA2151CAWDMA"),
-      ("1111", "AWDIDCMA1251ACC1241"),
-      ("2222", "AFIA21AFMAA251AWMA5"),
-	  ("12151", "AEONF#=A=#MFALS=!!="),
-	  ("159012", "SGIA#)#NASNDAPW125");
+INSERT INTO sensors(appID, devEUI)
+VALUES(1, "WDJA12WDA2151CAWDMA"),
+      (1, "AWDIDCMA1251ACC1241"),
+      (2, "AFIA21AFMAA251AWMA5"),
+	  (3, "AEONF#=A=#MFALS=!!="),
+	  (4, "SGIA#)#NASNDAPW125");

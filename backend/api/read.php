@@ -55,7 +55,7 @@ switch ($source)
         $users[$i]['email'] = $row['email'];
         $users[$i]['phonenumber'] = $row['phonenumber'];
         $users[$i]['address'] = $row['address'];
-        $users[$i]['op5_key'] = $row['op5_key'];
+        $users[$i]['op5Key'] = $row['op5Key'];
         $users[$i]['admin'] = $row['admin'];
         $i++;
       }

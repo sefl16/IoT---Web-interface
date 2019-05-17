@@ -8,7 +8,7 @@ $postdata = json_decode(file_get_contents("php://input"));
 function email_exists($email, $con)
 {
   $email = mysqli_real_escape_string($con, (string)($email));
-  // $query = "SELECT id, username, firstname, lastname, P_hash, email, op5_key, address, phonenumber, admin
+  // $query = "SELECT id, username, firstname, lastname, pHash, email, op5Key, address, phonenumber, admin
   //         FROM user
   //         WHERE email = '{$email}'
   //         LIMIT 0,1";
@@ -21,9 +21,9 @@ function email_exists($email, $con)
        $user['username'] = $row['username'];
        $user['firstname'] = $row['firstname'];
        $user['lastname'] = $row['lastname'];
-       $user['p_hash'] = $row['P_hash'];
+       $user['pHash'] = $row['pHash'];
        $user['email'] = $row['email'];
-       $user['op5_key'] = $row['op5_key'];
+       $user['op5Key'] = $row['op5Key'];
        $user['address'] = $row['address'];
        $user['phonenumber'] = $row['phonenumber'];
        $user['admin'] = $row['admin'];
@@ -34,7 +34,7 @@ function email_exists($email, $con)
 }
 if($res = email_exists($postdata->email, $con))
 {
-  if(password_verify($postdata->password, $res['p_hash'])){
+  if(password_verify($postdata->password, $res['pHash'])){
     // Create token header as a JSON string
     $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
     // Create token payload as a JSON string

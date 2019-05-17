@@ -16,20 +16,14 @@ export class ApartmentComponent implements OnInit {
   id: any;
   complex: Complex[];
   selectedComplex: Complex = {address: null, city: null, complexID: null, apartments: null};
-  sensors:boolean = false;
-  street: string;
-  house:string;
-  function:string;
-  location:string;
   source:string;
-  data:any;
-  lgh:string;
-  apartment: Apartment[];
+  //apartment: Apartment[];
   selectedApartment: Apartment = {appnumber: null, devEUI: null};
-  appid: any;
   users: User[];
-  selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5_key:null, city:null, admin:null}
-
+  selectedUser: User = {id: null, username: null, password: null, firstname:null, lastname:null, email:null, phonenumber:null, address:null, op5Key:null, city:null, admin:null}
+  selectedComplexID: any;
+  expanded: boolean = false;
+  apartments: Apartment[];
 
 
   constructor(
@@ -48,4 +42,5 @@ export class ApartmentComponent implements OnInit {
       console.log(this.complex);
     })
   }
+
 }
