@@ -26,9 +26,11 @@ export class DeviceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.id = this.route.snapshot.paramMap.get('id')
 
     this.sensorList =[{appID: this.id, devEUI: "Sensor1"}, {appID: this.id, devEUI: "Sensor2"}];
+    this.readSensors();
     //this.id = JSON.parse(localStorage.getItem("currentUser")).id;
     this.readSensors();
   }
