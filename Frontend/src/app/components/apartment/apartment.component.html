@@ -8,6 +8,6 @@
   <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" (click)="selectComplex(item.id)">
   {{item.address}}</button>
   <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton">
-    <a *ngFor="let app of this.currentApartments" class="dropdown-item" href="sensor-view/{{app.appNumber}}">{{app.appNumber}}</a>
+    <a *ngFor="let app of this.currentApartments" class="dropdown-item" href="sensor-view/{{app.id}}">{{app.appNumber}}</a>
   </div>
 </div>

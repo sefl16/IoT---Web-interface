@@ -19,24 +19,39 @@ api = Api(app)
 CORS(app)
 
 
-def DBcon():
+def DBcon(DevEUIlist):
     client = InfluxDBClient(host = 'localhost', port=8086)
     client.switch_database('op5_test')
-    DevEUI = []
-    DevEUI.append("A81758FFFE03CC78")
-    DevEUI.append("A81758FFFE0377EB")
+
     callBefore = "SELECT value FROM temperature, humidity, light, motion, soundAvg, soundPeak, vdd, LrrLAT, LrrLON WHERE "
     callDynamic = ""
-    for item in DevEUI:
-        callDynamic += "DevEUI = '" + item + "' OR "
+    for item in DevEUIlist:
+        print(item.get('devEUI'))
+        callDynamic += "DevEUI = '" + item.get('devEUI') + "' OR "
     callDynamic = callDynamic[:-3]
     callAfter = "ORDER BY ASC LIMIT 1"
     callFinal = callBefore + callDynamic + callAfter
     print(callFinal)
-    result = client.query(callFinal)
-    print(result)
+    results = client.query(callFinal)
+    #client.query(callFinal)
 
-DBcon()
-if __name__ == 'main':
-    DBcon()
-    app.run()
+    #return json.loads(result)
+    return results.raw
+
+#DBcon()
+# class Influx(Resource):
+#     def post(self, request.data):
+#         return DBcon(request.data)
+
+@app.route('/influx', methods=['POST'])
+def parse_request():
+    data = request.get_json() # data is empty
+    print(data)
+    # need posted data here
+    test = DBcon(data)
+    print(test)
+    return json.dumps(DBcon(data))
+# api.add_resource(Influx, "/influx")
+
+if __name__ == '__main__':
+    app.run(port = 5003)
