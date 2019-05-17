@@ -30,6 +30,9 @@ export class DeviceComponent implements OnInit {
 
     this.sensorList =[{appID: this.id, devEUI: "Sensor1"}, {appID: this.id, devEUI: "Sensor2"}];
     //this.id = JSON.parse(localStorage.getItem("currentUser")).id;
+  }
+
+  readSensors() {
     this.apiService.readSensors(this.id, 'readSensors').subscribe((sensors: Sensor[])=>
     {
       console.log(sensors);
@@ -37,11 +40,11 @@ export class DeviceComponent implements OnInit {
     })
   }
 
-
   addOne(sensor) {
-    this.apiService.createSensor(sensor).subscribe((sensor: Sensor)=>
+    this.apiService.createSensor(sensor.value).subscribe((sensor: Sensor)=>
     {
       console.log(sensor);
+      this.readSensors();
     })
   }
 
@@ -49,6 +52,7 @@ export class DeviceComponent implements OnInit {
     this.apiService.deleteSensor(sensor).subscribe((msg: any)=>
     {
       console.log(msg);
+      this.readSensors();
     })
   }
 }

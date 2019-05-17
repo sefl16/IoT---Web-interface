@@ -17,19 +17,16 @@
  -->
 
 
-<h5>List of sensors</h5>
-<form>
-    <div class="form-group">
-        <label for="option">Lägg till devEUI av en sensor</label>
-        <br>
-        <li *ngFor="let sensor of sensorList">
-            {{sensor.devEUI}} <button
-            class="btn btn-info btn-sm"
-            (click)="addOne(sensor)">add</button>
-        </li>
+<h5>Add sensor to apartment</h5>
 
-    </div>
-    </form>
+<form #sensor ="ngForm">
+  <input type="hidden" name="appID" [(ngModel)] = "id" class="form-control">
+  <div class="form-group">
+  <label for="appnumber">devEUI</label>
+  <input type="text" name="devEUI" [(ngModel)] = "devEUI" class="form-control">
+  </div>
+  <input type="submit" (click)="addOne(sensor)" value="create sensor" class="btn btn-primary">
+</form>
 
 <div class="alert alert-info">
     <ul>
