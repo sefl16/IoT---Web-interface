@@ -8,11 +8,11 @@ import { switchMap } from 'rxjs/operators';
 import { HttpClientModule }    from '@angular/common/http';
 
 @Component({
-  selector: 'app-apartment',
-  templateUrl: './apartment.component.html',
-  styleUrls: ['./apartment.component.css']
+  selector: 'app-complexes',
+  templateUrl: './complexes.component.html',
+  styleUrls: ['./complexes.component.css']
 })
-export class ApartmentComponent implements OnInit {
+export class ComplexesComponent implements OnInit {
 
   id: any;
   complex: Complex[];

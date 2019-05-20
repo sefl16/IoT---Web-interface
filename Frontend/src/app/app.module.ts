@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { SensorComponent } from './components/sensor/sensor.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
-import { DeviceComponent } from './components/device/device.component';
+import { ApartmentViewComponent } from './components/apartment-view/apartment-view.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { HomeComponent } from './components/home/home.component';
-import { ApartmentComponent } from './components/apartment/apartment.component';
+import { ComplexesComponent } from './components/complexes/complexes.component';
 import { AlertComponent } from './alert/alert.component'
 import { JwtModule } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './jwt-interceptor';
@@ -27,10 +27,10 @@ export function tokenGetter() {
     LoginComponent,
     AdminComponent,
     HomeComponent,
-    ApartmentComponent,
+    ComplexesComponent,
     AlertComponent,
     UserViewComponent,
-    DeviceComponent
+    ApartmentViewComponent
   ],
   imports: [
     BrowserModule,

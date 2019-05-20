@@ -9,11 +9,11 @@ import {switchMap} from 'rxjs/operators';
 import {HttpClientModule}    from '@angular/common/http';
 
 @Component({
-  selector: 'app-device',
-  templateUrl: './device.component.html',
-  styleUrls: ['./device.component.css']
+  selector: 'app-apartment-view',
+  templateUrl: './apartment-view.component.html',
+  styleUrls: ['./apartment-view.component.css']
 })
-export class DeviceComponent implements OnInit {
+export class ApartmentViewComponent implements OnInit {
   sensorList: Sensor[];
   id: any;
   sensors: Sensor[];
