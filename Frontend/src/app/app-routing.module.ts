@@ -8,12 +8,14 @@ import {AdminComponent} from './components/admin/admin.component';
 import {UserViewComponent} from './components/user-view/user-view.component';
 import {HomeComponent} from './components/home/home.component';
 
+import { AuthGuard } from './auth-guard';
+
 const routes: Routes = [
-     {path: 'apartment/:id', component: DeviceComponent},
+     {path: 'apartment/:id', component: DeviceComponent, canActivate: [AuthGuard]},
      {path: 'login', component: LoginComponent},
-     {path: 'complexes', component: ApartmentComponent},
-     {path: 'admin', component: AdminComponent},
-     {path: 'user/:id', component: UserViewComponent},
+     {path: 'complexes', component: ApartmentComponent, canActivate: [AuthGuard]},
+     {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+     {path: 'user/:id', component: UserViewComponent, canActivate: [AuthGuard]},
      {path: 'sensor-view/:id', component: SensorComponent},
      {path: '', component: HomeComponent}
 ];

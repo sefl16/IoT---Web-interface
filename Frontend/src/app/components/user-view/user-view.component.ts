@@ -39,6 +39,7 @@ export class UserViewComponent implements OnInit {
     })
   }
   selectComplex(id) {
+    console.log(this.complexes);
     this.readApartments(id);
     this.expanded = !this.expanded;
   }

@@ -2,7 +2,7 @@
   <a class="my-0 mr-md-auto" href="../index.html"><img src="assets/affLogo2.png" style="width:150px; height:50px" alt="logo"></a>
   <nav class="my-2 my-md-0 mr-md-3">
     <a *ngIf="currentUser && isAdmin() == true"class="p-2 text-dark" href="/admin">Admin</a>
-    <a class="p-2 text-dark" href="/complexes">Områden</a>
+    <a *ngIf="currentUser" class="p-2 text-dark" href="/complexes">Områden</a>
   </nav>
   <a *ngIf="!currentUser" class="btn btn-primary" href="/login">Logga in</a>
 <a *ngIf="currentUser" class="btn btn-primary" (click)="logout()">Logga ut</a>
