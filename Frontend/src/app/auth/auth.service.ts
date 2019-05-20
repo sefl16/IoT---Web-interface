@@ -19,7 +19,10 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
     public get isAdmin() {
-      return this.jwtHelper.decodeToken(this.currentUserValue.jwt).admin
+      if (this.currentUserValue) {
+        return this.jwtHelper.decodeToken(this.currentUserValue.jwt).admin
+      }
+      return false;
     }
 
     login(email: string, password: string) {
