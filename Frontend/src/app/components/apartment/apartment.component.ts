@@ -16,7 +16,7 @@ export class ApartmentComponent implements OnInit {
 
   id: any;
   complex: Complex[];
-  selectedComplex: Complex = {address: null, city: null, complexID: null, apartments: null};
+  selectedComplex: Complex = {address: null, city: null, id: null, apartments: null};
   currentApartments: Apartment[];
 
   constructor(
@@ -30,7 +30,12 @@ export class ApartmentComponent implements OnInit {
     this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complex: Complex[])=>
     {
       this.complex = complex;
-      console.log(this.complex);
+
+      for (let data of this.complex)
+      {
+        this.selectComplex(data.id)
+      }
+      console.log(this.complex)
     })
   }
 
@@ -38,7 +43,9 @@ export class ApartmentComponent implements OnInit {
     this.apiService.readAdminComplex(complexID, "readAdminComplex").subscribe((apartments: Apartment[])=>
     {
       this.currentApartments = apartments
-      console.log(apartments);
+      this.selectedComplex = this.complex.find(i => i.id === complexID)
+      this.selectedComplex.apartments = this.currentApartments
+      //console.log(apartments);
     })
   }
 }
