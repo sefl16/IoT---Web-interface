@@ -4,10 +4,10 @@
 </h4>
 <br>
 <div class="dropdown btn-block" *ngFor="let item of complex">
-
-  <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" (click)="selectComplex(item.id)">
+  <!-- <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" (click)="selectComplex(item.id)"> -->
+  <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
   {{item.address}}</button>
   <div class="dropdown-menu btn-block" aria-labelledby="dropdownMenuButton">
-    <a *ngFor="let app of this.currentApartments" class="dropdown-item" href="sensor-view/{{app.id}}">{{app.appNumber}}</a>
+    <a *ngFor="let app of item.apartments" class="dropdown-item" href="sensor-view/{{app.id}}">{{app.appNumber}}</a>
   </div>
 </div>

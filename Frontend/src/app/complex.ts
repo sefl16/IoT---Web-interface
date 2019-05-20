@@ -3,6 +3,6 @@ export class Complex {
   apartments: Apartment[];
   city: string;
   address: string;
-  complexID: string;
+  id: number;
 
 }
