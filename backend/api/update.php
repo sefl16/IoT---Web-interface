@@ -10,7 +10,8 @@ if(isset($postdata) && !empty($postdata))
   $request = json_decode($postdata);
 
   // Validate.
-  if ((int)$request->id < 1 || trim($request->username) == '' ){
+  if ((int)$request->id < 1 || trim($request->username) == '' )
+  {
     return http_response_code(400);
   }
 

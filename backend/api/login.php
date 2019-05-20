@@ -8,10 +8,7 @@ $postdata = json_decode(file_get_contents("php://input"));
 function email_exists($email, $con)
 {
   $email = mysqli_real_escape_string($con, (string)($email));
-  // $query = "SELECT id, username, firstname, lastname, pHash, email, op5Key, address, phonenumber, admin
-  //         FROM user
-  //         WHERE email = '{$email}'
-  //         LIMIT 0,1";
+  
   $query = "CALL login('{$email}')";
   $result = mysqli_query($con,$query);
   if (mysqli_num_rows($result) > 0)

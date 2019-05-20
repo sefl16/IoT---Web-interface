@@ -20,12 +20,11 @@ export class SensorComponent implements OnInit {
   function:string;
   location:string;
   data:any;
-  show:boolean = false;
   id: any;
   apartment: any;
   sensor: any;
-  idRoom: any;
   sensors: Sensor[];
+  influxData: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -41,15 +40,6 @@ export class SensorComponent implements OnInit {
     } else if(this.id == 2) {
         this.apartment = data[1].rooms
     }
-    this.idRoom = this.route.snapshot.paramMap.get('idRoom')
-    if (this.idRoom == 1) {
-        this.sensor = sens[0].sensors
-    } else if(this.idRoom == 2) {
-        this.sensor = sens[1].sensors
-    } else if(this.idRoom == 3) {
-        this.sensor = sens[2].sensors
-    }
-    this.function = 'sound';
     this.location = 'Hallen';
     this.data = '10C';
     this.apiService.readSensors(this.id, 'readSensors').subscribe((sensors: Sensor[])=>
@@ -59,31 +49,9 @@ export class SensorComponent implements OnInit {
 
         this.httpClient.post<any>("http://127.0.0.1:5003/influx", this.sensors).subscribe
         (data => {
-          console.log(data);
+          this.influxData = data.series;
+          console.log(data.series);
         })
       })
-  }
-
-
-  showSensors(id){
-    this.sensor = sens[id].sensors;
-    console.log(this.idRoom);
-    this.show = !this.show;
-  }
-sensSelect(option) {
-    if(option == 'sound') {
-      this.function = 'sound';
-      this.location = 'Tvättstuga1';
-      this.data = 'graph';
-    } else if(option == 'co2') {
-      this.function = 'CO2';
-      this.location = 'Hallen';
-      this.data = 'graph';
-    } else if(option == 'hum') {
-      this.function = 'Humidity';
-      this.location = 'Tvättstuga1';
-      this.data = '30 C';
-    }
-
   }
 }
