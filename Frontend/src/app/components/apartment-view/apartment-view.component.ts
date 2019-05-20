@@ -52,10 +52,12 @@ export class ApartmentViewComponent implements OnInit {
   }
 
   deleteSensor(sensor) {
-    this.apiService.deleteSensor(sensor).subscribe((msg: any)=>
-    {
-      console.log(msg);
-      this.readSensors();
-    })
+    if(confirm("Ta bort sensor?")) {
+      this.apiService.deleteSensor(sensor).subscribe((msg: any)=>
+      {
+        console.log(msg);
+        this.readSensors();
+      })
+    }
   }
 }

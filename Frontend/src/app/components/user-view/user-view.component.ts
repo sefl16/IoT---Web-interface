@@ -46,26 +46,28 @@ export class UserViewComponent implements OnInit {
 
   deleteComplex(complex)
   {
-    console.log(complex);
-    this.apiService.deleteComplex(complex).subscribe((complex: any)=>
-    {
-      console.log("Complex deleted, ", complex);
-      this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>
+    if(confirm("Ta bort Complex?")) {
+      this.apiService.deleteComplex(complex).subscribe((complex: any)=>
       {
-        console.log(complexes);
-        this.complexes = complexes;
-      })
-    });
+        console.log("Complex deleted, ", complex);
+        this.apiService.readUserComplex(this.id, "readUserComplex").subscribe((complexes: Complex[])=>
+        {
+          console.log(complexes);
+          this.complexes = complexes;
+        })
+      });
+    }
   }
 
   deleteApartment(apartment)
   {
-    console.log(apartment);
-    this.apiService.deleteApartment(apartment).subscribe((msg: any)=>
-    {
-      console.log("Apartment removed", apartment.appNumber);
-      this.readApartments(apartment.complexID)
-    });
+    if(confirm("Ta bort Lägenhet?")) {
+      this.apiService.deleteApartment(apartment).subscribe((msg: any)=>
+      {
+        console.log("Apartment removed", apartment.appNumber);
+        this.readApartments(apartment.complexID)
+      });
+    }
   }
 
   createComplex(form)

@@ -38,11 +38,13 @@ export class AdminComponent implements OnInit {
 
   deleteUser(id)
   {
-    this.apiService.deleteUser(id, 'deleteUser').subscribe((users: User)=>
-    {
-      console.log("user deleted, ", users);
-      this.readUsers();
-    });
+    if(confirm("Ta bort användare?")) {
+      this.apiService.deleteUser(id, 'deleteUser').subscribe((users: User)=>
+      {
+        console.log("user deleted, ", users);
+        this.readUsers();
+      });
+    }
   }
 
   createOrUpdateUser(form)
